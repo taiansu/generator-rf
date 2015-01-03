@@ -1,0 +1,35 @@
+{
+  "name": <%= appname %>,
+  "version": "0.0.0",
+  "description": <%= description %>,
+  "main": "build/bundle.js",
+  "dependencies": {
+    "file-loader": "*",
+    "flux": "^2.0.1",
+    "object-assign": "^2.0.0",
+    "react": "^0.12.2",
+    "react-router-component": "^0.23.2"
+  },
+  "devDependencies": <%= dev_dependencies %>,
+  "scripts": {
+    "dev": "webpack --color && webpack-dev-server --inline --hot --content-base ./build",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "MIT",
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/preprocessor.js",
+    "testFileExtensions": <%= test_file_extensions %>,
+    "moduleFileExtensions": <%= dialect_module_file_extensions %>,
+    "globals": {
+      "SCRIPTS": "<rootDir>/src/scripts"
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/node_modules/"
+    ],
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ]
+  }
+}
