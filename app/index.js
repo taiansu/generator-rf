@@ -24,7 +24,7 @@ module.exports = generators.Base.extend({
                                desc: "Don't create __test__ for every subfolder in src/scripts" });
 
     this.option('skip-install', { type: Boolean,
-                                  defaults: true,
+                                  defaults: false,
                                   desc: "Skip automatic installation" });
   },
 
@@ -49,6 +49,7 @@ module.exports = generators.Base.extend({
       this._copyConfigFiles();
       this._copyHTML();
       this._mkDirs(this.dest);
+      this._copyScripts();
     },
 
     projectfiles: function () {
@@ -194,6 +195,25 @@ module.exports = generators.Base.extend({
   _mkTestDirs: function (tree, dest){
     this._.forEach(tree['src/scripts'], function (dir) {
       dest.mkdir('src/scripts/' + dir + '/__test__');
+    });
+  },
+
+  _copyScripts: function () {
+    var that = this;
+    var file_dests = {
+      'main': 'src/scripts/',
+      'App': 'src/scripts/components/',
+      'AppDispatcher': 'src/scripts/dispatcher/'
+    };
+
+    this._.each(file_dests, function(dist, filename){
+      var fileSuffixed = filename.toString() + that.config.get('scriptSuffix');
+      var template = that.config.get('dialect') + "/"  + fileSuffixed;
+
+      that.fs.copy(
+        that.templatePath(template),
+        that.destinationPath(dist + fileSuffixed)
+      );
     });
   }
 });

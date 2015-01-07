@@ -26,11 +26,28 @@ npm install -g yo
 npm install -g generator-rf
 ```
 
-Finally, initiate the generator:
+### Intiate Project
+
+For example, to create a project name "myapp" , you should make a directory
+first.
 
 ```bash
-yo rf --help
+mkdir myapp && cd myapp
 ```
+
+Then initiate project with rf:
+
+```bash
+yo rf myapp
+```
+
+And you're done! Start a developer server.
+
+```bash
+npm run dev
+```
+
+Then open [http://localhost:8080](http://localhost:8080) in the browser.
 
 ## Options
 
