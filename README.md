@@ -7,11 +7,11 @@
 * [React](http://facebook.github.io/react/)
 * [Flux](http://facebook.github.io/flux/)
 * [Jest](http://facebook.github.io/jest)
-* [Webpack](http://webpack.github.io/)
+* [webpack](http://webpack.github.io/)
 * [react-hot-loader](https://gaearon.github.io/react-hot-loader/) that livereload your browser after file change saved.
 * JS Dialect you choose in: [CoffeeScript](http://coffeescript.org/), [LiveScript](http://livescript.net) or vanilla JavaScript
 * [coffee-react-transform](https://github.com/jsdf/coffee-react-transform) for writing jsx syntax in CoffeeScript/LiveScript
-* CSS syntax you choose in: [SASS](http://sass-lang.com/) or SCSS (Sassy CSS) or CSS
+* CSS syntax you choose in: [SASS](http://sass-lang.com/), SCSS (Sassy CSS) or CSS
 
 ## Getting Started
 
@@ -52,13 +52,44 @@ npm run dev
 
 Then open [http://localhost:8080](http://localhost:8080) in the browser.
 
+## What RF generates:
+
+├── build
+│   ├── bundle.js
+│   └── index.html
+├── package.json
+├── preprocessor.js
+├── node\_modules
+├── src
+│   ├── assets
+│   │   ├── images
+│   │   └── stylesheets
+│   ├── index.html
+│   └── scripts
+│       ├── actions
+│       │   └── \_\_test\_\_
+│       ├── components
+│       │   ├── App.coffee
+│       │   └── \_\_test\_\_
+│       ├── constants
+│       │   └── \_\_test\_\_
+│       ├── dispatcher
+│       │   ├── AppDispatcher.coffee
+│       │   └── \_\_test\_\_
+│       ├── main.coffee
+│       ├── mixins
+│       │   └── \_\_test\_\_
+│       └── stores
+│           └── \_\_test\_\_
+└── webpack.config.js
+
 ## Options
 
 ### -d: Dialect
 
 By default, RF will generate code in [CoffeeScript](http://coffeescript.org/). If you don't like it, use -d flag to use other dialect.
 
-* `lsc` for [LiveScript](http://livescript.net) (actually `ls` works too)
+* `lsc` for [LiveScript](http://livescript.net) (actually `ls` works, too)
 * or `js` for JavaScript
 
 Example:
@@ -74,10 +105,11 @@ Example:
 
     yo rf myapp -s=scss
 
-
 ## TODO
-* interactive mode when no appname provided
+* Test the generator
+* Generate stylesheet and test file
 * Store, Component, Actions w/Constants, Mixin generators
+* interactive mode when no appName provided
 
 ## License
 

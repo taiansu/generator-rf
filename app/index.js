@@ -8,8 +8,8 @@ module.exports = generators.Base.extend({
 
   constructor: function () {
     generators.Base.apply(this, arguments);
-    this.argument('appname', { type: String, required: true});
-    this.config.set('appname', this.appname);
+    this.argument('apName', { type: String, required: true});
+    this.config.set('apName', this.appName);
 
     this.option('d', { type: String,
                        defaults: "coffee-script",
@@ -137,26 +137,24 @@ module.exports = generators.Base.extend({
   },
 
   _copyConfigFiles: function () {
-      this.fs.copyTpl(
-        this.templatePath('_package.json'),
-        this.destinationPath('package.json'),
-        this._stringifiedConfig()
-      );
+    var that = this;
+    var configFiles = [
+      "package.json",
+      "preprocessor.js",
+      "webpack.config.js"
+    ];
 
-      this.fs.copyTpl(
-        this.templatePath('_preprocessor.js'),
-        this.destinationPath('preprocessor.js'),
-        this._stringifiedConfig()
+    _.each(configFiles, function(file){
+      that.fs.copyTpl(
+        that.templatePath('_' + file),
+        that.destinationPath(file),
+        that._stringifiedConfig()
       );
-      this.fs.copyTpl(
-        this.templatePath('_webpack.config.js'),
-        this.destinationPath('webpack.config.js'),
-        this._stringifiedConfig()
-      );
+    });
   },
 
   _copyHTML: function () {
-      this.fs.copyTpl(
+      this.fs.copy(
         this.templatePath('_index.html'),
         this.destinationPath('src/index.html')
       );

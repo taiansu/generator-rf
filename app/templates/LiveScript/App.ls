@@ -4,7 +4,7 @@ APP = React.createClass do
   render: ->
     <div>
       <header>
-        <h1><%= appname %></h1>
+        <h1><%= appName %></h1>
         <h3><%= description %></h3>
       </header>
       <p style={{'fontSize': 16}}>
