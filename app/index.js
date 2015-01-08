@@ -8,8 +8,8 @@ module.exports = generators.Base.extend({
 
   constructor: function () {
     generators.Base.apply(this, arguments);
-    this.argument('apName', { type: String, required: true});
-    this.config.set('apName', this.appName);
+    this.argument('appName', { type: String, required: true});
+    this.config.set('appName', this.appName);
 
     this.option('d', { type: String,
                        defaults: "coffee-script",
@@ -71,69 +71,33 @@ module.exports = generators.Base.extend({
     });
   },
 
-  _setDialect: function (dialect_flag) {
-
-    var configs = {
-      "description": "A React/Flux app generate by RF, powered with ",
-      'dev_dependencies':  {
-        'react-addons': '^0.9.0',
-        'react-hot-loader': '^1.0.4',
-        'webpack-dev-server': '^1.7.0',
-        'webpack': '^1.4.14'
-      },
-      'test_file_extensions': ['js'],
-      'dialect_module_file_extensions': ['js', 'json'],
-    }
-
-    switch(dialect_flag) {
+  _setDialect: function (dialectFlag) {
+    var dialect, suffix, config;
+    switch(dialectFlag) {
       case 'ls':
         // Fall through
       case 'lsc':
-        configs['dialect'] = 'LiveScript';
-        configs['scriptSuffix'] = '.ls';
-        configs['dev_dependencies'] = this._.merge(configs['dev_dependencies'], {
-          'cjsx-loader': '^1.1.0',
-          'livescript-loader': '*',
-          'LiveScript': '*'
-        });
-
-        configs['test_file_extensions'] =
-          configs['test_file_extensions'].concat('ls');
-
-        configs['dialect_module_file_extensions'] =
-          configs['dialect_module_file_extensions'].concat('ls');
+        dialect = 'LiveScript';
+        suffix = 'ls';
         break;
       case 'js':
-        configs['dialect'] = 'JavaScript';
-        configs['scriptSuffix'] = '.js';
-        configs['dev_dependencies'] = this._.merge(configs['dev_dependencies'], {
-          'jsx-loader': '*'
-        });
+        dialect = 'JavaScript';
+        suffix = 'js';
         break;
       default:
-        configs['dialect'] = 'coffee-script';
-        configs['scriptSuffix'] = '.coffee';
-        configs['dev_dependencies'] = this._.merge(configs['dev_dependencies'], {
-          'cjsx-loader': '^1.1.0',
-          'coffee-loader': '*',
-          'coffee-script': '*'
-        });
-
-        configs['test_file_extensions'] =
-          configs['test_file_extensions'].concat('coffee');
-
-        configs['dialect_module_file_extensions'] =
-          configs['dialect_module_file_extensions'].concat('coffee', 'litcoffee');
+        dialect = 'coffee-script';
+        suffix = 'coffee';
         break;
     }
-    configs['description'] = configs['description'] + configs['dialect'];
+    config = this._.merge(this._dialectConfig(dialect, suffix),
+                          this._dialectDependencies(dialect));
 
-    this.config.set(configs);
+    this.config.set(config);
   },
 
-  _setStylesheet: function (style_flag) {
-    this.config.set('stylesheetSyntax', style_flag.toUpperCase());
-    this.config.set('stylesheetSuffix', '.' + style_flag.toLowerCase());
+  _setStylesheet: function (styleFlag) {
+    this.config.set('stylesheetSyntax', styleFlag.toUpperCase());
+    this.config.set('stylesheetSuffix', '.' + styleFlag.toLowerCase());
   },
 
   _copyConfigFiles: function () {
@@ -144,7 +108,7 @@ module.exports = generators.Base.extend({
       "webpack.config.js"
     ];
 
-    _.each(configFiles, function(file){
+    this._.each(configFiles, function(file){
       that.fs.copyTpl(
         that.templatePath('_' + file),
         that.destinationPath(file),
@@ -161,7 +125,7 @@ module.exports = generators.Base.extend({
   },
 
   _mkDirs: function (dest) {
-    var _ = this._
+    var _ = this._;
     var folderTree = {
       "src/scripts": [ "actions", "components", "constants",
                    "dispatcher", "mixins", "stores" ],
@@ -169,9 +133,9 @@ module.exports = generators.Base.extend({
 
     }
 
-    _.map(_.keys(folderTree), function (dir) {
+    _.each(_.keys(folderTree), function (dir) {
       dest.mkdir(dir);
-      _.forEach(folderTree[dir], function (subdir) {
+      _.each(folderTree[dir], function (subdir) {
         dest.mkdir(dir + "/" + subdir);
       });
     });
@@ -205,6 +169,47 @@ module.exports = generators.Base.extend({
         that._stringifiedConfig()
       );
     });
+  },
+
+  _dialectDependencies: function(dialect) {
+    var _ = this._;
+    var devDependencies = {
+      'react-addons': '^0.9.0',
+      'react-hot-loader': '^1.0.4',
+      'webpack-dev-server': '^1.7.0',
+      'webpack': '^1.4.14'
+    };
+
+    switch(dialect) {
+      case 'JavaScript':
+        return {"devDependencies": _.merge(devDependencies,
+                                           {'jsx-loader': '*'})};
+        break;
+      case 'LiveScript':
+        return {"devDependencies": _.merge(devDependencies,
+                                           {'cjsx-loader': '^1.1.0',
+                                            'livescript-loader': '*',
+                                            'LiveScript': '*' })};
+        break;
+      default:
+        return {"devDependencies": _.merge(devDependencies,
+                                           {'cjsx-loader': '^1.1.0',
+                                            'coffee-loader': '*',
+                                            'coffee-script': '*' })};
+        break;
+    }
+  },
+
+  _dialectConfig: function (dialect, suffix) {
+    var _ = this._;
+
+    return  {
+      'description': "A React/Flux app generate by RF, powered with " + dialect,
+      'dialect': dialect,
+      'scriptSuffix': "." + suffix,
+      'testFileExtensions': _.uniq(['js', suffix]),
+      'dialectModuleFileExtensions': _.uniq(['js', 'json', suffix]),
+    };
   },
 
   _stringifiedConfig: function () {

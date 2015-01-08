@@ -8,10 +8,10 @@
 * [Flux](http://facebook.github.io/flux/)
 * [Jest](http://facebook.github.io/jest)
 * [webpack](http://webpack.github.io/)
-* [react-hot-loader](https://gaearon.github.io/react-hot-loader/) that livereload your browser after file change saved.
-* JS Dialect you choose in: [CoffeeScript](http://coffeescript.org/), [LiveScript](http://livescript.net) or vanilla JavaScript
+* [react-hot-loader](https://gaearon.github.io/react-hot-loader/) that livereload your browser after file change saved
+* JS Dialect you choose in: CoffeeScript, LiveScript or vanilla JavaScript
 * [coffee-react-transform](https://github.com/jsdf/coffee-react-transform) for writing jsx syntax in CoffeeScript/LiveScript
-* CSS syntax you choose in: [SASS](http://sass-lang.com/), SCSS (Sassy CSS) or CSS
+* CSS syntax you choose in: SASS, SCSS (Sassy CSS) or CSS
 
 ## Getting Started
 
@@ -24,7 +24,7 @@
 npm install -g yo@1.3.3
 ```
 
-> Note: The newest [yo@1.4.0 breaks directly usage from commandline](https://github.com/yeoman/yo/issues/264). Please install 1.3.3 for now, will update once it's fixed.
+> Note: The newest [yo@1.4.0 breaks directly usage from commandline](https://github.com/yeoman/yo/issues/264). Please install 1.3.3 for now, will update this once it's fixed.
 
 ### Install RF generator
 
@@ -47,13 +47,13 @@ Then initiate project with rf:
 yo rf myapp
 ```
 
-And you're done! Start a developer server.
+And viola! Start a webpack-dev-server with:
 
 ```bash
 npm run dev
 ```
 
-Then open [http://localhost:8080](http://localhost:8080) in the browser.
+Just open [http://localhost:8080](http://localhost:8080) in the browser and have fun!
 
 ## What RF generates:
 
@@ -100,10 +100,11 @@ Example:
 
     yo rf myapp -d=lsc
 
-### -s: StyleDialect
+### -s: Stylesheet Syntax
 RF generate [SASS](http://sass-lang.com/) (indented syntax) by default. Use -s flag to change it.
 
-`scss` for SCSS (Sassy CSS) or `css` for CSS.
+* `scss` for SCSS (Sassy CSS)
+* or `css` for CSS.
 
 Example:
 

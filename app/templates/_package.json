@@ -10,7 +10,7 @@
     "react": "^0.12.2",
     "react-router-component": "^0.23.2"
   },
-  "devDependencies": <%= dev_dependencies %>,
+  "devDependencies": <%= devDependencies %>,
   "scripts": {
     "dev": "webpack --color && webpack-dev-server --inline --hot --content-base ./build",
     "test": "jest"
@@ -19,8 +19,8 @@
   "license": "MIT",
   "jest": {
     "scriptPreprocessor": "<rootDir>/preprocessor.js",
-    "testFileExtensions": <%= test_file_extensions %>,
-    "moduleFileExtensions": <%= dialect_module_file_extensions %>,
+    "testFileExtensions": <%= testFileExtensions %>,
+    "moduleFileExtensions": <%= dialectModuleFileExtensions %>,
     "globals": {
       "SCRIPTS": "<rootDir>/src/scripts"
     },
