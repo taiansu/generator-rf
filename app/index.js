@@ -74,7 +74,7 @@ module.exports = generators.Base.extend({
   _setDialect: function (dialect_flag) {
 
     var configs = {
-      "description": "RF: React/Flux app with ",
+      "description": "A React/Flux app generate by RF, powered with ",
       'dev_dependencies':  {
         'react-addons': '^0.9.0',
         'react-hot-loader': '^1.0.4',
@@ -137,30 +137,21 @@ module.exports = generators.Base.extend({
   },
 
   _copyConfigFiles: function () {
-      var configurateion = this._.each(this.config.getAll(), function(value, key, item){
-        if (typeof item === 'object') {
-          item[key] = JSON.stringify(value);
-        }
-      });
-
       this.fs.copyTpl(
         this.templatePath('_package.json'),
         this.destinationPath('package.json'),
-        configurateion
+        this._stringifiedConfig()
       );
 
       this.fs.copyTpl(
         this.templatePath('_preprocessor.js'),
         this.destinationPath('preprocessor.js'),
-        {'dialect': this.config.get('dialect'),
-         'scriptSuffix': this.config.get('scriptSuffix')}
+        this._stringifiedConfig()
       );
       this.fs.copyTpl(
         this.templatePath('_webpack.config.js'),
         this.destinationPath('webpack.config.js'),
-        {'dialect': this.config.get('dialect'),
-         'scriptSuffix': this.config.get('scriptSuffix'),
-         'style': this.config.get('stylesheetSyntax')}
+        this._stringifiedConfig()
       );
   },
 
@@ -210,10 +201,19 @@ module.exports = generators.Base.extend({
       var fileSuffixed = filename.toString() + that.config.get('scriptSuffix');
       var template = that.config.get('dialect') + "/"  + fileSuffixed;
 
-      that.fs.copy(
+      that.fs.copyTpl(
         that.templatePath(template),
-        that.destinationPath(dist + fileSuffixed)
+        that.destinationPath(dist + fileSuffixed),
+        that._stringifiedConfig()
       );
+    });
+  },
+
+  _stringifiedConfig: function () {
+    return this._.each(this.config.getAll(), function(value, key, item){
+      if (typeof value === 'object') {
+        item[key] = JSON.stringify(value);
+      }
     });
   }
 });

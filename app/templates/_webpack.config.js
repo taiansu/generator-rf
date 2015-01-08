@@ -20,9 +20,9 @@
             { test: /\.coffee$/, loader: "coffee!cjsx" },
             <% } %>
 
-            <% if ( style === 'CSS' ) { %>
+            <% if ( stylesheetSyntax === 'CSS' ) { %>
             { test: /\.css$/, loader: "style!css" },
-            <% } else if ( style === 'SCSS') { %>
+            <% } else if ( stylesheetSyntax === 'SCSS') { %>
             {
               test: /\.scss$/,
               loader: "style!css!sass?outputStyle=expanded"

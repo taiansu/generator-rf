@@ -1,7 +1,7 @@
 {
-  "name": <%= appname %>,
+  "name": "<%= appname %>",
   "version": "0.0.0",
-  "description": <%= description %>,
+  "description": "<%= description %>",
   "main": "build/bundle.js",
   "dependencies": {
     "file-loader": "*",

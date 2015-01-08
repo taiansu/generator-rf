@@ -1,13 +1,16 @@
 # generator-rf
 
-> RF: a [React](http://facebook.github.io/react/)/[Flux](http://facebook.github.io/flux/) generator with webpack and CoffeeScript/LiveScript support.
+> RF: a [React](http://facebook.github.io/react/)/[Flux](http://facebook.github.io/flux/) generator with webpack and CoffeeScript/LiveScript + JSX syntax (cjsx) support.
+
 
 ### What's inside
 * [React](http://facebook.github.io/react/)
 * [Flux](http://facebook.github.io/flux/)
 * [Jest](http://facebook.github.io/jest)
 * [Webpack](http://webpack.github.io/)
+* [react-hot-loader](https://gaearon.github.io/react-hot-loader/) that livereload your browser after file change saved.
 * JS Dialect you choose in: [CoffeeScript](http://coffeescript.org/), [LiveScript](http://livescript.net) or vanilla JavaScript
+* [coffee-react-transform](https://github.com/jsdf/coffee-react-transform) for writing jsx syntax in CoffeeScript/LiveScript
 * CSS syntax you choose in: [SASS](http://sass-lang.com/) or SCSS (Sassy CSS) or CSS
 
 ## Getting Started
@@ -55,7 +58,8 @@ Then open [http://localhost:8080](http://localhost:8080) in the browser.
 
 By default, RF will generate code in [CoffeeScript](http://coffeescript.org/). If you don't like it, use -d flag to use other dialect.
 
-`lsc` for [LiveScript](http://livescript.net) or `js` for JavaScript.
+* `lsc` for [LiveScript](http://livescript.net) (actually `ls` works too)
+* or `js` for JavaScript
 
 Example:
 
