@@ -21,8 +21,11 @@
 * Have [Yeoman](http://yeoman.io) installed by:
 
 ```bash
-npm install -g yo
+npm install -g yo@1.3.3
 ```
+
+> Note: The newest [yo@1.4.0 breaks directly usage from commandline](https://github.com/yeoman/yo/issues/264). Please install 1.3.3 for now, will update once it's fixed.
+
 ### Install RF generator
 
 ```bash
