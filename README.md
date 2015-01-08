@@ -1,4 +1,4 @@
-# generator-rf
+# generator-rf [![Build Status](https://secure.travis-ci.org/taiansu/generator-rf.png?branch=master)](https://travis-ci.org/taiansu/generator-rf)
 
 > RF: a [React](http://facebook.github.io/react/)/[Flux](http://facebook.github.io/flux/) generator with webpack and CoffeeScript/LiveScript + JSX syntax (cjsx) support.
 
@@ -110,8 +110,14 @@ Example:
 
     yo rf myapp -s=scss
 
+## Contribute
+
+* Fork this project
+* run `npm test` and make sure they're all pass
+* Make your changes with [a bit of test](http://yeoman.io/authoring/testing.html)
+* For commit message of pull request, please check [these useful tips](http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message) ahead.
+
 ## TODO
-* Test the generator
 * Generate stylesheet and test file
 * Store, Component, Actions w/Constants, Mixin generators
 * interactive mode when no appName provided

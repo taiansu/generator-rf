@@ -14,7 +14,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "jest"
+    "test": "mocha"
   },
   "files": [
     "app"
@@ -28,6 +28,6 @@
     "yosay": "^0.3.0"
   },
   "devDependencies": {
-    "jest": ">=0.1.37"
+    "mocha": "*"
   }
 }
