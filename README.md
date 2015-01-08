@@ -54,34 +54,35 @@ Then open [http://localhost:8080](http://localhost:8080) in the browser.
 
 ## What RF generates:
 
-├── build
-│   ├── bundle.js
-│   └── index.html
-├── package.json
-├── preprocessor.js
-├── node\_modules
-├── src
-│   ├── assets
-│   │   ├── images
-│   │   └── stylesheets
-│   ├── index.html
-│   └── scripts
-│       ├── actions
-│       │   └── \_\_test\_\_
-│       ├── components
-│       │   ├── App.coffee
-│       │   └── \_\_test\_\_
-│       ├── constants
-│       │   └── \_\_test\_\_
-│       ├── dispatcher
-│       │   ├── AppDispatcher.coffee
-│       │   └── \_\_test\_\_
-│       ├── main.coffee
-│       ├── mixins
-│       │   └── \_\_test\_\_
-│       └── stores
-│           └── \_\_test\_\_
-└── webpack.config.js
+    .
+    ├── build
+    │   ├── bundle.js
+    │   └── index.html
+    ├── package.json
+    ├── preprocessor.js
+    ├── node_modules
+    ├── src
+    │   ├── assets
+    │   │   ├── images
+    │   │   └── stylesheets
+    │   ├── index.html
+    │   └── scripts
+    │       ├── actions
+    │       │   └── __test__
+    │       ├── components
+    │       │   ├── App.coffee
+    │       │   └── __test__
+    │       ├── constants
+    │       │   └── __test__
+    │       ├── dispatcher
+    │       │   ├── AppDispatcher.coffee
+    │       │   └── __test__
+    │       ├── main.coffee
+    │       ├── mixins
+    │       │   └── __test__
+    │       └── stores
+    │           └── __test__
+    └── webpack.config.js
 
 ## Options
 
