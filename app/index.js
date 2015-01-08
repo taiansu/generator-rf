@@ -146,9 +146,18 @@ module.exports = generators.Base.extend({
   },
 
   _mkTestDirs: function (tree, dest){
-    this._.forEach(tree['src/scripts'], function (dir) {
-      dest.mkdir('src/scripts/' + dir + '/__test__');
+    this._.each(tree['src/scripts'], function (dir) {
+      dest.mkdir('src/scripts/' + dir + '/__tests__');
     });
+
+    var testFile = 'App-test' + this.config.get('scriptSuffix')
+    var testFilePath = this.config.get('dialect') + '/' + testFile;
+
+    this.fs.copyTpl(
+        this.templatePath(testFilePath),
+        this.destinationPath('src/scripts/components/__tests__/' + testFile),
+        this._stringifiedConfig()
+    );
   },
 
   _copyScripts: function () {
@@ -160,7 +169,7 @@ module.exports = generators.Base.extend({
     };
 
     this._.each(file_dests, function(dist, filename){
-      var fileSuffixed = filename.toString() + that.config.get('scriptSuffix');
+      var fileSuffixed = filename + that.config.get('scriptSuffix');
       var template = that.config.get('dialect') + "/"  + fileSuffixed;
 
       that.fs.copyTpl(
@@ -175,6 +184,7 @@ module.exports = generators.Base.extend({
     var _ = this._;
     var devDependencies = {
       'react-addons': '^0.9.0',
+      'react-tools': '^0.12.2',
       'react-hot-loader': '^1.0.4',
       'webpack-dev-server': '^1.7.0',
       'webpack': '^1.4.14'

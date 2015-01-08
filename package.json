@@ -1,6 +1,6 @@
 {
   "name": "generator-rf",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "RF: a React/Flux webapp generator with webpack and CoffeeScript/LiveScript + JSX (a.k.a cjsx) support.",
   "license": "MIT",
   "main": "app/index.js",

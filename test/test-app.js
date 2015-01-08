@@ -37,6 +37,7 @@ describe('rf:app', function () {
       assert.file([
         'src/scripts/main.coffee',
         'src/scripts/components/App.coffee',
+        'src/scripts/components/__tests__/App-test.coffee',
         'src/scripts/dispatcher/AppDispatcher.coffee'
       ]);
     });
@@ -69,6 +70,7 @@ describe('rf:app', function () {
       assert.file([
         'src/scripts/main.ls',
         'src/scripts/components/App.ls',
+        'src/scripts/components/__tests__/App-test.ls',
         'src/scripts/dispatcher/AppDispatcher.ls'
       ]);
     });
@@ -101,6 +103,7 @@ describe('rf:app', function () {
       assert.file([
         'src/scripts/main.js',
         'src/scripts/components/App.js',
+        'src/scripts/components/__tests__/App-test.js',
         'src/scripts/dispatcher/AppDispatcher.js'
       ]);
     });

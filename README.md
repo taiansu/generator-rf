@@ -55,6 +55,12 @@ npm run dev
 
 Just open [http://localhost:8080](http://localhost:8080) in the browser and have fun!
 
+Don't forget to test your project by:
+
+```bash
+npm test
+```
+
 ## What RF generates:
 
     .
@@ -71,20 +77,21 @@ Just open [http://localhost:8080](http://localhost:8080) in the browser and have
     │   ├── index.html
     │   └── scripts
     │       ├── actions
-    │       │   └── __test__
+    │       │   └── __tests__
     │       ├── components
     │       │   ├── App.coffee
-    │       │   └── __test__
+    │       │   └── __tests__
+    │       │       └── App-test.coffee
     │       ├── constants
-    │       │   └── __test__
+    │       │   └── __tests__
     │       ├── dispatcher
     │       │   ├── AppDispatcher.coffee
-    │       │   └── __test__
+    │       │   └── __tests__
     │       ├── main.coffee
     │       ├── mixins
-    │       │   └── __test__
+    │       │   └── __tests__
     │       └── stores
-    │           └── __test__
+    │           └── __tests__
     └── webpack.config.js
 
 ## Options
@@ -118,7 +125,7 @@ Example:
 * For commit message of pull request, please check [these useful tips](http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message) ahead.
 
 ## TODO
-* Generate stylesheet and test file
+* Generate stylesheet file
 * Store, Component, Actions w/Constants, Mixin generators
 * interactive mode when no appName provided
 

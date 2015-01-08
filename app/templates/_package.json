@@ -8,7 +8,8 @@
     "flux": "^2.0.1",
     "object-assign": "^2.0.0",
     "react": "^0.12.2",
-    "react-router-component": "^0.23.2"
+    "react-router-component": "^0.23.2",
+    "jest-cli": "*"
   },
   "devDependencies": <%= devDependencies %>,
   "scripts": {
