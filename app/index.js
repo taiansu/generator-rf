@@ -21,7 +21,7 @@ module.exports = generators.Base.extend({
 
     this.option('skip-test', { type: Boolean,
                                defaults: false,
-                               desc: "Don't create __test__ for every subfolder in src/scripts" });
+                               desc: "Don't create __tests__ for every subfolder in src/scripts" });
 
     this.option('skip-install', { type: Boolean,
                                   defaults: false,
@@ -70,6 +70,10 @@ module.exports = generators.Base.extend({
       skipInstall: this.options['skip-install']
     });
   },
+
+  //////////////////////
+  // Helper Functions //
+  //////////////////////
 
   _setDialect: function (dialectFlag) {
     var dialect, suffix, config;
@@ -128,9 +132,8 @@ module.exports = generators.Base.extend({
     var _ = this._;
     var folderTree = {
       "src/scripts": [ "actions", "components", "constants",
-                   "dispatcher", "mixins", "stores" ],
-      "src/assets": [ "images", "stylesheets" ],
-
+                       "dispatcher", "mixins", "stores" ],
+      "src/assets":  [ "images", "stylesheets" ]
     }
 
     _.each(_.keys(folderTree), function (dir) {
@@ -140,23 +143,25 @@ module.exports = generators.Base.extend({
       });
     });
 
-    if (this.config.get('mkTestDirs')) {
-      this._mkTestDirs(folderTree, dest);
-    }
+    this._mkTestDirs(folderTree, dest);
   },
 
   _mkTestDirs: function (tree, dest){
+    if (!this.config.get('mkTestDirs')) {
+      return;
+    }
+
     this._.each(tree['src/scripts'], function (dir) {
       dest.mkdir('src/scripts/' + dir + '/__tests__');
     });
 
-    var testFile = 'App-test' + this.config.get('scriptSuffix')
-    var testFilePath = this.config.get('dialect') + '/' + testFile;
+    var testFile = this._suffixedFile('App-test');
+    var testFilePath = this._dialectTemplate('App-test');
 
     this.fs.copyTpl(
-        this.templatePath(testFilePath),
-        this.destinationPath('src/scripts/components/__tests__/' + testFile),
-        this._stringifiedConfig()
+      this.templatePath(testFilePath),
+      this.destinationPath('src/scripts/components/__tests__/' + testFile),
+      this._stringifiedConfig()
     );
   },
 
@@ -169,12 +174,12 @@ module.exports = generators.Base.extend({
     };
 
     this._.each(file_dests, function(dist, filename){
-      var fileSuffixed = filename + that.config.get('scriptSuffix');
-      var template = that.config.get('dialect') + "/"  + fileSuffixed;
+      var suffixedFile = that._suffixedFile(filename);
+      var template = that._dialectTemplate(filename);
 
       that.fs.copyTpl(
         that.templatePath(template),
-        that.destinationPath(dist + fileSuffixed),
+        that.destinationPath(dist + suffixedFile),
         that._stringifiedConfig()
       );
     });
@@ -220,6 +225,14 @@ module.exports = generators.Base.extend({
       'testFileExtensions': _.uniq(['js', suffix]),
       'dialectModuleFileExtensions': _.uniq(['js', 'json', suffix]),
     };
+  },
+
+  _suffixedFile: function(filename) {
+    return (filename + this.config.get('scriptSuffix'));
+  },
+
+  _dialectTemplate: function(filename) {
+    return this.config.get('dialect') + "/"  + this._suffixedFile(filename);
   },
 
   _stringifiedConfig: function () {

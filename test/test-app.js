@@ -114,4 +114,31 @@ describe('rf:app', function () {
       assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".css"/);
     });
   });
+
+  /////////////////
+  //  skip-test  //
+  /////////////////
+
+  describe('skip-test', function () {
+    before(function (done) {
+       helpers.run(path.join(__dirname, '../app'))
+         .inDir(path.join(os.tmpdir(), './temp-test'))
+         .withArguments(['MyApp'])
+         .withOptions({ 'skip-test': true, 'skip-install': true })
+         .on('end', done);
+    });
+
+    it('creates implementation files', function () {
+      assert.file([
+        'src/scripts/main.coffee',
+        'src/scripts/components/App.coffee',
+        'src/scripts/dispatcher/AppDispatcher.coffee'
+      ]);
+    });
+
+    it('doesn\'t create __tests__ directory and file', function () {
+      assert.noFile('src/scripts/components/__tests__/App-test.coffee');
+    });
+
+  });
 });
