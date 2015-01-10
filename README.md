@@ -71,26 +71,29 @@ npm test
     │   ├── assets
     │   │   ├── images
     │   │   └── stylesheets
-    │   │       └── style.sass
+    │   │       └── style.sass *
     │   ├── index.html
     │   └── scripts
     │       ├── actions
     │       │   └── __tests__
     │       ├── components
-    │       │   ├── App.coffee
+    │       │   ├── App.coffee *
     │       │   └── __tests__
-    │       │       └── App-test.coffee
+    │       │       └── App-test.coffee *
     │       ├── constants
     │       │   └── __tests__
     │       ├── dispatcher
-    │       │   ├── AppDispatcher.coffee
+    │       │   ├── AppDispatcher.coffee *
     │       │   └── __tests__
-    │       ├── main.coffee
+    │       ├── main.coffee *
     │       ├── mixins
     │       │   └── __tests__
     │       └── stores
     │           └── __tests__
     └── webpack.config.js
+
+
+    *: base on the dialect and stylesheet syntax you choose
 
 ## Options
 
@@ -119,11 +122,12 @@ Example:
 ## Contribute
 
 * Fork this project
-* run `npm test` and make sure they're all pass
+* run `npm install && npm test` and make sure all test are pass
 * Make your changes with [a bit of test](http://yeoman.io/authoring/testing.html)
 * For commit message of pull request, please check [these useful tips](http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message) ahead.
 
 ## TODO
+
 * Store, Component, Actions w/Constants, Mixin generators
 * Interactive mode when no appname provided
 

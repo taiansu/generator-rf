@@ -3,6 +3,7 @@ var yeoman = require('yeoman-generator');
 var generators = yeoman.generators;
 var chalk = require('chalk');
 var yosay = require('yosay');
+var packages = require('./packages.js');
 
 module.exports = generators.Base.extend({
 
@@ -46,7 +47,7 @@ module.exports = generators.Base.extend({
     app: function () {
       this._copyConfigFiles();
       this._copyHTML();
-      this._mkDirs(this.dest);
+      this._mkDirs();
       this._copyScripts();
       this._copyStylesheets();
     },
@@ -129,7 +130,8 @@ module.exports = generators.Base.extend({
     );
   },
 
-  _mkDirs: function (dest) {
+  _mkDirs: function () {
+    var that = this;
     var _ = this._;
     var folderTree = {
       "src/scripts": [ "actions", "components", "constants",
@@ -138,22 +140,23 @@ module.exports = generators.Base.extend({
     }
 
     _.each(_.keys(folderTree), function (dir) {
-      dest.mkdir(dir);
+      that.dest.mkdir(dir);
       _.each(folderTree[dir], function (subdir) {
-        dest.mkdir(dir + "/" + subdir);
+        that.dest.mkdir(dir + "/" + subdir);
       });
     });
 
-    this._mkTestDirs(folderTree, dest);
+    this._mkTestDirs(folderTree);
   },
 
-  _mkTestDirs: function (tree, dest){
+  _mkTestDirs: function (tree){
+    var that = this;
     if (!this.config.get('mkTestDirs')) {
       return;
     }
 
     this._.each(tree['src/scripts'], function (dir) {
-      dest.mkdir('src/scripts/' + dir + '/__tests__');
+      that.dest.mkdir('src/scripts/' + dir + '/__tests__');
     });
 
     var testFile = this._suffixedScriptFile('App-test');
@@ -233,65 +236,7 @@ module.exports = generators.Base.extend({
     var scriptSuffix = this.config.get('scriptSuffix');
     var stylesheetSuffix = this.config.get('stylesheetSuffix');
 
-    var devDependencies = this._.merge(
-      this._baseDependencies,
-      this._dialectDependencies(scriptSuffix),
-      this._dialectDependencies(stylesheetSuffix)
-    );
-
-    this.config.set('devDependencies', devDependencies);
-  },
-
-  _dialectDependencies: function (suffix) {
-    var key = "_" + suffix.replace(/\./, '') + "Dependencies";
-
-    // return an empty object if this[key] not exist, like _cssDependencies
-    if (typeof this[key] === 'object') {
-      return this[key];
-    } else {
-      return {};
-    }
-  },
-
-  ////////////////////
-  //  Depencencies  //
-  ////////////////////
-
-  _jsDependencies: {
-    'jsx-loader': '*'
-  },
-
-  _coffeeDependencies: {
-    'cjsx-loader': '^1.1.0',
-    'coffee-loader': '*',
-    'coffee-script': '*'
-  },
-
-  _lsDependencies: {
-    'cjsx-loader': '^1.1.0',
-    'livescript-loader': '*',
-    'LiveScript': '*'
-  },
-
-  _sassDependencies: {
-    'sass-loader': '*'
-  },
-
-  _scssDependencies: {
-    'sass-loader': '*'
-  },
-
-  _lessDependencies: {
-    'less-loader': '*'
-  },
-
-  _baseDependencies: {
-    'react-addons': '^0.9.0',
-    'react-tools': '^0.12.2',
-    'react-hot-loader': '^1.0.4',
-    'css-loader': '*',
-    'style-loader': '*',
-    'webpack-dev-server': '^1.7.0',
-    'webpack': '^1.4.14'
+    this.config.set('devDependencies',
+                    packages.fetch(['base', scriptSuffix, stylesheetSuffix]));
   }
 });
