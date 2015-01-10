@@ -1,4 +1,5 @@
 require('../index.html');
+require('../assets/stylesheets/style<%= stylesheetSuffix %>');
 
 // TODO: Require assets here.
 // require('../assets/product.png');

@@ -5,9 +5,9 @@ var TestUtils = React.addons.TestUtils;
 var App = require('../App.js');
 
 describe('App', function () {
-  it('generate appName in <h1>', function () {
+  it('generate appname in <h1>', function () {
     var app = TestUtils.renderIntoDocument(<App />);
     var title = TestUtils.findRenderedDOMComponentWithTag(app, 'h1');
-    expect(title.getDOMNode().textContent).toEqual('<%= appName %>');
+    expect(title.getDOMNode().textContent).toEqual('<%= appname %>');
   });
 });

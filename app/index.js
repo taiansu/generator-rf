@@ -8,8 +8,8 @@ module.exports = generators.Base.extend({
 
   constructor: function () {
     generators.Base.apply(this, arguments);
-    this.argument('appName', { type: String, required: true});
-    this.config.set('appName', this.appName);
+    this.argument('appname', { type: String, required: true});
+    this.config.set('appname', this.appname);
 
     this.option('d', { type: String,
                        defaults: "coffee-script",
@@ -17,7 +17,7 @@ module.exports = generators.Base.extend({
 
     this.option('s', { type: String,
                        defaults: "SASS",
-                       desc: "Stylesheet syntax, can be 'scss' or 'css' "});
+                       desc: "Stylesheet syntax, can be 'scss', 'less' or 'css' "});
 
     this.option('skip-test', { type: Boolean,
                                defaults: false,
@@ -36,12 +36,10 @@ module.exports = generators.Base.extend({
   },
 
   configuring: function () {
-
     this.config.set('mkTestDirs', !this.options['skip-test']);
-
     this._setDialect(this.options.d);
     this._setStylesheet(this.options.s);
-
+    this._setDependencies();
   },
 
   writing: {
@@ -50,6 +48,7 @@ module.exports = generators.Base.extend({
       this._copyHTML();
       this._mkDirs(this.dest);
       this._copyScripts();
+      this._copyStylesheets();
     },
 
     projectfiles: function () {
@@ -93,13 +92,15 @@ module.exports = generators.Base.extend({
         suffix = 'coffee';
         break;
     }
-    config = this._.merge(this._dialectConfig(dialect, suffix),
-                          this._dialectDependencies(dialect));
 
-    this.config.set(config);
+    this.config.set(this._dialectConfig(dialect, suffix));
   },
 
   _setStylesheet: function (styleFlag) {
+    if (!this._.contains(['sass', 'scss', 'css', 'less'], styleFlag.toLowerCase())) {
+      this.log("Warning: I don't recognize stylesheet: " + styleFlag.replace(/=/, '') + ", will use SASS instead.");
+      styleFlag = 'sass';
+    }
     this.config.set('stylesheetSyntax', styleFlag.toUpperCase());
     this.config.set('stylesheetSuffix', '.' + styleFlag.toLowerCase());
   },
@@ -122,10 +123,10 @@ module.exports = generators.Base.extend({
   },
 
   _copyHTML: function () {
-      this.fs.copy(
-        this.templatePath('_index.html'),
-        this.destinationPath('src/index.html')
-      );
+    this.fs.copy(
+      this.templatePath('_index.html'),
+      this.destinationPath('src/index.html')
+    );
   },
 
   _mkDirs: function (dest) {
@@ -155,7 +156,7 @@ module.exports = generators.Base.extend({
       dest.mkdir('src/scripts/' + dir + '/__tests__');
     });
 
-    var testFile = this._suffixedFile('App-test');
+    var testFile = this._suffixedScriptFile('App-test');
     var testFilePath = this._dialectTemplate('App-test');
 
     this.fs.copyTpl(
@@ -174,45 +175,22 @@ module.exports = generators.Base.extend({
     };
 
     this._.each(file_dests, function(dist, filename){
-      var suffixedFile = that._suffixedFile(filename);
+      var suffixedScriptFile = that._suffixedScriptFile(filename);
       var template = that._dialectTemplate(filename);
 
       that.fs.copyTpl(
         that.templatePath(template),
-        that.destinationPath(dist + suffixedFile),
+        that.destinationPath(dist + suffixedScriptFile),
         that._stringifiedConfig()
       );
     });
   },
 
-  _dialectDependencies: function(dialect) {
-    var _ = this._;
-    var devDependencies = {
-      'react-addons': '^0.9.0',
-      'react-tools': '^0.12.2',
-      'react-hot-loader': '^1.0.4',
-      'webpack-dev-server': '^1.7.0',
-      'webpack': '^1.4.14'
-    };
-
-    switch(dialect) {
-      case 'JavaScript':
-        return {"devDependencies": _.merge(devDependencies,
-                                           {'jsx-loader': '*'})};
-        break;
-      case 'LiveScript':
-        return {"devDependencies": _.merge(devDependencies,
-                                           {'cjsx-loader': '^1.1.0',
-                                            'livescript-loader': '*',
-                                            'LiveScript': '*' })};
-        break;
-      default:
-        return {"devDependencies": _.merge(devDependencies,
-                                           {'cjsx-loader': '^1.1.0',
-                                            'coffee-loader': '*',
-                                            'coffee-script': '*' })};
-        break;
-    }
+  _copyStylesheets: function () {
+    this.fs.copy(
+      this.templatePath(this._stylesheetTemplate('style')),
+      this.destinationPath('src/assets/stylesheets/' + this._suffixedStylesheet('style'))
+    );
   },
 
   _dialectConfig: function (dialect, suffix) {
@@ -227,19 +205,93 @@ module.exports = generators.Base.extend({
     };
   },
 
-  _suffixedFile: function(filename) {
+  _suffixedScriptFile: function(filename) {
     return (filename + this.config.get('scriptSuffix'));
   },
 
   _dialectTemplate: function(filename) {
-    return this.config.get('dialect') + "/"  + this._suffixedFile(filename);
+    return this.config.get('dialect') + "/"  + this._suffixedScriptFile(filename);
+  },
+
+  _suffixedStylesheet: function (filename) {
+    return (filename + this.config.get('stylesheetSuffix'));
+  },
+
+  _stylesheetTemplate: function(filename) {
+    return this.config.get('stylesheetSyntax') + "/"  + this._suffixedStylesheet(filename);
   },
 
   _stringifiedConfig: function () {
     return this._.each(this.config.getAll(), function(value, key, item){
       if (typeof value === 'object') {
-        item[key] = JSON.stringify(value);
+        item[key] = JSON.stringify(value, null, '\t');
       }
     });
+  },
+
+  _setDependencies: function () {
+    var scriptSuffix = this.config.get('scriptSuffix');
+    var stylesheetSuffix = this.config.get('stylesheetSuffix');
+
+    var devDependencies = this._.merge(
+      this._baseDependencies,
+      this._dialectDependencies(scriptSuffix),
+      this._dialectDependencies(stylesheetSuffix)
+    );
+
+    this.config.set('devDependencies', devDependencies);
+  },
+
+  _dialectDependencies: function (suffix) {
+    var key = "_" + suffix.replace(/\./, '') + "Dependencies";
+
+    // return an empty object if this[key] not exist, like _cssDependencies
+    if (typeof this[key] === 'object') {
+      return this[key];
+    } else {
+      return {};
+    }
+  },
+
+  ////////////////////
+  //  Depencencies  //
+  ////////////////////
+
+  _jsDependencies: {
+    'jsx-loader': '*'
+  },
+
+  _coffeeDependencies: {
+    'cjsx-loader': '^1.1.0',
+    'coffee-loader': '*',
+    'coffee-script': '*'
+  },
+
+  _lsDependencies: {
+    'cjsx-loader': '^1.1.0',
+    'livescript-loader': '*',
+    'LiveScript': '*'
+  },
+
+  _sassDependencies: {
+    'sass-loader': '*'
+  },
+
+  _scssDependencies: {
+    'sass-loader': '*'
+  },
+
+  _lessDependencies: {
+    'less-loader': '*'
+  },
+
+  _baseDependencies: {
+    'react-addons': '^0.9.0',
+    'react-tools': '^0.12.2',
+    'react-hot-loader': '^1.0.4',
+    'css-loader': '*',
+    'style-loader': '*',
+    'webpack-dev-server': '^1.7.0',
+    'webpack': '^1.4.14'
   }
 });

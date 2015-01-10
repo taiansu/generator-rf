@@ -8,12 +8,18 @@ APP = React.createClass
 
     <div>
       <header>
-        <h1><%= appName %></h1>
+        <h1><%= appname %></h1>
         <h3><%= description %></h3>
       </header>
-      <p style={{'fontSize': 16}}>
-      Greeting form <a href='https://github.com/taiansu/generator-rf'>RF generator</a>. You're powered with <a href='https://gaearon.github.io/react-hot-loader/'>react-hot-loader</a>. Edit this file in <span style={ codeBlockStyle }> src/scripts/components/App<%= scriptSuffix %></span> and save it.
-      </p>
+      <article className="context">
+        <p>
+          Greeting form <a href="https://github.com/taiansu/generator-rf">RF generator</a>.
+        </p>
+
+        <p>
+          Remember you are powered with <a href='https://gaearon.github.io/react-hot-loader/'>react-hot-loader</a> now. Edit this file in <span style={ codeBlockStyle }>src/scripts/components/App.coffee</span> and save it, it will auto reload the page for you.
+        </p>
+      </article>
     </div>
 
 module.exports = APP

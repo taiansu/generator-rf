@@ -27,6 +27,11 @@
               test: /\.scss$/,
               loader: "style!css!sass?outputStyle=expanded"
             },
+            <% } else if ( stylesheetSyntax === 'LESS') { %>
+            {
+              test: /\.less$/,
+              loader: "style!css!less"
+            },
             <% } else { %>
             {
               test: /\.sass$/,

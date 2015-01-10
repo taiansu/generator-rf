@@ -5,7 +5,7 @@ TestUtils = React.addons.TestUtils
 App = require('../App.coffee')
 
 describe 'App', ->
-  it 'generate appName in <h1>',  ->
+  it 'generate appname in <h1>',  ->
     app = TestUtils.renderIntoDocument <App />
     title = TestUtils.findRenderedDOMComponentWithTag(app, 'h1')
-    expect(title.getDOMNode().textContent).toEqual('<%= appName %>')
+    expect(title.getDOMNode().textContent).toEqual('<%= appname %>')

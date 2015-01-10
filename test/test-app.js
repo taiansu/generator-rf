@@ -20,7 +20,7 @@ describe('rf:app', function () {
   //  CoffeeScript  //
   ////////////////////
 
-  describe('CoffeeScript', function() {
+  describe('Default: CoffeeScript & SASS', function() {
     before(function (done) {
        helpers.run(path.join(__dirname, '../app'))
          .inDir(path.join(os.tmpdir(), './temp-test'))
@@ -42,10 +42,21 @@ describe('rf:app', function () {
       ]);
     });
 
-    it('save config with coffee and SASS', function () {
+    it('creates sass files', function () {
+      assert.file('src/assets/stylesheets/style.sass');
+    });
+
+    it('save configs of coffee-script and SASS', function () {
       assert.fileContent('.yo-rc.json', /"dialect": "coffee-script"/);
+      assert.fileContent('.yo-rc.json', /"scriptSuffix": ".coffee"/);
       assert.fileContent('.yo-rc.json', /"stylesheetSyntax": "SASS"/);
       assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".sass"/);
+    });
+
+    it('generact package.json with base, coffee and sass devDependencies', function () {
+      assert.fileContent('package.json', /react-tools/);
+      assert.fileContent('package.json', /coffee-script/);
+      assert.fileContent('package.json', /sass-loader/);
     });
   });
 
@@ -58,7 +69,7 @@ describe('rf:app', function () {
        helpers.run(path.join(__dirname, '../app'))
          .inDir(path.join(os.tmpdir(), './temp-test'))
          .withArguments(['MyApp'])
-         .withOptions({ 'd': 'ls', 's': 'scss', 'skip-install': true })
+         .withOptions({ 'd': 'ls', 'skip-install': true })
          .on('end', done);
     });
 
@@ -75,10 +86,14 @@ describe('rf:app', function () {
       ]);
     });
 
-    it('save config with LiveScript and SCSS', function () {
+    it('save configs of LiveScript', function () {
       assert.fileContent('.yo-rc.json', /"dialect": "LiveScript"/);
-      assert.fileContent('.yo-rc.json', /"stylesheetSyntax": "SCSS"/);
-      assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".scss"/);
+      assert.fileContent('.yo-rc.json', /"scriptSuffix": ".ls"/);
+    });
+
+    it('generact package.json with base and LiveScript devDependencies', function () {
+      assert.fileContent('package.json', /react-tools/);
+      assert.fileContent('package.json', /LiveScript/);
     });
   });
 
@@ -99,7 +114,7 @@ describe('rf:app', function () {
       assert.file(generalFiles);
     });
 
-    it('creates LiveScript files', function () {
+    it('creates JavaScript files', function () {
       assert.file([
         'src/scripts/main.js',
         'src/scripts/components/App.js',
@@ -108,11 +123,97 @@ describe('rf:app', function () {
       ]);
     });
 
-    it('save config with JavaScript and CSS', function () {
+    it('save configs of JavaScript', function () {
       assert.fileContent('.yo-rc.json', /"dialect": "JavaScript"/);
+      assert.fileContent('.yo-rc.json', /"scriptSuffix": ".js"/);
+    });
+
+    it('generact package.json with base and JavaScript devDependencies', function () {
+      assert.fileContent('package.json', /react-tools/);
+      assert.fileContent('package.json', /jsx-loader/);
+    });
+  });
+
+  ////////////
+  //  SCSS  //
+  ////////////
+
+  describe('SCSS', function() {
+    before(function (done) {
+       helpers.run(path.join(__dirname, '../app'))
+         .inDir(path.join(os.tmpdir(), './temp-test'))
+         .withArguments(['MyApp'])
+         .withOptions({ 's': 'scss', 'skip-install': true })
+         .on('end', done);
+    });
+
+    it('save configs of SCSS', function () {
+      assert.fileContent('.yo-rc.json', /"stylesheetSyntax": "SCSS"/);
+      assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".scss"/);
+    });
+
+    it('generact package.json with base and SCSS devDependencies', function () {
+      assert.fileContent('package.json', /react-tools/);
+      assert.fileContent('package.json', /sass-loader/);
+    });
+
+    it('creates sass files', function () {
+      assert.file('src/assets/stylesheets/style.scss');
+    });
+
+  });
+
+  ////////////
+  //  LESS  //
+  ////////////
+
+  describe('LESS', function() {
+    before(function (done) {
+       helpers.run(path.join(__dirname, '../app'))
+         .inDir(path.join(os.tmpdir(), './temp-test'))
+         .withArguments(['MyApp'])
+         .withOptions({ 's': 'less', 'skip-install': true })
+         .on('end', done);
+    });
+
+    it('save configs of LESS', function () {
+      assert.fileContent('.yo-rc.json', /"stylesheetSyntax": "LESS"/);
+      assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".less"/);
+    });
+
+    it('generact package.json with base and SCSS devDependencies', function () {
+      assert.fileContent('package.json', /react-tools/);
+      assert.fileContent('package.json', /less-loader/);
+    });
+
+    it('creates less files', function () {
+      assert.file('src/assets/stylesheets/style.less');
+    });
+
+  });
+
+  ///////////
+  //  CSS  //
+  ///////////
+
+  describe('CSS', function() {
+    before(function (done) {
+       helpers.run(path.join(__dirname, '../app'))
+         .inDir(path.join(os.tmpdir(), './temp-test'))
+         .withArguments(['MyApp'])
+         .withOptions({ 's': 'css', 'skip-install': true })
+         .on('end', done);
+    });
+
+    it('save configs of LESS', function () {
       assert.fileContent('.yo-rc.json', /"stylesheetSyntax": "CSS"/);
       assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".css"/);
     });
+
+    it('creates css files', function () {
+      assert.file('src/assets/stylesheets/style.css');
+    });
+
   });
 
   /////////////////

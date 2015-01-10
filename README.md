@@ -8,10 +8,10 @@
 * [Flux](http://facebook.github.io/flux/)
 * [Jest](http://facebook.github.io/jest)
 * [webpack](http://webpack.github.io/)
-* [react-hot-loader](https://gaearon.github.io/react-hot-loader/) that livereload your browser after file change saved
-* JS Dialect you choose in: CoffeeScript, LiveScript or vanilla JavaScript
-* [coffee-react-transform](https://github.com/jsdf/coffee-react-transform) for writing jsx syntax in CoffeeScript/LiveScript
-* CSS syntax you choose in: SASS, SCSS (Sassy CSS) or CSS
+* [react-hot-loader](https://gaearon.github.io/react-hot-loader/): livereload your browser after code change
+* [CoffeeScript](http://coffeescript.org/), [LiveScript](http://livescript.net) or vanilla JavaScript: JS dialect in your favor
+* [coffee-react-transform](https://github.com/jsdf/coffee-react-transform): Write jsx syntax in CoffeeScript/LiveScript
+* [SASS/SCSS](http://sass-lang.com/), [LESS](http://lesscss.org/) or pure CSS: Stylesheet syntax in your favor
 
 ## Getting Started
 
@@ -32,8 +32,7 @@ npm install -g generator-rf
 
 ### Intiate Project
 
-For example, to create a project name "myapp" , you should make a directory
-first.
+For example, to create a project named "myapp" , make a directory first.
 
 ```bash
 mkdir myapp && cd myapp
@@ -45,7 +44,7 @@ Then initiate project with rf:
 yo rf myapp
 ```
 
-And viola! Start a webpack-dev-server with:
+And _Viola!_ Start a webpack-dev-server with:
 
 ```bash
 npm run dev
@@ -72,6 +71,7 @@ npm test
     │   ├── assets
     │   │   ├── images
     │   │   └── stylesheets
+    │   │       └── style.sass
     │   ├── index.html
     │   └── scripts
     │       ├── actions
@@ -96,7 +96,7 @@ npm test
 
 ### -d: Dialect
 
-By default, RF will generate code in [CoffeeScript](http://coffeescript.org/). If you don't like it, use -d flag to use other dialect.
+By default, RF will generate codes in [CoffeeScript](http://coffeescript.org/). If you don't like it, use -d flag to use other dialect.
 
 * `lsc` for [LiveScript](http://livescript.net) (actually `ls` works, too)
 * or `js` for JavaScript
@@ -109,6 +109,7 @@ Example:
 RF generate [SASS](http://sass-lang.com/) (indented syntax) by default. Use -s flag to change it.
 
 * `scss` for SCSS (Sassy CSS)
+* `less` for LESS
 * or `css` for CSS.
 
 Example:
@@ -123,9 +124,8 @@ Example:
 * For commit message of pull request, please check [these useful tips](http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message) ahead.
 
 ## TODO
-* Generate stylesheet file
 * Store, Component, Actions w/Constants, Mixin generators
-* interactive mode when no appName provided
+* Interactive mode when no appname provided
 
 ## License
 

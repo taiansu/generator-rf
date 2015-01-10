@@ -1,5 +1,5 @@
 {
-  "name": "<%= appName %>",
+  "name": "<%= appname %>",
   "version": "0.0.0",
   "description": "<%= description %>",
   "main": "build/bundle.js",
