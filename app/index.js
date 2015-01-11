@@ -20,11 +20,11 @@ module.exports = generators.Base.extend({
                        defaults: "SASS",
                        desc: "Stylesheet syntax, can be 'scss', 'less' or 'css' "});
 
-    this.option('skip-test', { type: Boolean,
+    this.option('skipTest', { type: Boolean,
                                defaults: false,
                                desc: "Don't create __tests__ for every subfolder in src/scripts" });
 
-    this.option('skip-install', { type: Boolean,
+    this.option('skipInstall', { type: Boolean,
                                   defaults: false,
                                   desc: "Skip automatic installation" });
   },
@@ -37,7 +37,7 @@ module.exports = generators.Base.extend({
   },
 
   configuring: function () {
-    this.config.set('mkTestDirs', !this.options['skip-test']);
+    this.config.set('mkTestDirs', !this.options.skipTest);
     this._setDialect(this.options.d);
     this._setStylesheet(this.options.s);
     this._setDependencies();
@@ -67,7 +67,7 @@ module.exports = generators.Base.extend({
   install: function () {
     this.installDependencies({
       bower: false,
-      skipInstall: this.options['skip-install']
+      skipInstall: this.options.skipInstall
     });
   },
 

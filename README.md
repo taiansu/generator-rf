@@ -97,19 +97,19 @@ npm test
 
 ## Options
 
-### -d: Dialect
+### --d: Dialect
 
-By default, RF will generate codes in [CoffeeScript](http://coffeescript.org/). If you don't like it, use -d flag to use other dialect.
+By default, RF will generate codes in [CoffeeScript](http://coffeescript.org/). If you don't like it, use --d flag to use other dialect.
 
 * `lsc` for [LiveScript](http://livescript.net) (actually `ls` works, too)
 * or `js` for JavaScript
 
 Example:
 
-    yo rf myapp -d=lsc
+    yo rf myapp --d=lsc
 
-### -s: Stylesheet Syntax
-RF generate [SASS](http://sass-lang.com/) (indented syntax) by default. Use -s flag to change it.
+### --s: Stylesheet Syntax
+RF generate [SASS](http://sass-lang.com/) (indented syntax) by default. Use --s flag to change it.
 
 * `scss` for SCSS (Sassy CSS)
 * `less` for LESS
@@ -117,7 +117,19 @@ RF generate [SASS](http://sass-lang.com/) (indented syntax) by default. Use -s f
 
 Example:
 
-    yo rf myapp -s=scss
+    yo rf myapp --s=scss
+
+### --skipTest: Don't create __tests__ for every subfolder in src/scripts
+
+Example:
+
+    yo rf myapp --skipTest
+
+### --skipInstall: Skip automatic installation
+
+Example:
+
+    yo rf myapp --skipInstall
 
 ## Contribute
 

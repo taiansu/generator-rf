@@ -25,7 +25,7 @@ describe('rf:app', function () {
        helpers.run(path.join(__dirname, '../app'))
          .inDir(path.join(os.tmpdir(), './temp-test'))
          .withArguments(['MyApp'])
-         .withOptions({ 'skip-install': true })
+         .withOptions({ 'skipInstall': true })
          .on('end', done);
     });
 
@@ -69,7 +69,7 @@ describe('rf:app', function () {
        helpers.run(path.join(__dirname, '../app'))
          .inDir(path.join(os.tmpdir(), './temp-test'))
          .withArguments(['MyApp'])
-         .withOptions({ 'd': 'ls', 'skip-install': true })
+         .withOptions({ 'd': 'ls', 'skipInstall': true })
          .on('end', done);
     });
 
@@ -106,7 +106,7 @@ describe('rf:app', function () {
        helpers.run(path.join(__dirname, '../app'))
          .inDir(path.join(os.tmpdir(), './temp-test'))
          .withArguments(['MyApp'])
-         .withOptions({ 'd': 'js', 's': 'css', 'skip-install': true })
+         .withOptions({ 'd': 'js', 's': 'css', 'skipInstall': true })
          .on('end', done);
     });
 
@@ -143,7 +143,7 @@ describe('rf:app', function () {
        helpers.run(path.join(__dirname, '../app'))
          .inDir(path.join(os.tmpdir(), './temp-test'))
          .withArguments(['MyApp'])
-         .withOptions({ 's': 'scss', 'skip-install': true })
+         .withOptions({ 's': 'scss', 'skipInstall': true })
          .on('end', done);
     });
 
@@ -172,7 +172,7 @@ describe('rf:app', function () {
        helpers.run(path.join(__dirname, '../app'))
          .inDir(path.join(os.tmpdir(), './temp-test'))
          .withArguments(['MyApp'])
-         .withOptions({ 's': 'less', 'skip-install': true })
+         .withOptions({ 's': 'less', 'skipInstall': true })
          .on('end', done);
     });
 
@@ -201,7 +201,7 @@ describe('rf:app', function () {
        helpers.run(path.join(__dirname, '../app'))
          .inDir(path.join(os.tmpdir(), './temp-test'))
          .withArguments(['MyApp'])
-         .withOptions({ 's': 'css', 'skip-install': true })
+         .withOptions({ 's': 'css', 'skipInstall': true })
          .on('end', done);
     });
 
@@ -216,16 +216,16 @@ describe('rf:app', function () {
 
   });
 
-  /////////////////
-  //  skip-test  //
-  /////////////////
+  ////////////////
+  //  skipTest  //
+  ////////////////
 
-  describe('skip-test', function () {
+  describe('skipTest', function () {
     before(function (done) {
        helpers.run(path.join(__dirname, '../app'))
          .inDir(path.join(os.tmpdir(), './temp-test'))
          .withArguments(['MyApp'])
-         .withOptions({ 'skip-test': true, 'skip-install': true })
+         .withOptions({ 'skipTest': true, 'skipInstall': true })
          .on('end', done);
     });
 
