@@ -22,7 +22,7 @@ module.exports = generators.Base.extend({
         break;
     }
 
-    this.config.set(this.dialectConfig(dialect, suffix));
+    this.config.set(this._dialectConfig(dialect, suffix));
   },
 
   setStylesheet: function (styleFlag) {
@@ -33,6 +33,14 @@ module.exports = generators.Base.extend({
     }
     this.config.set('stylesheetSyntax', style);
     this.config.set('stylesheetSuffix', '.' + style.toLowerCase());
+  },
+
+  setDependencies: function () {
+    var scriptSuffix = this.config.get('scriptSuffix');
+    var stylesheetSuffix = this.config.get('stylesheetSuffix');
+
+    this.config.set('devDependencies',
+                    packages.fetch([scriptSuffix, stylesheetSuffix]));
   },
 
   copyConfigFiles: function () {
@@ -47,7 +55,7 @@ module.exports = generators.Base.extend({
       that.fs.copyTpl(
         that.templatePath('_' + file),
         that.destinationPath(file),
-        that.stringifiedConfig()
+        that._stringifiedConfig()
       );
     });
   },
@@ -75,27 +83,7 @@ module.exports = generators.Base.extend({
       });
     });
 
-    this.mkTestDirs(folderTree);
-  },
-
-  mkTestDirs: function (tree){
-    var that = this;
-    if (!this.config.get('mkTestDirs')) {
-      return;
-    }
-
-    this._.each(tree['src/scripts'], function (dir) {
-      that.dest.mkdir('src/scripts/' + dir + '/__tests__');
-    });
-
-    var testFile = this.suffixedScriptFile('App-test');
-    var testFilePath = this.dialectTemplate('App-test');
-
-    this.fs.copyTpl(
-      this.templatePath(testFilePath),
-      this.destinationPath('src/scripts/components/__tests__/' + testFile),
-      this.stringifiedConfig()
-    );
+    this._mkTestDirs(folderTree);
   },
 
   copyScripts: function () {
@@ -107,25 +95,25 @@ module.exports = generators.Base.extend({
     };
 
     this._.each(file_dests, function(dist, filename){
-      var suffixedScriptFile = that.suffixedScriptFile(filename);
-      var template = that.dialectTemplate(filename);
+      var suffixedScriptFile = that._suffixedScriptFile(filename);
+      var template = that._dialectTemplate(filename);
 
       that.fs.copyTpl(
         that.templatePath(template),
         that.destinationPath(dist + suffixedScriptFile),
-        that.stringifiedConfig()
+        that._stringifiedConfig()
       );
     });
   },
 
   copyStylesheets: function () {
     this.fs.copy(
-      this.templatePath(this.stylesheetTemplate('style')),
-      this.destinationPath('src/assets/stylesheets/' + this.suffixedStylesheet('style'))
+      this.templatePath(this._stylesheetTemplate('style')),
+      this.destinationPath('src/assets/stylesheets/' + this._suffixedStylesheet('style'))
     );
   },
 
-  dialectConfig: function (dialect, suffix) {
+  _dialectConfig: function (dialect, suffix) {
     var _ = this._;
 
     return  {
@@ -137,23 +125,43 @@ module.exports = generators.Base.extend({
     };
   },
 
-  suffixedScriptFile: function(filename) {
+  _mkTestDirs: function (tree){
+    var that = this;
+    if (!this.config.get('mkTestDirs')) {
+      return;
+    }
+
+    this._.each(tree['src/scripts'], function (dir) {
+      that.dest.mkdir('src/scripts/' + dir + '/__tests__');
+    });
+
+    var testFile = this._suffixedScriptFile('App-test');
+    var testFilePath = this._dialectTemplate('App-test');
+
+    this.fs.copyTpl(
+      this.templatePath(testFilePath),
+      this.destinationPath('src/scripts/components/__tests__/' + testFile),
+      this._stringifiedConfig()
+    );
+  },
+
+  _suffixedScriptFile: function(filename) {
     return (filename + this.config.get('scriptSuffix'));
   },
 
-  dialectTemplate: function(filename) {
-    return this.config.get('dialect') + "/"  + this.suffixedScriptFile(filename);
+  _dialectTemplate: function(filename) {
+    return this.config.get('dialect') + "/"  + this._suffixedScriptFile(filename);
   },
 
-  suffixedStylesheet: function (filename) {
+  _suffixedStylesheet: function (filename) {
     return (filename + this.config.get('stylesheetSuffix'));
   },
 
-  stylesheetTemplate: function(filename) {
-    return this.config.get('stylesheetSyntax') + "/"  + this.suffixedStylesheet(filename);
+  _stylesheetTemplate: function(filename) {
+    return this.config.get('stylesheetSyntax') + "/"  + this._suffixedStylesheet(filename);
   },
 
-  stringifiedConfig: function () {
+  _stringifiedConfig: function () {
     var _ = this._;
 
     return _.each(this.config.getAll(), function(value, key, item){
@@ -163,13 +171,5 @@ module.exports = generators.Base.extend({
                                              // not perfect but better than one line only
       }
     });
-  },
-
-  setDependencies: function () {
-    var scriptSuffix = this.config.get('scriptSuffix');
-    var stylesheetSuffix = this.config.get('stylesheetSuffix');
-
-    this.config.set('devDependencies',
-                    packages.fetch([scriptSuffix, stylesheetSuffix]));
   }
 });
