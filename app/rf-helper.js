@@ -95,12 +95,12 @@ module.exports = generators.Base.extend({
     };
 
     this._.each(file_dests, function(dist, filename){
-      var suffixedScriptFile = that._suffixedScriptFile(filename);
-      var template = that._dialectTemplate(filename);
+      var suffixedFile = that._suffixedFile(filename, 'script');
+      var template = that._templatePath(filename, 'script');
 
       that.fs.copyTpl(
         that.templatePath(template),
-        that.destinationPath(dist + suffixedScriptFile),
+        that.destinationPath(dist + suffixedFile),
         that._stringifiedConfig()
       );
     });
@@ -108,8 +108,8 @@ module.exports = generators.Base.extend({
 
   copyStylesheets: function () {
     this.fs.copy(
-      this.templatePath(this._stylesheetTemplate('style')),
-      this.destinationPath('src/assets/stylesheets/' + this._suffixedStylesheet('style'))
+      this.templatePath(this._templatePath('style', 'stylesheet')),
+      this.destinationPath('src/assets/stylesheets/' + this._suffixedFile('style', 'stylesheet'))
     );
   },
 
@@ -135,8 +135,8 @@ module.exports = generators.Base.extend({
       that.dest.mkdir('src/scripts/' + dir + '/__tests__');
     });
 
-    var testFile = this._suffixedScriptFile('App-test');
-    var testFilePath = this._dialectTemplate('App-test');
+    var testFile = this._suffixedFile('App-test', 'script');
+    var testFilePath = this._templatePath('App-test', 'script');
 
     this.fs.copyTpl(
       this.templatePath(testFilePath),
@@ -145,20 +145,14 @@ module.exports = generators.Base.extend({
     );
   },
 
-  _suffixedScriptFile: function(filename) {
-    return (filename + this.config.get('scriptSuffix'));
+  _suffixedFile: function(filename, type) {
+    var suffix = this.config.get(type + 'Suffix');
+    return filename + suffix;
   },
 
-  _dialectTemplate: function(filename) {
-    return this.config.get('dialect') + "/"  + this._suffixedScriptFile(filename);
-  },
-
-  _suffixedStylesheet: function (filename) {
-    return (filename + this.config.get('stylesheetSuffix'));
-  },
-
-  _stylesheetTemplate: function(filename) {
-    return this.config.get('stylesheetSyntax') + "/"  + this._suffixedStylesheet(filename);
+  _templatePath: function(filename, type) {
+    var templateDir = ('script' === type) ? 'dialect' : 'stylesheetSyntax';
+    return this.config.get(templateDir) + "/" + this._suffixedFile(filename, type);
   },
 
   _stringifiedConfig: function () {
