@@ -32,7 +32,7 @@ npm install -g generator-rf
 
 ### Intiate Project
 
-For example, to create a project named "myapp" , make a directory first.
+For example, to create a project named "myapp", make a directory first.
 
 ```bash
 mkdir myapp && cd myapp
@@ -93,13 +93,13 @@ npm test
     └── webpack.config.js
 
 
-    *: base on the dialect and stylesheet syntax you choose
+    *: varied by your choices of the dialect and stylesheet syntax
 
 ## Options
 
 ### --d: Dialect
 
-By default, RF will generate codes in [CoffeeScript](http://coffeescript.org/). If you don't like it, use --d flag to use other dialect.
+By default, RF will generate codes in [CoffeeScript](http://coffeescript.org/). If you don't like it, use --d flag to change the dialect to generate.
 
 * `lsc` for [LiveScript](http://livescript.net) (actually `ls` works, too)
 * or `js` for JavaScript
@@ -119,17 +119,17 @@ Example:
 
     yo rf myapp --s=scss
 
-### --skipTest: Don't create __tests__ for every subfolder in src/scripts
+### --skip-test: Don't create __tests__ for every subfolder in src/scripts
 
 Example:
 
-    yo rf myapp --skipTest
+    yo rf myapp --skip-test
 
-### --skipInstall: Skip automatic installation
+### --skip-install: Skip automatic package installation
 
 Example:
 
-    yo rf myapp --skipInstall
+    yo rf myapp --skip-install
 
 ## Contribute
 

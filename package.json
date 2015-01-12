@@ -1,7 +1,7 @@
 {
   "name": "generator-rf",
-  "version": "0.1.3",
-  "description": "RF: a React/Flux webapp generator with webpack and CoffeeScript/LiveScript + JSX (a.k.a cjsx) support.",
+  "version": "0.1.4",
+  "description": "RF: a React/Flux webapp generator with webpack and CoffeeScript/LiveScript + CJSX support.",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "taiansu/generator-rf",
@@ -20,7 +20,7 @@
     "app"
   ],
   "keywords": [
-    "yeoman-generator", "react", "flux", "CoffeeScript", "LiveScript", "webpack"
+    "yeoman-generator", "react", "flux", "CoffeeScript", "LiveScript", "webpack", "cjsx"
   ],
   "dependencies": {
     "yeoman-generator": "^0.18.0",

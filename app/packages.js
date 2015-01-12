@@ -4,7 +4,8 @@ module.exports = {
 
   fetch: function(items) {
     var that = this;
-    var devDependencies = {};
+    var devDependencies = _.clone(this.baseDependencies);
+
     _.each(items, function(item) {
       _.merge(devDependencies, that._dependenciesOf(item));
     });
@@ -16,7 +17,7 @@ module.exports = {
     var key = suffix.replace(/\./, '') + "Dependencies";
 
     // return an empty object if this[key] not exist, like _cssDependencies
-    if (typeof this[key] === 'object') {
+    if (_.isPlainObject(this[key])) {
       return this[key];
     } else {
       return {};
