@@ -2,24 +2,19 @@ var _ = require('lodash');
 
 module.exports = {
 
-  fetch: function(items) {
-    var that = this;
-    var devDependencies = _.clone(this.baseDependencies);
-
-    _.each(items, function(item) {
-      _.merge(devDependencies, that._dependenciesOf(item));
-    });
-
-    return devDependencies;
+  wrap: function(items) {
+    return _.reduce(items, function(result, item) {
+      return _.merge(result, this._dependenciesOf(item));
+    }, this.baseDependencies, this);
   },
 
   _dependenciesOf: function (suffix) {
     var key = suffix.replace(/\./, '') + "Dependencies";
 
-    // return an empty object if this[key] not exist, like _cssDependencies
     if (_.isPlainObject(this[key])) {
       return this[key];
     } else {
+      // return an empty object if this[key] not exist, like _cssDependencies
       return {};
     }
   },

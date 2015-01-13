@@ -52,11 +52,11 @@ module.exports = RfHelper.extend({
     },
 
     projectfiles: function () {
-      var that = this;
+      var self = this;
       this._.each([".editorconfig", ".jshintrc"], function (file) {
-        that.fs.copy(
-          that.templatePath(file.replace(/\./, "")),
-          that.destinationPath(file)
+        self.fs.copy(
+          self.templatePath(file.replace(/\./, "")),
+          self.destinationPath(file)
         );
       });
     }

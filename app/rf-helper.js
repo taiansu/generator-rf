@@ -40,11 +40,11 @@ module.exports = generators.Base.extend({
     var stylesheetSuffix = this.config.get('stylesheetSuffix');
 
     this.config.set('devDependencies',
-                    packages.fetch([scriptSuffix, stylesheetSuffix]));
+                    packages.wrap([scriptSuffix, stylesheetSuffix]));
   },
 
   copyConfigFiles: function () {
-    var that = this;
+    var self = this;
     var configFiles = [
       "package.json",
       "preprocessor.js",
@@ -52,10 +52,10 @@ module.exports = generators.Base.extend({
     ];
 
     this._.each(configFiles, function(file){
-      that.fs.copyTpl(
-        that.templatePath('_' + file),
-        that.destinationPath(file),
-        that._stringifiedConfig()
+      self.fs.copyTpl(
+        self.templatePath('_' + file),
+        self.destinationPath(file),
+        self._stringifiedConfig()
       );
     });
   },
@@ -68,7 +68,7 @@ module.exports = generators.Base.extend({
   },
 
   mkDirs: function () {
-    var that = this;
+    var self = this;
     var _ = this._;
     var folderTree = {
       "src/scripts": [ "actions", "components", "constants",
@@ -77,9 +77,9 @@ module.exports = generators.Base.extend({
     }
 
     _.each(_.keys(folderTree), function (dir) {
-      that.dest.mkdir(dir);
+      self.dest.mkdir(dir);
       _.each(folderTree[dir], function (subdir) {
-        that.dest.mkdir(dir + "/" + subdir);
+        self.dest.mkdir(dir + "/" + subdir);
       });
     });
 
@@ -87,7 +87,7 @@ module.exports = generators.Base.extend({
   },
 
   copyScripts: function () {
-    var that = this;
+    var self = this;
     var file_dests = {
       'main': 'src/scripts/',
       'App': 'src/scripts/components/',
@@ -95,13 +95,13 @@ module.exports = generators.Base.extend({
     };
 
     this._.each(file_dests, function(dist, filename){
-      var suffixedFile = that._suffixedFile(filename, 'script');
-      var template = that._templatePath(filename, 'script');
+      var suffixedFile = self._suffixedFile(filename, 'script');
+      var template = self._templatePath(filename, 'script');
 
-      that.fs.copyTpl(
-        that.templatePath(template),
-        that.destinationPath(dist + suffixedFile),
-        that._stringifiedConfig()
+      self.fs.copyTpl(
+        self.templatePath(template),
+        self.destinationPath(dist + suffixedFile),
+        self._stringifiedConfig()
       );
     });
   },
@@ -126,13 +126,13 @@ module.exports = generators.Base.extend({
   },
 
   _mkTestDirs: function (tree){
-    var that = this;
+    var self = this;
     if (!this.config.get('mkTestDirs')) {
       return;
     }
 
     this._.each(tree['src/scripts'], function (dir) {
-      that.dest.mkdir('src/scripts/' + dir + '/__tests__');
+      self.dest.mkdir('src/scripts/' + dir + '/__tests__');
     });
 
     var testFile = this._suffixedFile('App-test', 'script');
