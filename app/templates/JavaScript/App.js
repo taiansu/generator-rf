@@ -1,6 +1,6 @@
 var React = require('react');
 
-APP = React.createClass({
+var APP = React.createClass({
   render: function(){
     var codeBlockStyle = { "fontFamily": "monospace",
                            "backgroundColor": "#D0D0D0" };
@@ -24,5 +24,4 @@ APP = React.createClass({
   }
 });
 
-module.exports = APP
-
+module.exports = APP;
