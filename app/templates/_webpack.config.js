@@ -12,32 +12,12 @@ module.exports = {
   },
   module: {
     loaders: [
-      <% if ( dialect == 'LiveScript') { %>
-      { test: /\.ls$/, loader: "livescript!cjsx" },
-      <% } else if ( dialect =='JavaScript') { %>
-      { test: /\.jsx?$/, loader: "jsx" },
-      <% } else { %>
-      { test: /\.coffee$/, loader: "coffee!cjsx" },
-      <% } %>
+      { test: /\<%= dialectTest %>$/, loader: "<%= dialectLoader %>" },
 
-      <% if ( stylesheetSyntax === 'CSS' ) { %>
-      { test: /\.css$/, loader: "style!css" },
-      <% } else if ( stylesheetSyntax === 'SCSS') { %>
       {
-        test: /\.scss$/,
-        loader: "style!css!sass?outputStyle=expanded"
+        test: /\<%= stylesheetSuffix %>$/,
+        loader: "<%= stylesheetLoader %>"
       },
-      <% } else if ( stylesheetSyntax === 'LESS') { %>
-      {
-        test: /\.less$/,
-        loader: "style!css!less"
-      },
-      <% } else { %>
-      {
-        test: /\.sass$/,
-        loader: "style!css!sass?indentedSyntax=true&outputStyle=expanded"
-      },
-      <% } %>
 
       {
         test: /\.(html|png)$/,

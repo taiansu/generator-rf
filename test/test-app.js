@@ -49,7 +49,7 @@ describe('rf:app', function () {
     it('save configs of coffee-script and SASS', function () {
       assert.fileContent('.yo-rc.json', /"dialect": "coffee-script"/);
       assert.fileContent('.yo-rc.json', /"scriptSuffix": ".coffee"/);
-      assert.fileContent('.yo-rc.json', /"stylesheetSyntax": "SASS"/);
+      assert.fileContent('.yo-rc.json', /"stylesheet": "SASS"/);
       assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".sass"/);
     });
 
@@ -148,7 +148,7 @@ describe('rf:app', function () {
     });
 
     it('save configs of SCSS', function () {
-      assert.fileContent('.yo-rc.json', /"stylesheetSyntax": "SCSS"/);
+      assert.fileContent('.yo-rc.json', /"stylesheet": "SCSS"/);
       assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".scss"/);
     });
 
@@ -177,7 +177,7 @@ describe('rf:app', function () {
     });
 
     it('save configs of LESS', function () {
-      assert.fileContent('.yo-rc.json', /"stylesheetSyntax": "LESS"/);
+      assert.fileContent('.yo-rc.json', /"stylesheet": "LESS"/);
       assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".less"/);
     });
 
@@ -206,7 +206,7 @@ describe('rf:app', function () {
     });
 
     it('save configs of LESS', function () {
-      assert.fileContent('.yo-rc.json', /"stylesheetSyntax": "CSS"/);
+      assert.fileContent('.yo-rc.json', /"stylesheet": "CSS"/);
       assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".css"/);
     });
 

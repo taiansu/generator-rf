@@ -39,7 +39,7 @@ module.exports = RfHelper.extend({
     this.config.set('mkTestDirs', !this.options.skipTest);
     this.setDialect(this.options.d);
     this.setStylesheet(this.options.s);
-    this.setDependencies();
+    this.setEnv();
   },
 
   writing: {

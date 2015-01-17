@@ -1,5 +1,6 @@
 var generators = require('yeoman-generator').generators;
 var packages = require('./packages.js');
+var loaders = require('./loaders.js');
 
 module.exports = generators.Base.extend({
 
@@ -31,23 +32,28 @@ module.exports = generators.Base.extend({
       this.log("Warning: Don't recognize stylesheet syntax: " + style + ", will use SASS instead.");
       style = 'SASS';
     }
-    this.config.set('stylesheetSyntax', style);
+    this.config.set('stylesheet', style);
     this.config.set('stylesheetSuffix', '.' + style.toLowerCase());
   },
 
-  setDependencies: function () {
+  setEnv: function () {
+    var dialect = this.config.get('dialect');
+    var stylesheet = this.config.get('stylesheet');
     var scriptSuffix = this.config.get('scriptSuffix');
-    var stylesheetSuffix = this.config.get('stylesheetSuffix');
+    var dialectTest = (scriptSuffix === 'js') ? '.jsx?' : scriptSuffix;
 
     this.config.set('devDependencies',
-                    packages.wrap([scriptSuffix, stylesheetSuffix]));
+                    packages.wrap([dialect, stylesheet]));
+
+    this.config.set('dialectTest', dialectTest);
+    this.config.set('dialectLoader',  loaders.get(dialect));
+    this.config.set('stylesheetLoader',  loaders.get(stylesheet));
   },
 
   copyConfigFiles: function () {
     var self = this;
     var configFiles = [
       "package.json",
-      "preprocessor.js",
       "webpack.config.js"
     ];
 
@@ -58,6 +64,12 @@ module.exports = generators.Base.extend({
         self._stringifiedConfig()
       );
     });
+
+    // Copy preprocessor.js base on chosen dialect
+    this.fs.copy(
+      this.templatePath(this._template('preprocessor.js', 'config')),
+      this.destinationPath('preprocessor.js')
+    );
   },
 
   copyHTML: function () {
@@ -96,7 +108,7 @@ module.exports = generators.Base.extend({
 
     this._.each(file_dests, function(dist, filename){
       var suffixedFile = self._suffixedFile(filename, 'script');
-      var template = self._templatePath(filename, 'script');
+      var template = self._template(filename, 'script');
 
       self.fs.copyTpl(
         self.templatePath(template),
@@ -108,7 +120,7 @@ module.exports = generators.Base.extend({
 
   copyStylesheets: function () {
     this.fs.copy(
-      this.templatePath(this._templatePath('style', 'stylesheet')),
+      this.templatePath(this._template('style', 'stylesheet')),
       this.destinationPath('src/assets/stylesheets/' + this._suffixedFile('style', 'stylesheet'))
     );
   },
@@ -136,7 +148,7 @@ module.exports = generators.Base.extend({
     });
 
     var testFile = this._suffixedFile('App-test', 'script');
-    var testFilePath = this._templatePath('App-test', 'script');
+    var testFilePath = this._template('App-test', 'script');
 
     this.fs.copyTpl(
       this.templatePath(testFilePath),
@@ -150,9 +162,14 @@ module.exports = generators.Base.extend({
     return filename + suffix;
   },
 
-  _templatePath: function(filename, type) {
-    var templateDir = ('script' === type) ? 'dialect' : 'stylesheetSyntax';
-    return this.config.get(templateDir) + "/" + this._suffixedFile(filename, type);
+  _template: function(filename, type) {
+    if (type === 'config') {
+      this.log( this.config.get('dialect') + "/" + filename);
+      return this.config.get('dialect') + "/" + filename;
+    } else {
+      var templateDir = ('script' === type) ? 'dialect' : 'stylesheet';
+      return this.config.get(templateDir) + "/" + this._suffixedFile(filename, type);
+    }
   },
 
   _stringifiedConfig: function () {

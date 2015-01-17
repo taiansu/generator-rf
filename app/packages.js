@@ -2,14 +2,14 @@ var _ = require('lodash');
 
 module.exports = {
 
-  wrap: function(items) {
-    return _.reduce(items, function(result, item) {
-      return _.merge(result, this._dependenciesOf(item));
+  wrap: function(dialectAndStylesheet) {
+    return _.reduce(dialectAndStylesheet, function(result, name) {
+      return _.merge(result, this._dependenciesOf(name));
     }, this.baseDependencies, this);
   },
 
-  _dependenciesOf: function (suffix) {
-    var key = suffix.replace(/\./, '') + "Dependencies";
+  _dependenciesOf: function (name) {
+    var key = name.replace(/-/, '') + "Dependencies";
 
     if (_.isPlainObject(this[key])) {
       return this[key];
@@ -19,31 +19,31 @@ module.exports = {
     }
   },
 
-  jsDependencies: {
+  JavaScriptDependencies: {
     'jsx-loader': '*'
   },
 
-  coffeeDependencies: {
+  coffeescriptDependencies: {
     'cjsx-loader': '^1.1.0',
     'coffee-loader': '*',
     'coffee-script': '*'
   },
 
-  lsDependencies: {
+  LiveScriptDependencies: {
     'cjsx-loader': '^1.1.0',
     'livescript-loader': '*',
     'LiveScript': '*'
   },
 
-  sassDependencies: {
+  SASSDependencies: {
     'sass-loader': '*'
   },
 
-  scssDependencies: {
+  SCSSDependencies: {
     'sass-loader': '*'
   },
 
-  lessDependencies: {
+  LESSDependencies: {
     'less-loader': '*'
   },
 
