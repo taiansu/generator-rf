@@ -17,6 +17,10 @@ module.exports = generators.Base.extend({
         dialect = 'JavaScript';
         suffix = 'js';
         break;
+      case '6to5':
+        dialect = 'JavaScript-6to5';
+        suffix = 'js';
+        break;
       default:
         dialect = 'coffee-script';
         suffix = 'coffee';

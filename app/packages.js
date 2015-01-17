@@ -23,6 +23,11 @@ module.exports = {
     'jsx-loader': '*'
   },
 
+  JavaScript6to5Dependencies: {
+    '6to5-loader': '*',
+    '6to5-jest': '*'
+  },
+
   coffeescriptDependencies: {
     'cjsx-loader': '^1.1.0',
     'coffee-loader': '*',

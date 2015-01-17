@@ -9,7 +9,7 @@
 * [Jest](http://facebook.github.io/jest)
 * [webpack](http://webpack.github.io/)
 * [react-hot-loader](https://gaearon.github.io/react-hot-loader/): livereload your browser after code change
-* [CoffeeScript](http://coffeescript.org/), [LiveScript](http://livescript.net) or vanilla JavaScript: JS dialect in your favor
+* [CoffeeScript](http://coffeescript.org/), [LiveScript](http://livescript.net), [JavaScript 6to5](https://6to5.org/) or vanilla JavaScript: JS dialect in your favor
 * [coffee-react-transform](https://github.com/jsdf/coffee-react-transform): Write jsx syntax in CoffeeScript/LiveScript
 * [SASS/SCSS](http://sass-lang.com/), [LESS](http://lesscss.org/) or pure CSS: Stylesheet syntax in your favor
 
@@ -101,8 +101,9 @@ npm test
 
 By default, RF will generate codes in [CoffeeScript](http://coffeescript.org/). If you don't like it, use --d flag to change the dialect to generate.
 
-* `lsc` for [LiveScript](http://livescript.net) (actually `ls` works, too)
-* or `js` for JavaScript
+* `ls` for [LiveScript](http://livescript.net)
+* `6to5` for [JavaScript 6to5](https://6to5.org/)
+* `js` for vanilla JavaScript
 
 Example:
 

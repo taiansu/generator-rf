@@ -134,6 +134,44 @@ describe('rf:app', function () {
     });
   });
 
+  ///////////////////////
+  //  JAVASCRIPT 6to5  //
+  ///////////////////////
+
+  describe('JavaScript-6to5', function () {
+    before(function (done) {
+       helpers.run(path.join(__dirname, '../app'))
+         .inDir(path.join(os.tmpdir(), './temp-test'))
+         .withArguments(['MyApp'])
+         .withOptions({ 'd': '6to5', 'skipInstall': true })
+         .on('end', done);
+    });
+
+    it('creates general files', function () {
+      assert.file(generalFiles);
+    });
+
+    it('creates JavaScript-6to5 files', function () {
+      assert.file([
+        'src/scripts/main.js',
+        'src/scripts/components/App.js',
+        'src/scripts/components/__tests__/App-test.js',
+        'src/scripts/dispatcher/AppDispatcher.js'
+      ]);
+    });
+
+    it('save configs of JavaScript-6to5', function () {
+      assert.fileContent('.yo-rc.json', /"dialect": "JavaScript-6to5"/);
+      assert.fileContent('.yo-rc.json', /"scriptSuffix": ".js"/);
+    });
+
+    it('generact package.json with base and JavaScript-6to5 devDependencies', function () {
+      assert.fileContent('package.json', /react-tools/);
+      assert.fileContent('package.json', /jsx-loader/);
+      assert.fileContent('package.json', /6to5-loader/);
+    });
+  });
+
   ////////////
   //  SCSS  //
   ////////////

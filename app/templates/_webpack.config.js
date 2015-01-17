@@ -12,7 +12,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\<%= dialectTest %>$/, loader: "<%= dialectLoader %>" },
+      { test: /\<%= dialectTest %>$/, exclude: /node_modules/, loader: "<%= dialectLoader %>" },
 
       {
         test: /\<%= stylesheetSuffix %>$/,
