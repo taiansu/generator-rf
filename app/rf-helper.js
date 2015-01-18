@@ -1,8 +1,8 @@
 var generators = require('yeoman-generator').generators;
-var dialects = require('./dialects.js');
-var styles = require('./styles.js');
-var packages = require('./packages.js');
-var loaders = require('./loaders.js');
+var dialects = require('./options/dialects.js');
+var styles = require('./options/styles.js');
+var dependencies = require('./options/dependencies.js');
+var loaders = require('./options/loaders.js');
 
 module.exports = generators.Base.extend({
 
@@ -34,7 +34,7 @@ module.exports = generators.Base.extend({
     var dialectTest = (scriptSuffix === 'js') ? '.jsx?' : scriptSuffix;
 
     this.config.set('devDependencies',
-                    packages.wrap([dialect, stylesheet]));
+                    dependencies.wrap([dialect, stylesheet]));
 
     this.config.set('dialectTest', dialectTest);
     this.config.set('dialectLoader',  loaders.get(dialect));

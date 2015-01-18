@@ -2,13 +2,13 @@ var _ = require('lodash');
 
 module.exports = {
 
-  wrap: function(dialectAndStylesheet) {
+  wrap: function (dialectAndStylesheet) {
     return _.reduce(dialectAndStylesheet, function(result, name) {
-      return _.merge(result, this._dependenciesOf(name));
+      return _.merge(result, this._get(name));
     }, this.baseDependencies, this);
   },
 
-  _dependenciesOf: function (name) {
+  _get: function (name) {
     var key = name.replace(/-/, '') + "Dependencies";
 
     if (_.isPlainObject(this[key])) {
