@@ -59,6 +59,10 @@ describe('rf:app', function () {
       assert.fileContent('package.json', /sass-loader/);
     });
 
+    it('generate package.json with "js" and "coffee" in testFileExtensions', function () {
+      assert.fileContent('package.json', /"testFileExtensions": \[[\s\S]*"js",[\s\S]*"coffee"[\s\S]\]/m);
+    });
+
     it('generate webpack.config.js with coffee-script loader', function () {
       assert.fileContent('webpack.config.js', /coffee!cjsx/);
     });

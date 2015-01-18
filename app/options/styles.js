@@ -7,7 +7,7 @@ module.exports = {
       return this[styleFlag];
     } else {
       var warning = { warning: "Warning: Don't recognize stylesheet syntax: "
-                               + styleFlag + ", generate SASS instead." }
+                                + styleFlag + ", generate SASS instead." };
       return _.merge(this.sass, warning);
     }
   },
@@ -19,20 +19,20 @@ module.exports = {
 
   less: {
     name: 'Less',
-    suffix:'.less'
+    suffix: '.less'
   },
   css: {
     name: 'CSS',
-    suffix:'.css'
+    suffix: '.css'
   },
 
   scss: {
     name: 'SCSS',
-    suffix:'.scss'
+    suffix: '.scss'
   },
 
   sass: {
     name: 'SASS',
-    suffix:'.sass'
+    suffix: '.sass'
   }
 }

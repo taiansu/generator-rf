@@ -13,7 +13,7 @@ module.exports = generators.Base.extend({
       this.log(dialect.warning);
     }
 
-    this.config.set(this._dialectConfig(dialect['name'], dialect['suffix']));
+    this.config.set(this._dialectConfig(dialect.name, dialect.suffix));
   },
 
   setStylesheet: function (styleFlag) {
@@ -123,8 +123,8 @@ module.exports = generators.Base.extend({
       'description': "A React/Flux app generate by RF, powered with " + dialect,
       'dialect': dialect,
       'scriptSuffix': suffix,
-      'testFileExtensions': _.uniq(['js', suffix]),
-      'dialectModuleFileExtensions': _.uniq(['js', 'json', suffix]),
+      'testFileExtensions': _.uniq(['js', suffix.replace(/\./, '')]),
+      'dialectModuleFileExtensions': _.uniq(['js', 'json', suffix.replace(/\./, '')]),
     };
   },
 

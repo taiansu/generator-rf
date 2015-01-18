@@ -57,8 +57,6 @@ module.exports = {
   },
 
   baseDependencies: {
-    'react-addons': '^0.9.0',
-    'react-tools': '^0.12.2',
     'react-hot-loader': '^1.0.4',
     'css-loader': '*',
     'style-loader': '*',

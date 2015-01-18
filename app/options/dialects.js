@@ -6,7 +6,7 @@ module.exports = {
       return this[dialectFlag];
     } else {
       var warning = { warning: "Warning: Don't recognize dialect: "
-                               + dialectFlag + ", generate coffee instead." }
+                                + dialectFlag + ", generate coffee-script instead." };
       return _.merge(this.coffee, warning);
     }
   },
