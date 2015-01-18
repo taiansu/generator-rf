@@ -1,33 +1,13 @@
 var generators = require('yeoman-generator').generators;
+var dialects = require('./dialects.js');
 var packages = require('./packages.js');
 var loaders = require('./loaders.js');
 
 module.exports = generators.Base.extend({
 
   setDialect: function (dialectFlag) {
-    var dialect, suffix, config;
-    switch(dialectFlag) {
-      case 'ls':
-        // Fall through
-      case 'lsc':
-        dialect = 'LiveScript';
-        suffix = 'ls';
-        break;
-      case 'js':
-        dialect = 'JavaScript';
-        suffix = 'js';
-        break;
-      case '6to5':
-        dialect = 'JavaScript-6to5';
-        suffix = 'js';
-        break;
-      default:
-        dialect = 'coffee-script';
-        suffix = 'coffee';
-        break;
-    }
-
-    this.config.set(this._dialectConfig(dialect, suffix));
+    var dialect = dialects.get(dialectFlag);
+    this.config.set(this._dialectConfig(dialect['name'], dialect['suffix']));
   },
 
   setStylesheet: function (styleFlag) {
@@ -135,7 +115,7 @@ module.exports = generators.Base.extend({
     return  {
       'description': "A React/Flux app generate by RF, powered with " + dialect,
       'dialect': dialect,
-      'scriptSuffix': "." + suffix,
+      'scriptSuffix': suffix,
       'testFileExtensions': _.uniq(['js', suffix]),
       'dialectModuleFileExtensions': _.uniq(['js', 'json', suffix]),
     };

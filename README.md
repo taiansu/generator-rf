@@ -107,7 +107,7 @@ By default, RF will generate codes in [CoffeeScript](http://coffeescript.org/). 
 
 Example:
 
-    yo rf myapp --d=lsc
+    yo rf myapp --d=ls
 
 ### --s: Stylesheet Syntax
 RF generate [SASS](http://sass-lang.com/) (indented syntax) by default. Use --s flag to change it.
