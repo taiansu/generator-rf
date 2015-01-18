@@ -1,6 +1,6 @@
 React = require('react')
 
-APP = React.createClass do
+App = React.createClass do
   render: ->
     codeBlockStyle =
       "fontFamily": "monospace"
@@ -22,5 +22,5 @@ APP = React.createClass do
       </article>
     </div>
 
-module.exports = APP
+module.exports = App
 
