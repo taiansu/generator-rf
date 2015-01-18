@@ -1,5 +1,6 @@
 var generators = require('yeoman-generator').generators;
 var dialects = require('./dialects.js');
+var styles = require('./styles.js');
 var packages = require('./packages.js');
 var loaders = require('./loaders.js');
 
@@ -7,17 +8,23 @@ module.exports = generators.Base.extend({
 
   setDialect: function (dialectFlag) {
     var dialect = dialects.get(dialectFlag);
+
+    if (dialect.warning) {
+      this.log(dialect.warning);
+    }
+
     this.config.set(this._dialectConfig(dialect['name'], dialect['suffix']));
   },
 
   setStylesheet: function (styleFlag) {
-    var style = styleFlag.toUpperCase();
-    if (!this._.contains(['SASS', 'SCSS', 'CSS', 'LESS'], style)) {
-      this.log("Warning: Don't recognize stylesheet syntax: " + style + ", will use SASS instead.");
-      style = 'SASS';
+    var style = styles.get(styleFlag);
+
+    if (style.warning) {
+      this.log(style.warning);
     }
-    this.config.set('stylesheet', style);
-    this.config.set('stylesheetSuffix', '.' + style.toLowerCase());
+
+    this.config.set('stylesheet', style.name);
+    this.config.set('stylesheetSuffix', style.suffix);
   },
 
   setEnv: function () {

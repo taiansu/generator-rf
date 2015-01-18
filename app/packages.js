@@ -48,8 +48,12 @@ module.exports = {
     'sass-loader': '*'
   },
 
-  LESSDependencies: {
+  LessDependencies: {
     'less-loader': '*'
+  },
+
+  StylusDependencies: {
+    'stylus-loader': '*'
   },
 
   baseDependencies: {

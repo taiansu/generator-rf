@@ -13,11 +13,12 @@ module.exports = RfHelper.extend({
 
     this.option('d', { type: String,
                        defaults: "coffee-script",
-                       desc: "Dialect: 'ls' for LiveScript, '6to5' for JavaScript 6to5 or 'js' for native JavaScript" });
+                       desc: "Dialect: 'ls' for LiveScript, '6to5' for JavaScript 6to5 or 'js' for native JavaScript"
+               });
 
     this.option('s', { type: String,
                        defaults: "SASS",
-                       desc: "Stylesheet syntax, can be 'scss', 'less' or 'css' "});
+                       desc: "Stylesheet syntax, can be 'scss', 'less', 'stylus' or 'css' "});
 
     this.option('skip-test', { type: Boolean,
                                defaults: false,

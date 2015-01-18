@@ -53,11 +53,16 @@ describe('rf:app', function () {
       assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".sass"/);
     });
 
-    it('generact package.json with base, coffee and sass devDependencies', function () {
+    it('generate package.json with base, coffee and sass devDependencies', function () {
       assert.fileContent('package.json', /react-tools/);
       assert.fileContent('package.json', /coffee-script/);
       assert.fileContent('package.json', /sass-loader/);
     });
+
+    it('generate webpack.config.js with coffee-script loader', function () {
+      assert.fileContent('webpack.config.js', /coffee!cjsx/);
+    });
+
   });
 
   //////////////////
@@ -91,10 +96,15 @@ describe('rf:app', function () {
       assert.fileContent('.yo-rc.json', /"scriptSuffix": ".ls"/);
     });
 
-    it('generact package.json with base and LiveScript devDependencies', function () {
+    it('generate package.json with base and LiveScript devDependencies', function () {
       assert.fileContent('package.json', /react-tools/);
       assert.fileContent('package.json', /LiveScript/);
     });
+
+    it('generate webpack.config.js with LiveScript loader', function () {
+      assert.fileContent('webpack.config.js', /livescript!cjsx/);
+    });
+
   });
 
   //////////////////
@@ -128,10 +138,15 @@ describe('rf:app', function () {
       assert.fileContent('.yo-rc.json', /"scriptSuffix": ".js"/);
     });
 
-    it('generact package.json with base and JavaScript devDependencies', function () {
+    it('generate package.json with base and JavaScript devDependencies', function () {
       assert.fileContent('package.json', /react-tools/);
       assert.fileContent('package.json', /jsx-loader/);
     });
+
+    it('generate webpack.config.js with JavaScript loader', function () {
+      assert.fileContent('webpack.config.js', /jsx/);
+    });
+
   });
 
   ///////////////////////
@@ -165,11 +180,16 @@ describe('rf:app', function () {
       assert.fileContent('.yo-rc.json', /"scriptSuffix": ".js"/);
     });
 
-    it('generact package.json with base and JavaScript-6to5 devDependencies', function () {
+    it('generate package.json with base and JavaScript-6to5 devDependencies', function () {
       assert.fileContent('package.json', /react-tools/);
       assert.fileContent('package.json', /jsx-loader/);
       assert.fileContent('package.json', /6to5-loader/);
     });
+
+    it('generate webpack.config.js with JavaScript-6to5 loader', function () {
+      assert.fileContent('webpack.config.js', /6to5/);
+    });
+
   });
 
   ////////////
@@ -190,7 +210,7 @@ describe('rf:app', function () {
       assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".scss"/);
     });
 
-    it('generact package.json with base and SCSS devDependencies', function () {
+    it('generate package.json with base and SCSS devDependencies', function () {
       assert.fileContent('package.json', /react-tools/);
       assert.fileContent('package.json', /sass-loader/);
     });
@@ -199,13 +219,17 @@ describe('rf:app', function () {
       assert.file('src/assets/stylesheets/style.scss');
     });
 
+    it('generate webpack.config.js with scss loader', function () {
+      assert.fileContent('webpack.config.js', /style!css!sass\?outputStyle=expanded/);
+    });
+
   });
 
   ////////////
-  //  LESS  //
+  //  Less  //
   ////////////
 
-  describe('LESS', function() {
+  describe('Less', function() {
     before(function (done) {
        helpers.run(path.join(__dirname, '../app'))
          .inDir(path.join(os.tmpdir(), './temp-test'))
@@ -214,18 +238,22 @@ describe('rf:app', function () {
          .on('end', done);
     });
 
-    it('save configs of LESS', function () {
-      assert.fileContent('.yo-rc.json', /"stylesheet": "LESS"/);
+    it('save configs of Less', function () {
+      assert.fileContent('.yo-rc.json', /"stylesheet": "Less"/);
       assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".less"/);
     });
 
-    it('generact package.json with base and SCSS devDependencies', function () {
+    it('generate package.json with base and Less devDependencies', function () {
       assert.fileContent('package.json', /react-tools/);
       assert.fileContent('package.json', /less-loader/);
     });
 
     it('creates less files', function () {
       assert.file('src/assets/stylesheets/style.less');
+    });
+
+    it('generate webpack.config.js with less loader', function () {
+      assert.fileContent('webpack.config.js', /style!css!less/);
     });
 
   });
@@ -243,7 +271,7 @@ describe('rf:app', function () {
          .on('end', done);
     });
 
-    it('save configs of LESS', function () {
+    it('save configs of Less', function () {
       assert.fileContent('.yo-rc.json', /"stylesheet": "CSS"/);
       assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".css"/);
     });
@@ -252,8 +280,39 @@ describe('rf:app', function () {
       assert.file('src/assets/stylesheets/style.css');
     });
 
+    it('generate webpack.config.js with css loader', function () {
+      assert.fileContent('webpack.config.js', /style!css[^!]/);
+    });
+
   });
 
+  //////////////
+  //  Stylus  //
+  //////////////
+
+  describe('Stylus', function() {
+    before(function (done) {
+       helpers.run(path.join(__dirname, '../app'))
+         .inDir(path.join(os.tmpdir(), './temp-test'))
+         .withArguments(['MyApp'])
+         .withOptions({ 's': 'stylus', 'skipInstall': true })
+         .on('end', done);
+    });
+
+    it('save configs of Stylus', function () {
+      assert.fileContent('.yo-rc.json', /"stylesheet": "Stylus"/);
+      assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".styl"/);
+    });
+
+    it('creates css files', function () {
+      assert.file('src/assets/stylesheets/style.styl');
+    });
+
+    it('generate webpack.config.js with Stylus loader', function () {
+      assert.fileContent('webpack.config.js', /style!css!stylus/);
+    });
+
+  });
   ////////////////
   //  skipTest  //
   ////////////////

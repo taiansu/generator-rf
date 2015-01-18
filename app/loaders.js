@@ -8,9 +8,10 @@ module.exports = {
   coffeescriptLoader:   'coffee!cjsx',
   JavaScriptLoader:     'jsx',
   JavaScript6to5Loader: '6to5',
-  LiveScripLoader:      'livescript!cjsx',
+  LiveScriptLoader:      'livescript!cjsx',
   CSSLoader:            'style!css',
-  LESSLoader:           'style!css!less',
+  LessLoader:           'style!css!less',
+  StylusLoader:         'style!css!stylus',
   SASSLoader:           'style!css!sass?indentedSyntax=true&outputStyle=expanded',
   SCSSLoader:           'style!css!sass?outputStyle=expanded'
 }

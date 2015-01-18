@@ -1,6 +1,14 @@
+var _ = require('lodash');
+
 module.exports = {
   get: function(dialectFlag) {
-    return this[dialectFlag] || this.coffee;
+    if ( this[dialectFlag] ) {
+      return this[dialectFlag];
+    } else {
+      var warning = { warning: "Warning: Don't recognize dialect: "
+                               + dialectFlag + ", generate coffee instead." }
+      return _.merge(this.coffee, warning);
+    }
   },
 
   ls: {

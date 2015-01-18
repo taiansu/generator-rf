@@ -8,10 +8,18 @@
 * [Flux](http://facebook.github.io/flux/)
 * [Jest](http://facebook.github.io/jest)
 * [webpack](http://webpack.github.io/)
-* [react-hot-loader](https://gaearon.github.io/react-hot-loader/): livereload your browser after code change
-* [CoffeeScript](http://coffeescript.org/), [LiveScript](http://livescript.net), [JavaScript 6to5](https://6to5.org/) or vanilla JavaScript: JS dialect in your favor
-* [coffee-react-transform](https://github.com/jsdf/coffee-react-transform): Write jsx syntax in CoffeeScript/LiveScript
-* [SASS/SCSS](http://sass-lang.com/), [LESS](http://lesscss.org/) or pure CSS: Stylesheet syntax in your favor
+* Live-reload by [react-hot-loader](https://gaearon.github.io/react-hot-loader/)
+* JS dialect in your favor:
+    * [CoffeeScript](http://coffeescript.org/)
+    * [LiveScript](http://livescript.net)
+    * [JavaScript 6to5](https://6to5.org/)
+    * vanilla JavaScript:
+* Have JSX in CoffeeScript/LiveScript by [coffee-react-transform](https://github.com/jsdf/coffee-react-transform)
+* Stylesheet syntax in your favor
+    * [SASS/SCSS](http://sass-lang.com/)
+    * [Less](http://lesscss.org/)
+    * [Stylus](http://learnboost.github.io/stylus/)
+    * pure CSS
 
 ## Getting Started
 
