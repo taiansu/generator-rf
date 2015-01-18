@@ -13,9 +13,9 @@
     * [CoffeeScript](http://coffeescript.org/)
     * [LiveScript](http://livescript.net)
     * [JavaScript 6to5](https://6to5.org/)
-    * vanilla JavaScript:
+    * vanilla JavaScript
 * Have JSX in CoffeeScript/LiveScript by [coffee-react-transform](https://github.com/jsdf/coffee-react-transform)
-* Stylesheet syntax in your favor
+* Stylesheet syntax in your favor:
     * [SASS/SCSS](http://sass-lang.com/)
     * [Less](http://lesscss.org/)
     * [Stylus](http://learnboost.github.io/stylus/)
@@ -122,6 +122,7 @@ RF generate [SASS](http://sass-lang.com/) (indented syntax) by default. Use --s 
 
 * `scss` for SCSS (Sassy CSS)
 * `less` for LESS
+* `stylus` for Stylus
 * or `css` for CSS.
 
 Example:
