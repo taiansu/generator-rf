@@ -106,7 +106,7 @@ describe('rf:app', function () {
        helpers.run(path.join(__dirname, '../app'))
          .inDir(path.join(os.tmpdir(), './temp-test'))
          .withArguments(['MyApp'])
-         .withOptions({ 'd': 'js', 's': 'css', 'skipInstall': true })
+         .withOptions({ 'd': 'js', 'skipInstall': true })
          .on('end', done);
     });
 
