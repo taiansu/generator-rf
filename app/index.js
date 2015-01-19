@@ -8,16 +8,15 @@ module.exports = RfHelper.extend({
 
   constructor: function () {
     generators.Base.apply(this, arguments);
-    this.argument('appname', { type: String, required: true});
-    this.config.set('appname', this.appname);
+    this.argument('appname', { type: String, required: false });
 
     this.option('d', { type: String,
-                       defaults: "coffee-script",
-                       desc: "Dialect: 'ls' for LiveScript, '6to5' for JavaScript 6to5 or 'js' for native JavaScript"
+                       defaults: "coffee",
+                       desc: "Dialect: 'ls' for LiveScript, '6to5' for JavaScript-6to5 or 'js' for native JavaScript"
                });
 
     this.option('s', { type: String,
-                       defaults: "SASS",
+                       defaults: "sass",
                        desc: "Stylesheet syntax, can be 'scss', 'less', 'stylus' or 'css' "});
 
     this.option('skip-test', { type: Boolean,
@@ -33,10 +32,72 @@ module.exports = RfHelper.extend({
     this.pkg = require('../package.json');
   },
 
-  prompting: function () {
+  prompting: {
+
+    askForAppname: function (){
+      if (this.appname) {
+        return;
+      } else {
+        this.interactive = true;
+      };
+
+      var done = this.async();
+
+      this.log(yosay("Greetings. I'm " + chalk.blue('RF') + ", here to generate a nice, well structured react/flux webapp for you."));
+      this.log("Please kindly answer my few questions.\n");
+
+      this.prompt({
+        type: 'input',
+        name: 'appname',
+        message: 'So your webapp name is?',
+        default: 'MyWebApp'
+      }, function(answers) {
+        this.log('\nAh, ' + chalk.yellow(answers.appname) + ', sounds will be an awesome project.\n');
+        this.appname = answers.appname;
+        done();
+      }.bind(this));
+    },
+
+    askForDialect: function () {
+      if ( !this.interactive ) {
+        return;
+      }
+      var done = this.async();
+
+      this.prompt({
+        type: 'input',
+        name: 'dialect',
+        message: 'So which JavaScript dialect you like in: ' + chalk.blue('coffee, ls, 6to5 or js') + ' ?',
+        default: 'coffee'
+      }, function(answers) {
+        this.log('\nAh, I like ' + chalk.yellow(answers.dialect) + ', too.\n');
+        this.options.d = answers.dialect;
+        done();
+      }.bind(this));
+    },
+
+    askForStyle: function () {
+      if ( !this.interactive ) {
+        return;
+      }
+      var done = this.async();
+
+      this.prompt({
+        type: 'input',
+        name: 'style',
+        message: 'So which css syntax you like in: ' + chalk.blue('sass, scss, less, stylus or css') + ' ?',
+        default: 'sass'
+      }, function(answers) {
+        this.log( "\n" + chalk.yellow(answers.style) + ", nice choice.\n");
+        this.log(chalk.bold.black.bgYellow("Your webapp will be served soon. Enjoy.") + "\n");
+        this.options.s = answers.style;
+        done();
+      }.bind(this));
+    }
   },
 
   configuring: function () {
+    this.config.set('appname', this.appname);
     this.config.set('mkTestDirs', !this.options.skipTest);
     this.setDialect(this.options.d);
     this.setStylesheet(this.options.s);

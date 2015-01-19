@@ -151,7 +151,6 @@ Example:
 ## TODO
 
 * Store, Component, Actions w/Constants, Mixin generators
-* Interactive mode when no appname provided
 
 ## License
 
