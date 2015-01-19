@@ -31,7 +31,7 @@ module.exports = generators.Base.extend({
     var dialect = this.config.get('dialect');
     var stylesheet = this.config.get('stylesheet');
     var scriptSuffix = this.config.get('scriptSuffix');
-    var dialectTest = (scriptSuffix === 'js') ? '.jsx?' : scriptSuffix;
+    var dialectTest = (scriptSuffix === '.js') ? '.jsx?' : scriptSuffix;
 
     this.config.set('devDependencies',
                     dependencies.wrap([dialect, stylesheet]));
@@ -168,9 +168,9 @@ module.exports = generators.Base.extend({
 
     return _.each(this.config.getAll(), function(value, key, item){
       if (_.isObject(value)) {
-        item[key] = JSON.stringify(value, null, '\t');
-                                             // '\t' option for prettify output file,
-                                             // not perfect but better than one line only
+        item[key] = JSON.stringify(value, null, '    ');
+                                                // four space for prettify output,
+                                                // still not perfect but acceptable
       }
     });
   }

@@ -8,7 +8,7 @@ module.exports = {
   coffeescriptLoader:   'coffee!cjsx',
   JavaScriptLoader:     'jsx',
   JavaScript6to5Loader: '6to5',
-  LiveScriptLoader:      'livescript!cjsx',
+  LiveScriptLoader:     'livescript!cjsx',
   CSSLoader:            'style!css',
   LessLoader:           'style!css!less',
   StylusLoader:         'style!css!stylus',

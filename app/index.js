@@ -54,7 +54,7 @@ module.exports = RfHelper.extend({
 
     projectfiles: function () {
       var self = this;
-      this._.each([".editorconfig", ".jshintrc"], function (file) {
+      this._.each([".editorconfig", ".jshintrc", ".gitignore"], function (file) {
         self.fs.copy(
           self.templatePath(file.replace(/\./, "")),
           self.destinationPath(file)

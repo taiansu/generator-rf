@@ -57,8 +57,11 @@ module.exports = {
   },
 
   baseDependencies: {
-    'react-hot-loader': '^1.0.4',
     'css-loader': '*',
+    'file-loader': '*',
+    'jest-cli': '*'
+    'react-hot-loader': '^1.0.4',
+    'react-tools': '^0.12.2',
     'style-loader': '*',
     'webpack-dev-server': '^1.7.0',
     'webpack': '^1.4.14'
