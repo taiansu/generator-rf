@@ -59,7 +59,7 @@ module.exports = {
   baseDependencies: {
     'css-loader': '*',
     'file-loader': '*',
-    'jest-cli': '*'
+    'jest-cli': '*',
     'react-hot-loader': '^1.0.4',
     'react-tools': '^0.12.2',
     'style-loader': '*',
