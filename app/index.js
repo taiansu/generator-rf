@@ -19,6 +19,10 @@ module.exports = RfHelper.extend({
                        defaults: "sass",
                        desc: "Stylesheet syntax, can be 'scss', 'less', 'stylus' or 'css' "});
 
+    this.option('skip-root', { type: Boolean,
+                                defaults: false,
+                                desc: "Don't create root directory when current location different from your app name" });
+
     this.option('skip-test', { type: Boolean,
                                defaults: false,
                                desc: "Don't create __tests__ for every subfolder in src/scripts" });
@@ -96,12 +100,24 @@ module.exports = RfHelper.extend({
     }
   },
 
-  configuring: function () {
-    this.config.set('appname', this.appname);
-    this.config.set('mkTestDirs', !this.options.skipTest);
-    this.setDialect(this.options.d);
-    this.setStylesheet(this.options.s);
-    this.setEnv();
+  configuring: {
+    changeRoot: function () {
+      if (this.isCwd(this.appname) || this.options.skipRoot) {
+        return;
+      }
+
+      this.makeRoot(this.appname);
+      this.destinationRoot(this.appname);
+      this.chdir = true;
+    },
+
+    setConfig: function () {
+      this.config.set('appname', this.appname);
+      this.config.set('mkTestDirs', !this.options.skipTest);
+      this.setDialect(this.options.d);
+      this.setStylesheet(this.options.s);
+      this.setEnv();
+    }
   },
 
   writing: {
@@ -127,7 +143,15 @@ module.exports = RfHelper.extend({
   install: function () {
     this.installDependencies({
       bower: false,
-      skipInstall: this.options.skipInstall
+      skipInstall: this.options.skipInstall,
+      callback: function() {
+        this.log("\n" + chalk.bold("Here is your webapp. Enjoy."));
+        if (this.chdir) {
+          this.log('Run ' + chalk.bold.green('cd ' + this.appname + ' && npm run dev') + ' to strat up your app.');
+        } else {
+          this.log('Run ' + chalk.bold.green('npm run dev') + ' to strat up your app.');
+        }
+      }.bind(this)
     });
   }
 });

@@ -21,6 +21,10 @@
     * [Stylus](http://learnboost.github.io/stylus/)
     * pure CSS
 
+### What 'RF' stands for
+
+No, not the boring abbreviation of "React" and "Flux". It's actually the suffix of `rm -rf`. Now it sounds [dangerous](https://github.com/MrMEEE/bumblebee-Old-and-abbandoned/issues/123) and cooler, doesn't it?
+
 ## Getting Started
 
 ### Prerequisites
@@ -40,13 +44,7 @@ npm install -g generator-rf
 
 ### Intiate Project
 
-For example, to create a project named "myapp", make a directory first.
-
-```bash
-mkdir myapp && cd myapp
-```
-
-Then initiate project with rf:
+For example, to create a project named "myapp", just type:
 
 ```bash
 yo rf myapp
@@ -55,10 +53,11 @@ yo rf myapp
 And _Viola!_ Start a webpack-dev-server with:
 
 ```bash
-npm run dev
+cd myapp && npm run dev
 ```
 
-Just open [http://localhost:8080](http://localhost:8080) in the browser and have fun!
+Open [http://localhost:8080](http://localhost:8080) in the browser and Play with
+it!
 
 Don't forget to test your project by:
 
@@ -67,41 +66,42 @@ npm test
 ```
 
 ## What RF generates:
-
     .
-    ├── build
-    │   ├── bundle.js
-    │   └── index.html
-    ├── package.json
-    ├── preprocessor.js
-    ├── node_modules
-    ├── src
-    │   ├── assets
-    │   │   ├── images
-    │   │   └── stylesheets
-    │   │       └── style.sass *
-    │   ├── index.html
-    │   └── scripts
-    │       ├── actions
-    │       │   └── __tests__
-    │       ├── components
-    │       │   ├── App.coffee *
-    │       │   └── __tests__
-    │       │       └── App-test.coffee *
-    │       ├── constants
-    │       │   └── __tests__
-    │       ├── dispatcher
-    │       │   ├── AppDispatcher.coffee *
-    │       │   └── __tests__
-    │       ├── main.coffee *
-    │       ├── mixins
-    │       │   └── __tests__
-    │       └── stores
-    │           └── __tests__
-    └── webpack.config.js
+    └── myapp *
+        ├── build
+        │   ├── bundle.js
+        │   └── index.html
+        ├── package.json
+        ├── preprocessor.js
+        ├── node_modules
+        ├── src
+        │   ├── assets
+        │   │   ├── images
+        │   │   └── stylesheets
+        │   │       └── style.sass **
+        │   ├── index.html
+        │   └── scripts
+        │       ├── actions
+        │       │   └── __tests__
+        │       ├── components
+        │       │   ├── App.coffee **
+        │       │   └── __tests__
+        │       │       └── App-test.coffee **
+        │       ├── constants
+        │       │   └── __tests__
+        │       ├── dispatcher
+        │       │   ├── AppDispatcher.coffee **
+        │       │   └── __tests__
+        │       ├── main.coffee **
+        │       ├── mixins
+        │       │   └── __tests__
+        │       └── stores
+        │           └── __tests__
+        └── webpack.config.js
 
-
-    *: varied by your choices of the dialect and stylesheet syntax
+    *: Won't create root directory if your current directory is identical with your
+    project name. Check [--skip-root](https://github.com/taiansu/generator-rf#--skip-root-Dont-create-root-directory) for detail
+    **: Varied by your choices of the dialect and stylesheet syntax
 
 ## Options
 
@@ -118,6 +118,7 @@ Example:
     yo rf myapp --d=ls
 
 ### --s: Stylesheet Syntax
+
 RF generate [SASS](http://sass-lang.com/) (indented syntax) by default. Use --s flag to change it.
 
 * `scss` for SCSS (Sassy CSS)
@@ -129,7 +130,18 @@ Example:
 
     yo rf myapp --s=scss
 
-### --skip-test: Don't create __tests__ for every subfolder in src/scripts
+### --skip-root: Don't create root directory
+
+From 0.1.13, RF will create a root directory if current directory name is different from your appname. If you're intentionally to have them with different name, use --skip-root to generate files right in the current directory.
+
+Example:
+
+    yo rf trueName --skip-root
+
+### --skip-test: Don't create __tests__ directory
+
+For every sub-directories in `src/scripts`, RF will create a __tests__ directory
+within. Use `skip-test` to skip that.
 
 Example:
 
@@ -150,7 +162,7 @@ Example:
 
 ## TODO
 
-* Store, Component, Actions w/Constants, Mixin generators
+* Actions w/Constants, Store, Component, Mixin generators
 
 ## License
 

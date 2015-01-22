@@ -29,6 +29,10 @@ describe('rf:app', function () {
          .on('end', done);
     });
 
+    it('create and change destinationRoot', function () {
+      assert.ok(process.cwd().match(/MyApp/));
+    });
+
     it('creates general files', function () {
       assert.file(generalFiles);
     });
@@ -343,4 +347,32 @@ describe('rf:app', function () {
     });
 
   });
+
+  ////////////////
+  //  skipRoot  //
+  ////////////////
+
+  describe('skipRoot', function () {
+    before(function (done) {
+       helpers.run(path.join(__dirname, '../app'))
+         .inDir(path.join(os.tmpdir(), './temp-test'))
+         .withArguments(['MyApp'])
+         .withOptions({ 'skipRoot': true, 'skipInstall': true })
+         .on('end', done);
+    });
+
+    it('don\'t create destinationRoot', function () {
+      assert.equal(process.cwd().match(/MyApp/), null);
+    });
+
+    it('Use temp-test as destinationRoot', function () {
+      assert.ok(process.cwd().match(/temp-test/));
+    });
+
+    it('creates general files', function () {
+      assert.file(generalFiles);
+    });
+
+  });
+
 });

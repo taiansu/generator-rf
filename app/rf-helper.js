@@ -1,4 +1,8 @@
+var fs = require('fs');
+var sys = require('sys');
+var exec = require('child_process').exec;
 var generators = require('yeoman-generator').generators;
+var chalk = require('chalk');
 var dialects = require('./options/dialects.js');
 var styles = require('./options/styles.js');
 var dependencies = require('./options/dependencies.js');
@@ -114,6 +118,19 @@ module.exports = generators.Base.extend({
       this.templatePath(this._template('style', 'stylesheet')),
       this.destinationPath('src/assets/stylesheets/' + this._suffixedFile('style', 'stylesheet'))
     );
+  },
+
+  isCwd: function(appname) {
+    var regex = new RegExp("/" + appname + "$");
+    return !!process.cwd().match(regex);
+  },
+
+  makeRoot: function(path) {
+    try {
+      fs.mkdirSync(path);
+    } catch(e) {
+      if (e.code != 'EEXIST') { throw e; }
+    }
   },
 
   _dialectConfig: function (dialect, suffix) {
