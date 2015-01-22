@@ -100,7 +100,7 @@ npm test
         └── webpack.config.js
 
     *: Won't create root directory if your current directory is identical with your
-    project name. Check [--skip-root](https://github.com/taiansu/generator-rf#--skip-root-Dont-create-root-directory) for detail
+    project name. Check #--skip-root section for detail
     **: Varied by your choices of the dialect and stylesheet syntax
 
 ## Options
