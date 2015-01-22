@@ -172,7 +172,6 @@ module.exports = generators.Base.extend({
 
   _template: function(filename, type) {
     if (type === 'config') {
-      this.log( this.config.get('dialect') + "/" + filename);
       return this.config.get('dialect') + "/" + filename;
     } else {
       var templateDir = ('script' === type) ? 'dialect' : 'stylesheet';

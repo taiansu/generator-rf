@@ -99,9 +99,9 @@ npm test
         │           └── __tests__
         └── webpack.config.js
 
-    *: Won't create root directory if your current directory is identical with your
-    project name. Check #--skip-root section for detail
-    **: Varied by your choices of the dialect and stylesheet syntax
+* \* Won't create root directory if your current directory is identical with your
+project name. Check [--skip-root](https://github.com/taiansu/generator-rf#--skip-root-dont-create-root-directory) section for detail.
+* \*\* Varied by your choices of the dialect and stylesheet syntax
 
 ## Options
 
@@ -132,15 +132,15 @@ Example:
 
 ### --skip-root: Don't create root directory
 
-From 0.1.13, RF will create a root directory if current directory name is different from your appname. If you're intentionally to have them with different name, use --skip-root to generate files right in the current directory.
+From 0.1.13, RF will create a root directory if current directory name is different from your appname, or generate files in current directory if they have same name. But if you're intentionally have them with different name, use --skip-root to generate files right in the current directory.
 
 Example:
 
     yo rf trueName --skip-root
 
-### --skip-test: Don't create __tests__ directory
+### --skip-test: Don't create \__tests\__ directory
 
-For every sub-directories in `src/scripts`, RF will create a __tests__ directory
+For every sub-directories in `src/scripts`, RF will create a \__tests\__ directory
 within. Use `skip-test` to skip that.
 
 Example:
