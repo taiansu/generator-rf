@@ -95,19 +95,19 @@ module.exports = generators.Base.extend({
 
   copyScripts: function () {
     var self = this;
-    var file_dests = {
-      'main': 'src/scripts/',
-      'App': 'src/scripts/components/',
-      'AppDispatcher': 'src/scripts/dispatcher/'
+    var scripts = {
+      'src/scripts/': 'main',
+      'src/scripts/components/': 'App',
+      'src/scripts/dispatcher/': 'AppDispatcher'
     };
 
-    this._.each(file_dests, function(dist, filename){
-      var suffixedFile = self._suffixedFile(filename, 'script');
-      var template = self._template(filename, 'script');
+    this._.each(scripts, function(file, path){
+      var suffixedFile = self._suffixedFile(file, 'script');
+      var template = self._template(file, 'script');
 
       self.fs.copyTpl(
         self.templatePath(template),
-        self.destinationPath(dist + suffixedFile),
+        self.destinationPath(path + suffixedFile),
         self._stringifiedConfig()
       );
     });
@@ -141,7 +141,7 @@ module.exports = generators.Base.extend({
       'dialect': dialect,
       'scriptSuffix': suffix,
       'testFileExtensions': _.uniq(['js', suffix.replace(/\./, '')]),
-      'dialectModuleFileExtensions': _.uniq(['js', 'json', suffix.replace(/\./, '')]),
+      'dialectModuleFileExtensions': _.uniq(['js', 'json', suffix.replace(/\./, '')])
     };
   },
 
