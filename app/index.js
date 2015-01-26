@@ -146,11 +146,8 @@ module.exports = RfHelper.extend({
       skipInstall: this.options.skipInstall,
       callback: function() {
         this.log("\n" + chalk.bold("Here is your webapp. Enjoy."));
-        if (this.chdir) {
-          this.log('Run ' + chalk.bold.green('cd ' + this.appname + ' && npm run dev') + ' to strat up your app.');
-        } else {
-          this.log('Run ' + chalk.bold.green('npm run dev') + ' to strat up your app.');
-        }
+        var chdirCmd = this.chdir ? "cd " + this.appname + " && " : "";
+        this.log('Run ' + chalk.bold.green(chdirCmd + "npm run dev") + ' to strat up your app.');
       }.bind(this)
     });
   }

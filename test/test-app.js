@@ -375,4 +375,22 @@ describe('rf:app', function () {
 
   });
 
+  describe('Directory name as same as App name', function () {
+    before(function (done) {
+       helpers.run(path.join(__dirname, '../app'))
+         .inDir(path.join(os.tmpdir(), './MyApp'))
+         .withArguments(['MyApp'])
+         .withOptions({ 'skipInstall': true })
+         .on('end', done);
+    });
+
+    it('don\'t create destinationRoot', function () {
+      assert.equal(process.cwd().match(/MyApp\/MyApp$/), null);
+    });
+
+    it('creates general files', function () {
+      assert.file(generalFiles);
+    });
+
+  });
 });
