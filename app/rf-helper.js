@@ -10,6 +10,65 @@ var loaders = require('./options/loaders.js');
 
 module.exports = generators.Base.extend({
 
+  ///////////////////////////
+  // Interactive Questions //
+  ///////////////////////////
+
+  greeting: function () {
+    this.log(yosay("Greetings. I'm " + chalk.blue('RF') + ", here to generate a nice, well structured react/flux webapp for you."));
+    this.log("Please kindly answer my few questions.\n");
+  },
+
+  askForAppname: function () {
+    var done = this.async();
+
+    this.prompt({
+      type: 'input',
+      name: 'appname',
+      message: 'So your webapp name is?',
+      default: 'MyWebApp'
+    }, function(answers) {
+      this.log('\nAh, ' + chalk.yellow(answers.appname) + ', sounds will be an awesome project.\n');
+      this.appname = answers.appname;
+      done();
+    }.bind(this));
+  },
+
+  askForDialect: function () {
+    var done = this.async();
+
+    this.prompt({
+      type: 'input',
+      name: 'dialect',
+      message: 'So which JavaScript dialect you like in: ' + chalk.blue('coffee, ls, 6to5 or js') + ' ?',
+      default: 'coffee'
+    }, function(answers) {
+      this.log('\nExcellent, I like ' + chalk.yellow(answers.dialect) + ', too.\n');
+      this.options.d = answers.dialect;
+      done();
+    }.bind(this));
+  },
+
+  askForStyle: function () {
+    var done = this.async();
+
+    this.prompt({
+      type: 'input',
+      name: 'style',
+      message: 'So which css syntax you like in: ' + chalk.blue('sass, scss, less, stylus or css') + ' ?',
+      default: 'sass'
+    }, function(answers) {
+      this.log( "\n" + chalk.yellow(answers.style) + ", nice choice.\n");
+      this.log(chalk.bold.black.bgYellow("Your webapp will be served soon.") + "\n");
+      this.options.s = answers.style;
+      done();
+    }.bind(this));
+  },
+
+  ///////////////////////
+  // Set configuration //
+  ///////////////////////
+
   setDialect: function (dialectFlag) {
     var dialect = dialects.get(dialectFlag);
 
@@ -44,6 +103,10 @@ module.exports = generators.Base.extend({
     this.config.set('dialectLoader',  loaders.get(dialect));
     this.config.set('stylesheetLoader',  loaders.get(stylesheet));
   },
+
+  //////////////////////
+  // Manipulate Files //
+  //////////////////////
 
   copyConfigFiles: function () {
     var self = this;
@@ -120,6 +183,10 @@ module.exports = generators.Base.extend({
     );
   },
 
+  /////////////////
+  // Change root //
+  /////////////////
+
   isCwd: function(appname) {
     var regex = new RegExp("/" + appname + "$");
     return !!process.cwd().match(regex);
@@ -132,6 +199,10 @@ module.exports = generators.Base.extend({
       if (e.code != 'EEXIST') { throw e; }
     }
   },
+
+  /////////////
+  // Private //
+  /////////////
 
   _dialectConfig: function (dialect, suffix) {
     var _ = this._;
