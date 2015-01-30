@@ -3,6 +3,7 @@ var sys = require('sys');
 var exec = require('child_process').exec;
 var generators = require('yeoman-generator').generators;
 var chalk = require('chalk');
+var yosay = require('yosay');
 var dialects = require('./options/dialects.js');
 var styles = require('./options/styles.js');
 var dependencies = require('./options/dependencies.js');
@@ -19,50 +20,32 @@ module.exports = generators.Base.extend({
     this.log("Please kindly answer my few questions.\n");
   },
 
-  askForAppname: function () {
-    var done = this.async();
-
-    this.prompt({
-      type: 'input',
+  questions: [
+    { type: 'input',
       name: 'appname',
       message: 'So your webapp name is?',
-      default: 'MyWebApp'
-    }, function(answers) {
-      this.log('\nAh, ' + chalk.yellow(answers.appname) + ', sounds will be an awesome project.\n');
-      this.appname = answers.appname;
-      done();
-    }.bind(this));
-  },
-
-  askForDialect: function () {
-    var done = this.async();
-
-    this.prompt({
-      type: 'input',
+      default: 'MyWebApp' },
+    { type: 'input',
       name: 'dialect',
       message: 'So which JavaScript dialect you like in: ' + chalk.blue('coffee, ls, 6to5 or js') + ' ?',
-      default: 'coffee'
-    }, function(answers) {
-      this.log('\nExcellent, I like ' + chalk.yellow(answers.dialect) + ', too.\n');
-      this.options.d = answers.dialect;
-      done();
-    }.bind(this));
-  },
-
-  askForStyle: function () {
-    var done = this.async();
-
-    this.prompt({
-      type: 'input',
+      default: 'coffee',
+      when: function (answers) { return !!answers.appname; } },
+    { type: 'input',
       name: 'style',
       message: 'So which css syntax you like in: ' + chalk.blue('sass, scss, less, stylus or css') + ' ?',
-      default: 'sass'
-    }, function(answers) {
-      this.log( "\n" + chalk.yellow(answers.style) + ", nice choice.\n");
-      this.log(chalk.bold.black.bgYellow("Your webapp will be served soon.") + "\n");
-      this.options.s = answers.style;
-      done();
-    }.bind(this));
+      default: 'sass',
+      when: function (answers) { return !!answers.dialect; } }
+  ],
+
+  interactiveSummary: function (answers) {
+    this.appname = answers.appname;
+    this.options.d = answers.dialect;
+    this.options.s = answers.style;
+    this.log("\nThank you. Then I'll sever your webapp with " +
+             chalk.yellow(answers.dialect) + " and " +
+             chalk.yellow(answers.style) + " flavor." +
+             "\nI'm sure this " + chalk.yellow(answers.appname) + " will be an awesome project.\n");
+    this.done();
   },
 
   ///////////////////////

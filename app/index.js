@@ -1,7 +1,6 @@
 'use strict';
 var generators = require('yeoman-generator').generators;
 var chalk = require('chalk');
-var yosay = require('yosay');
 var RfHelper = require('./rf-helper.js');
 
 module.exports = RfHelper.extend({
@@ -41,10 +40,9 @@ module.exports = RfHelper.extend({
       return;
     };
 
+    this.done = this.async();
     this.greeting();
-    this.askForAppname();
-    this.askForDialect();
-    this.askForStyle();
+    this.prompt(this.questions, this.interactiveSummary.bind(this));
   },
 
   configuring: {
