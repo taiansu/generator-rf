@@ -87,6 +87,23 @@ module.exports = generators.Base.extend({
     this.config.set('stylesheetLoader',  loaders.get(stylesheet));
   },
 
+  /////////////////
+  // Change root //
+  /////////////////
+
+  isCwd: function(appname) {
+    var regex = new RegExp("/" + appname + "$");
+    return !!process.cwd().match(regex);
+  },
+
+  makeRoot: function(path) {
+    try {
+      fs.mkdirSync(path);
+    } catch(e) {
+      if (e.code != 'EEXIST') { throw e; }
+    }
+  },
+
   //////////////////////
   // Manipulate Files //
   //////////////////////
@@ -164,23 +181,6 @@ module.exports = generators.Base.extend({
       this.templatePath(this._template('style', 'stylesheet')),
       this.destinationPath('src/assets/stylesheets/' + this._suffixedFile('style', 'stylesheet'))
     );
-  },
-
-  /////////////////
-  // Change root //
-  /////////////////
-
-  isCwd: function(appname) {
-    var regex = new RegExp("/" + appname + "$");
-    return !!process.cwd().match(regex);
-  },
-
-  makeRoot: function(path) {
-    try {
-      fs.mkdirSync(path);
-    } catch(e) {
-      if (e.code != 'EEXIST') { throw e; }
-    }
   },
 
   /////////////

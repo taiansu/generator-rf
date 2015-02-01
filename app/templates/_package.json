@@ -11,7 +11,7 @@
   },
   "devDependencies": <%= devDependencies %>,
   "scripts": {
-    "dev": "webpack --color && webpack-dev-server --inline --hot --content-base ./build",
+    "dev": "webpack-dev-server --colors -d --inline --hot --content-base ./build",
     "test": "jest"
   },
   "author": "",

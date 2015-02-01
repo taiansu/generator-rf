@@ -1,4 +1,6 @@
 ### Node ###
+# Source Map
+*.map
 # Logs
 logs
 *.log
