@@ -8,6 +8,7 @@ var dialects = require('./options/dialects.js');
 var styles = require('./options/styles.js');
 var dependencies = require('./options/dependencies.js');
 var loaders = require('./options/loaders.js');
+var _ = require('lodash');
 
 module.exports = generators.Base.extend({
 
@@ -109,19 +110,18 @@ module.exports = generators.Base.extend({
   //////////////////////
 
   copyConfigFiles: function () {
-    var self = this;
     var configFiles = [
       "package.json",
       "webpack.config.js"
     ];
 
-    this._.each(configFiles, function(file){
-      self.fs.copyTpl(
-        self.templatePath('_' + file),
-        self.destinationPath(file),
-        self._stringifiedConfig()
+    _.each(configFiles, function(file){
+      this.fs.copyTpl(
+        this.templatePath('_' + file),
+        this.destinationPath(file),
+        this._stringifiedConfig()
       );
-    });
+    }.bind(this));
 
     // Copy preprocessor.js base on chosen dialect
     this.fs.copy(
@@ -138,42 +138,39 @@ module.exports = generators.Base.extend({
   },
 
   mkDirs: function () {
-    var self = this;
-    var _ = this._;
     var folderTree = {
       "src/scripts": [ "actions", "components", "constants",
                        "dispatcher", "mixins", "stores" ],
       "src/assets":  [ "images", "stylesheets" ]
-    }
+    };
 
     _.each(_.keys(folderTree), function (dir) {
-      self.dest.mkdir(dir);
+      this.dest.mkdir(dir);
       _.each(folderTree[dir], function (subdir) {
-        self.dest.mkdir(dir + "/" + subdir);
-      });
-    });
+        this.dest.mkdir(dir + "/" + subdir);
+      }.bind(this));
+    }.bind(this));
 
     this._mkTestDirs(folderTree);
   },
 
   copyScripts: function () {
-    var self = this;
     var scripts = {
       'src/scripts/': 'main',
       'src/scripts/components/': 'App',
       'src/scripts/dispatcher/': 'AppDispatcher'
     };
 
-    this._.each(scripts, function(file, path){
-      var suffixedFile = self._suffixedFile(file, 'script');
-      var template = self._template(file, 'script');
+    _.each(scripts, function(file, path){
+      var suffixedFile = this._suffixedFile(file, 'script');
+      var template = this._template(file, 'script');
 
-      self.fs.copyTpl(
-        self.templatePath(template),
-        self.destinationPath(path + suffixedFile),
-        self._stringifiedConfig()
+      this.fs.copyTpl(
+        this.templatePath(template),
+        this.destinationPath(path + suffixedFile),
+        this._stringifiedConfig()
       );
-    });
+    }.bind(this));
   },
 
   copyStylesheets: function () {
@@ -188,9 +185,7 @@ module.exports = generators.Base.extend({
   /////////////
 
   _dialectConfig: function (dialect, suffix) {
-    var _ = this._;
-
-    return  {
+    return {
       'description': "A React/Flux app generate by RF, powered with " + dialect,
       'dialect': dialect,
       'scriptSuffix': suffix,
@@ -200,14 +195,13 @@ module.exports = generators.Base.extend({
   },
 
   _mkTestDirs: function (tree){
-    var self = this;
     if (!this.config.get('mkTestDirs')) {
       return;
     }
 
-    this._.each(tree['src/scripts'], function (dir) {
-      self.dest.mkdir('src/scripts/' + dir + '/__tests__');
-    });
+    _.each(tree['src/scripts'], function (dir) {
+      this.dest.mkdir('src/scripts/' + dir + '/__tests__');
+    }.bind(this));
 
     var testFile = this._suffixedFile('App-test', 'script');
     var testFilePath = this._template('App-test', 'script');
@@ -234,14 +228,12 @@ module.exports = generators.Base.extend({
   },
 
   _stringifiedConfig: function () {
-    var _ = this._;
-
     return _.each(this.config.getAll(), function(value, key, item){
       if (_.isObject(value)) {
         item[key] = JSON.stringify(value, null, '    ');
                                                 // four space for prettify output,
                                                 // still not perfect but acceptable
       }
-    });
+    }.bind(this));
   }
 });
