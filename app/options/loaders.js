@@ -5,10 +5,10 @@ module.exports = {
     return this[key] || '';
   },
 
-  coffeescriptLoader:   'coffee!cjsx',
-  JavaScriptLoader:     'jsx',
-  JavaScript6to5Loader: '6to5',
-  LiveScriptLoader:     'livescript!cjsx',
+  coffeescriptLoader:   'react-hot!coffee!cjsx',
+  JavaScriptLoader:     'react-hot!jsx',
+  JavaScript6to5Loader: 'react-hot!6to5',
+  LiveScriptLoader:     'react-hot!livescript!cjsx',
   CSSLoader:            'style!css',
   LessLoader:           'style!css!less',
   StylusLoader:         'style!css!stylus',
