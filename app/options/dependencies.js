@@ -60,7 +60,7 @@ module.exports = {
     'css-loader': '*',
     'file-loader': '*',
     'jest-cli': '*',
-    'react-hot-loader': '^1.0.4',
+    'react-hot-loader': '^1.1.4',
     'react-tools': '^0.12.2',
     'style-loader': '*',
     'webpack-dev-server': '^1.7.0',

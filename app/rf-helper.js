@@ -84,8 +84,8 @@ module.exports = generators.Base.extend({
                     dependencies.wrap([dialect, stylesheet]));
 
     this.config.set('dialectTest', dialectTest);
-    this.config.set('dialectLoader',  loaders.get(dialect));
-    this.config.set('stylesheetLoader',  loaders.get(stylesheet));
+    this.config.set('dialectLoader', loaders.get(dialect));
+    this.config.set('stylesheetLoader', loaders.get(stylesheet));
   },
 
   /////////////////
@@ -234,6 +234,6 @@ module.exports = generators.Base.extend({
                                                 // four space for prettify output,
                                                 // still not perfect but acceptable
       }
-    }.bind(this));
+    });
   }
 });

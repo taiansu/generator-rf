@@ -8,6 +8,7 @@
 * [Flux](http://facebook.github.io/flux/)
 * [Jest](http://facebook.github.io/jest)
 * [webpack](http://webpack.github.io/)
+* SourceMap from webpack's [devtool](http://webpack.github.io/docs/configuration.html#devtool)
 * Live-reload by [react-hot-loader](https://gaearon.github.io/react-hot-loader/)
 * JS dialect in your favor:
     * [CoffeeScript](http://coffeescript.org/)
@@ -100,7 +101,7 @@ npm test
         └── webpack.config.js
 
 * \* Won't create root directory if your current directory is identical with your
-project name. Check [--skip-root](https://github.com/taiansu/generator-rf#--skip-root-dont-create-root-directory) section for detail.
+project name. Check [--skip-root](#--skip-root-dont-create-root-directory) section for detail.
 * \*\* Varied by your choices of the dialect and stylesheet syntax
 
 ## Options
