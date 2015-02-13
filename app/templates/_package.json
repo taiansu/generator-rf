@@ -11,6 +11,7 @@
   },
   "devDependencies": <%= devDependencies %>,
   "scripts": {
+    "build": "webpack"
     "dev": "webpack-dev-server --colors --content-base ./build",
     "test": "jest"
   },

@@ -1,7 +1,6 @@
 # generator-rf [![Build Status](https://secure.travis-ci.org/taiansu/generator-rf.png?branch=master)](https://travis-ci.org/taiansu/generator-rf) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/taiansu/generator-rf?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-> RF: a [React](http://facebook.github.io/react/)/[Flux](http://facebook.github.io/flux/) generator with webpack and CoffeeScript/LiveScript + CJSX support.
-
+> RF: a [React](http://facebook.github.io/react/)/[Flux](http://facebook.github.io/flux/) generator with webpack, dialects and some good stuffs.
 
 ### What's inside
 * [React](http://facebook.github.io/react/)
@@ -26,12 +25,13 @@
 
 No, not the boring abbreviation of "React" and "Flux". It's actually the suffix of `rm -rf`. Now it sounds [dangerous](https://github.com/MrMEEE/bumblebee-Old-and-abbandoned/issues/123) and cooler, doesn't it?
 
-## Getting Started
+## Installation
 
 ### Prerequisites
 
-* [Node.js w/npm](http://nodejs.org/) installed. I recommend installing via [homebrew](http://brew.sh/).
-* Have [Yeoman](http://yeoman.io) installed by:
+* [Node.js w/npm](http://nodejs.org/) installed. I recommend install it via `nvm` or `node` via [homebrew](http://brew.sh/).
+
+### Install [Yeoman](http://yeoman.io)
 
 ```bash
 npm install -g yo
@@ -43,6 +43,8 @@ npm install -g yo
 npm install -g generator-rf
 ```
 
+## Getting Started
+
 ### Intiate Project
 
 For example, to create a project named "myapp", just type:
@@ -51,27 +53,33 @@ For example, to create a project named "myapp", just type:
 yo rf myapp
 ```
 
-And _Viola!_ Start a webpack-dev-server with:
+### Run it up
 
 ```bash
 cd myapp && npm run dev
 ```
+<br/>
 
-Open [http://localhost:8080](http://localhost:8080) in the browser and Play with
-it!
+Then Open [http://localhost:8080](http://localhost:8080) in the browser and have fun!
 
+> If you get error message like `Cannot GET /` on MS Windows, try `http://localhost:8080/index.html` instead. And please tell me how to fix it if you know why so.
+
+### Run the test suit
 Don't forget to test your project by:
 
 ```bash
 npm test
 ```
 
+### Build for deploy
+
+```
+npm run build
+```
+
 ## What RF generates:
     .
     └── myapp *
-        ├── build
-        │   ├── bundle.js
-        │   └── index.html
         ├── package.json
         ├── preprocessor.js
         ├── node_modules
@@ -100,9 +108,18 @@ npm test
         │           └── __tests__
         └── webpack.config.js
 
-* \* Won't create root directory if your current directory is identical with your
-project name. Check [--skip-root](#--skip-root-dont-create-root-directory) section for detail.
-* \*\* Varied by your choices of the dialect and stylesheet syntax
+<br/>
+*  Won't create root directory if your current directory is identical with your project name. Check [--skip-root](#--skip-root-dont-create-root-directory) section for detail.
+* \* Varied by your choices of the dialect and stylesheet syntax
+
+
+## What `npm run build` gives:
+    .
+    └── myapp *
+        ├── build
+        │   ├── bundle.js
+        │   └── index.html
+        └── ...
 
 ## Options
 
@@ -163,7 +180,9 @@ Example:
 
 ## TODO
 
-* Actions w/Constants, Store, Component, Mixin generators
+* Actions w/Constants, Store
+* Component and Mixin generate command
+* Isomorphic server script(?)
 
 ## License
 
