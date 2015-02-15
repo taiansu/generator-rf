@@ -4,6 +4,7 @@ var path = require('path');
 var assert = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
 var os = require('os');
+var fs = require('fs');
 
 describe('rf:app', function () {
   var generalFiles = [
@@ -393,4 +394,35 @@ describe('rf:app', function () {
     });
 
   });
+
+  //////////////////////////////
+  //  Generated package.json  //
+  //////////////////////////////
+
+  describe('Generated package.json', function () {
+
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../app'))
+        .inDir(path.join(os.tmpdir(), './temp-test'))
+        .withArguments(['MyApp'])
+        .withOptions({ 'skipInstall': true })
+        .on('end', done);
+    });
+
+    function isValidJSON (jsonString) {
+      try {
+        JSON.parse(jsonString);
+      } catch (e) {
+        return false;
+      }
+      return true;
+    }
+
+    it('Generated package.json is valid JSON', function () {
+      var text = fs.readFileSync('package.json', 'utf8');
+      assert.equal(isValidJSON(text), true);
+    })
+
+  })
+
 });
