@@ -28,7 +28,7 @@ module.exports = generators.Base.extend({
       default: 'MyWebApp' },
     { type: 'input',
       name: 'dialect',
-      message: 'So which JavaScript dialect you like in: ' + chalk.blue('coffee, ls, 6to5 or js') + ' ?',
+      message: 'So which JavaScript dialect you like in: ' + chalk.blue('coffee, ls, babel or js') + ' ?',
       default: 'coffee',
       when: function (answers) { return !!answers.appname; } },
     { type: 'input',

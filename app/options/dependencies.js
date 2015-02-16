@@ -23,9 +23,9 @@ module.exports = {
     'jsx-loader': '*'
   },
 
-  JavaScript6to5Dependencies: {
-    '6to5-loader': '*',
-    '6to5-jest': '*'
+  BabelDependencies: {
+    'babel-loader': '*',
+    'babel-jest': '*'
   },
 
   coffeescriptDependencies: {

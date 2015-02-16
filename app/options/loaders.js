@@ -7,7 +7,7 @@ module.exports = {
 
   coffeescriptLoader:   'react-hot!coffee!cjsx',
   JavaScriptLoader:     'react-hot!jsx',
-  JavaScript6to5Loader: 'react-hot!6to5',
+  BabelLoader:          'react-hot!babel',
   LiveScriptLoader:     'react-hot!livescript!cjsx',
   CSSLoader:            'style!css',
   LessLoader:           'style!css!less',

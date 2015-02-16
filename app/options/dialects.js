@@ -21,10 +21,17 @@ module.exports = {
     suffix: '.js'
   },
 
-  "6to5": { // object property name constraints
-    name: 'JavaScript-6to5',
+  "babel": {
+    name: 'Babel',
     suffix:'.js'
   },
+
+  //Backward compatibility
+  "6to5": { // object property name constraints
+    name: 'Babel',
+    suffix:'.js'
+  },
+
 
   coffee: {
     name: 'coffee-script',

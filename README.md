@@ -12,7 +12,7 @@
 * JS dialect in your favor:
     * [CoffeeScript](http://coffeescript.org/)
     * [LiveScript](http://livescript.net)
-    * [JavaScript 6to5](https://6to5.org/)
+    * [Babel](https://babeljs.io/) (Formally Javascript 6to5)
     * vanilla JavaScript
 * Have JSX in CoffeeScript/LiveScript by [coffee-react-transform](https://github.com/jsdf/coffee-react-transform)
 * Stylesheet syntax in your favor:
@@ -58,11 +58,10 @@ yo rf myapp
 ```bash
 cd myapp && npm run dev
 ```
-<br/>
 
 Then Open [http://localhost:8080](http://localhost:8080) in the browser and have fun!
 
-> If you get error message like `Cannot GET /` on MS Windows, try `http://localhost:8080/index.html` instead. And please tell me how to fix it if you know why so.
+> If you get error message like `Cannot GET /` on MS Windows, try `http://localhost:8080/index.html` instead. And please let me how to fix it if you know how.
 
 ### Run the test suit
 Don't forget to test your project by:
@@ -108,9 +107,8 @@ npm run build
         │           └── __tests__
         └── webpack.config.js
 
-<br/>
-*  Won't create root directory if your current directory is identical with your project name. Check [--skip-root](#--skip-root-dont-create-root-directory) section for detail.
-* \* Varied by your choices of the dialect and stylesheet syntax
+* \* Won't create root directory if your current directory is identical with your project name. Check [--skip-root](#--skip-root-dont-create-root-directory) section for detail.
+* \*\* Varied by your choices of the dialect and stylesheet syntax
 
 
 ## What `npm run build` gives:
@@ -128,7 +126,7 @@ npm run build
 By default, RF will generate codes in [CoffeeScript](http://coffeescript.org/). If you don't like it, use --d flag to change the dialect to generate.
 
 * `ls` for [LiveScript](http://livescript.net)
-* `6to5` for [JavaScript 6to5](https://6to5.org/)
+* `babel` for [Babel](https://babeljs.io/) (Formally JavaScript 6to5)
 * `js` for vanilla JavaScript
 
 Example:
@@ -156,9 +154,9 @@ Example:
 
     yo rf trueName --skip-root
 
-### --skip-test: Don't create \__tests\__ directory
+### --skip-test: Don't create \_\_tests\_\_ directory
 
-For every sub-directories in `src/scripts`, RF will create a \__tests\__ directory
+For every sub-directories in `src/scripts`, RF will create a \_\_tests\_\_ directory
 within. Use `skip-test` to skip that.
 
 Example:

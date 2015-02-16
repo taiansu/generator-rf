@@ -158,16 +158,16 @@ describe('rf:app', function () {
 
   });
 
-  ///////////////////////
-  //  JAVASCRIPT 6to5  //
-  ///////////////////////
+  ////////////
+  //  Babel //
+  ////////////
 
-  describe('JavaScript-6to5', function () {
+  describe('Babel', function () {
     before(function (done) {
        helpers.run(path.join(__dirname, '../app'))
          .inDir(path.join(os.tmpdir(), './temp-test'))
          .withArguments(['MyApp'])
-         .withOptions({ 'd': '6to5', 'skipInstall': true })
+         .withOptions({ 'd': 'babel', 'skipInstall': true })
          .on('end', done);
     });
 
@@ -175,7 +175,7 @@ describe('rf:app', function () {
       assert.file(generalFiles);
     });
 
-    it('creates JavaScript-6to5 files', function () {
+    it('creates Babel files', function () {
       assert.file([
         'src/scripts/main.js',
         'src/scripts/components/App.js',
@@ -184,19 +184,19 @@ describe('rf:app', function () {
       ]);
     });
 
-    it('save configs of JavaScript-6to5', function () {
-      assert.fileContent('.yo-rc.json', /"dialect": "JavaScript-6to5"/);
+    it('save configs of Babel', function () {
+      assert.fileContent('.yo-rc.json', /"dialect": "Babel"/);
       assert.fileContent('.yo-rc.json', /"scriptSuffix": ".js"/);
     });
 
-    it('generate package.json with base and JavaScript-6to5 devDependencies', function () {
+    it('generate package.json with base and Babel devDependencies', function () {
       assert.fileContent('package.json', /react-tools/);
       assert.fileContent('package.json', /jsx-loader/);
-      assert.fileContent('package.json', /6to5-loader/);
+      assert.fileContent('package.json', /babel-loader/);
     });
 
-    it('generate webpack.config.js with JavaScript-6to5 loader', function () {
-      assert.fileContent('webpack.config.js', /6to5/);
+    it('generate webpack.config.js with Babel loader', function () {
+      assert.fileContent('webpack.config.js', /babel/);
     });
 
   });
@@ -395,11 +395,11 @@ describe('rf:app', function () {
 
   });
 
-  //////////////////////////////
-  //  Generated package.json  //
-  //////////////////////////////
+  ////////////////////////////////////
+  //  Generated valid package.json  //
+  ////////////////////////////////////
 
-  describe('Generated package.json', function () {
+  describe('Package.json', function () {
 
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
@@ -418,7 +418,7 @@ describe('rf:app', function () {
       return true;
     }
 
-    it('Generated package.json is valid JSON', function () {
+    it('is a valid JSON', function () {
       var text = fs.readFileSync('package.json', 'utf8');
       assert.equal(isValidJSON(text), true);
     })
