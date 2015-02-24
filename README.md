@@ -113,7 +113,7 @@ npm run build
 
 ## What `npm run build` gives:
     .
-    └── myapp *
+    └── myapp
         ├── build
         │   ├── bundle.js
         │   └── index.html
@@ -181,6 +181,7 @@ Example:
 * Actions w/Constants, Store
 * Component and Mixin generate command
 * Isomorphic server script(?)
+* React native things(?)
 
 ## License
 

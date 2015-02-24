@@ -60,6 +60,7 @@ describe('rf:app', function () {
 
     it('generate package.json with base, coffee and sass devDependencies', function () {
       assert.fileContent('package.json', /react-tools/);
+      assert.fileContent('package.json', /coffee-react-transform/);
       assert.fileContent('package.json', /coffee-script/);
       assert.fileContent('package.json', /sass-loader/);
     });
@@ -107,6 +108,7 @@ describe('rf:app', function () {
 
     it('generate package.json with base and LiveScript devDependencies', function () {
       assert.fileContent('package.json', /react-tools/);
+      assert.fileContent('package.json', /coffee-react-transform/);
       assert.fileContent('package.json', /LiveScript/);
     });
 

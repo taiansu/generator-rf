@@ -29,13 +29,15 @@ module.exports = {
   },
 
   coffeescriptDependencies: {
-    'cjsx-loader': '^1.1.0',
+    'coffee-react-transform': '*',
+    'cjsx-loader': '*',
     'coffee-loader': '*',
     'coffee-script': '*'
   },
 
   LiveScriptDependencies: {
-    'cjsx-loader': '^1.1.0',
+    'coffee-react-transform': '*',
+    'cjsx-loader': '*',
     'livescript-loader': '*',
     'LiveScript': '*'
   },
@@ -60,10 +62,10 @@ module.exports = {
     'css-loader': '*',
     'file-loader': '*',
     'jest-cli': '*',
-    'react-hot-loader': '^1.1.4',
-    'react-tools': '^0.12.2',
+    'react-hot-loader': '*',
+    'react-tools': '*',
     'style-loader': '*',
-    'webpack-dev-server': '^1.7.0',
-    'webpack': '^1.4.14'
+    'webpack-dev-server': '*',
+    'webpack': '*'
   }
 }
