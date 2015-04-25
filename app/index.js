@@ -11,12 +11,15 @@ module.exports = RfHelper.extend({
 
     this.option('d', { type: String,
                        defaults: "coffee",
-                       desc: "Dialect: 'ls' for LiveScript, 'babel' for Babel or 'js' for native JavaScript"
-               });
+                       desc: "Dialect: 'ls' for LiveScript, 'babel' for Babel or 'js' for native JavaScript" });
 
     this.option('s', { type: String,
                        defaults: "sass",
-                       desc: "Stylesheet syntax, can be 'scss', 'less', 'stylus' or 'css' "});
+                       desc: "Stylesheet syntax, can be 'scss', 'less', 'stylus' or 'css'" });
+
+    this.option('skip-bootstrap', { type: Boolean,
+                                    defaults: false,
+                                    desc: "Don't include Twitter Bootstrap framework settings" });
 
     this.option('skip-root', { type: Boolean,
                                 defaults: false,
@@ -59,6 +62,7 @@ module.exports = RfHelper.extend({
     setConfig: function () {
       this.config.set('appname', this.appname);
       this.config.set('mkTestDirs', !this.options.skipTest);
+      this.config.set('withBootstrap', !this.options.skipBootstrap);
       this.setDialect(this.options.d);
       this.setStylesheet(this.options.s);
       this.setEnv();

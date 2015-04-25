@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - '0.10'
+  - "iojs-v1.6.3"
+  - "iojs-v1.8.1"
 before_install:
   - currentfolder=${PWD##*/}
   - if [ "$currentfolder" != 'generator-rf' ]; then cd .. && eval "mv $currentfolder generator-rf" && cd generator-rf; fi

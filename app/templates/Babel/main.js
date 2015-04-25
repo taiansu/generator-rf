@@ -1,3 +1,4 @@
+<%= withBootstrap ? "require('bootstrap-webpack');" : "" %>
 require('../index.html');
 require('../assets/stylesheets/style<%= stylesheetSuffix %>');
 

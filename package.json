@@ -1,17 +1,18 @@
 {
   "name": "generator-rf",
-  "version": "0.1.18",
+  "version": "0.2.0",
   "description": "RF: a React/Flux webapp generator with webpack, dialects and some good stuffs",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "taiansu/generator-rf",
   "author": {
     "name": "Taian Su",
-    "email": "me@taian.su",
+    "email": "i@taian.su",
     "url": "https://github.com/taiansu"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=0.10.0",
+    "iojs": ">=1.6.3"
   },
   "scripts": {
     "test": "mocha"
@@ -20,7 +21,7 @@
     "app"
   ],
   "keywords": [
-    "yeoman-generator", "react", "flux", "CoffeeScript", "LiveScript", "webpack", "cjsx"
+    "yeoman-generator", "react", "flux", "CoffeeScript", "LiveScript", "webpack", "cjsx", "babel"
   ],
   "dependencies": {
     "yeoman-generator": "^0.18.0",

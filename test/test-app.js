@@ -56,6 +56,7 @@ describe('rf:app', function () {
       assert.fileContent('.yo-rc.json', /"scriptSuffix": ".coffee"/);
       assert.fileContent('.yo-rc.json', /"stylesheet": "SASS"/);
       assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".sass"/);
+      assert.fileContent('.yo-rc.json', /"withBootstrap": true/);
     });
 
     it('generate package.json with base, coffee and sass devDependencies', function () {
@@ -63,6 +64,9 @@ describe('rf:app', function () {
       assert.fileContent('package.json', /coffee-react-transform/);
       assert.fileContent('package.json', /coffee-script/);
       assert.fileContent('package.json', /sass-loader/);
+      assert.fileContent('package.json', /jquery/);
+      assert.fileContent('package.json', /bootstrap/);
+      assert.fileContent('package.json', /bootstrap-webpack/);
     });
 
     it('generate package.json with "js" and "coffee" in testFileExtensions', function () {
@@ -71,6 +75,12 @@ describe('rf:app', function () {
 
     it('generate webpack.config.js with coffee-script loader', function () {
       assert.fileContent('webpack.config.js', /coffee!cjsx/);
+    });
+
+    it('generate webpack.config.js with bootstrap loaders', function () {
+      assert.fileContent('webpack.config.js', /loader: 'imports\?jQuery=jquery'/);
+      assert.fileContent('webpack.config.js', /(ttf|eot|svg)/);
+      assert.fileContent('webpack.config.js', /loader: 'url-loader\?limit=10000&minetype=application/);
     });
 
   });
@@ -193,8 +203,8 @@ describe('rf:app', function () {
 
     it('generate package.json with base and Babel devDependencies', function () {
       assert.fileContent('package.json', /react-tools/);
-      assert.fileContent('package.json', /jsx-loader/);
       assert.fileContent('package.json', /babel-loader/);
+      assert.fileContent('package.json', /babel-jest/);
     });
 
     it('generate webpack.config.js with Babel loader', function () {
@@ -393,6 +403,41 @@ describe('rf:app', function () {
 
     it('creates general files', function () {
       assert.file(generalFiles);
+    });
+
+  });
+
+  /////////////////////
+  //  skipBootstrap  //
+  /////////////////////
+
+  describe('skipBootstrap', function () {
+    before(function (done) {
+       helpers.run(path.join(__dirname, '../app'))
+         .inDir(path.join(os.tmpdir(), './temp-test'))
+         .withArguments(['MyApp'])
+         .withOptions({ 'skipBootstrap': true, 'skipInstall': true })
+         .on('end', done);
+    });
+
+    it('save skipBootstrap to configs', function () {
+      assert.fileContent('.yo-rc.json', /"withBootstrap": false/);
+    });
+
+    it('creates general files', function () {
+      assert.file(generalFiles);
+    });
+
+    it('generate package.json without BootstrapDependencies', function () {
+      assert.noFileContent('package.json', /jquery/);
+      assert.noFileContent('package.json', /bootstrap/);
+      assert.noFileContent('package.json', /bootstrap-webpack/);
+    });
+
+    it('generate webpack.config.js without bootstrap loaders', function () {
+      assert.noFileContent('webpack.config.js', /loader: 'imports\?jQuery=jquery'/);
+      assert.noFileContent('webpack.config.js', /(ttf|eot|svg)/);
+      assert.noFileContent('webpack.config.js', /loader: 'url-loader\?limit=10000&minetype=application/);
     });
 
   });

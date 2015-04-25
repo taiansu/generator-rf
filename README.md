@@ -20,6 +20,7 @@
     * [Less](http://lesscss.org/)
     * [Stylus](http://learnboost.github.io/stylus/)
     * pure CSS
+* Optional [Bootstrap](http://getbootstrap.com/) Framework
 
 ### What 'RF' stands for
 
@@ -29,7 +30,12 @@ No, not the boring abbreviation of "React" and "Flux". It's actually the suffix 
 
 ### Prerequisites
 
-* [Node.js w/npm](http://nodejs.org/) installed. I recommend install it via `nvm` or `node` via [homebrew](http://brew.sh/).
+* [Node.js w/npm](http://nodejs.org/) or [iojs](https://iojs.org/) installed. I
+  recommend install it by [nvm](https://github.com/creationix/nvm). Mac user can
+  install it from [homebrew](http://brew.sh/).
+
+> Note: Currently Jest only support v0.10.x of Node.js, and io.js v1.6.3 or above. Other
+> node version can't run the test correctly.
 
 ### Install [Yeoman](http://yeoman.io)
 
@@ -61,7 +67,7 @@ cd myapp && npm run dev
 
 Then Open [http://localhost:8080](http://localhost:8080) in the browser and have fun!
 
-> If you get error message like `Cannot GET /` on MS Windows, try `http://localhost:8080/index.html` instead. And please let me how to fix it if you know how.
+> If you get error message like `Cannot GET /` on MS Windows, try `http://localhost:8080/index.html` instead. [Help wanted](https://github.com/taiansu/generator-rf/issues/12)
 
 ### Run the test suit
 Don't forget to test your project by:
@@ -146,6 +152,14 @@ Example:
 
     yo rf myapp --s=scss
 
+### --skip-bootstrap: Don't include Bootstrap framework stuffs
+
+From 0.2.0, RF will include Bootstrap settings in the real __Webpack__ way. Turn them off by --skip-bootstrap flag.
+
+Example:
+
+    yo rf myapp --skip-bootstrap
+
 ### --skip-root: Don't create root directory
 
 From 0.1.13, RF will create a root directory if current directory name is different from your appname, or generate files in current directory if they have same name. But if you're intentionally have them with different name, use --skip-root to generate files right in the current directory.
@@ -179,9 +193,9 @@ Example:
 ## TODO
 
 * Actions w/Constants, Store
+* Custom template folder
 * Component and Mixin generate command
 * Isomorphic server script(?)
-* React native things(?)
 
 ## License
 

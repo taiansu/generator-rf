@@ -33,8 +33,14 @@ module.exports = {
         loader: "<%= stylesheetLoader %>"
       },
 
+      <%= bootstrapLoaders %>
       {
-        test: /\.(html|png)$/,
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader?limit=8192'
+      },
+
+      {
+        test: /\.html$/,
         loader: "file?name=[path][name].[ext]&context=./src"
       }
     ]

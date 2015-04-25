@@ -35,16 +35,23 @@ module.exports = generators.Base.extend({
       name: 'style',
       message: 'So which css syntax you like in: ' + chalk.blue('sass, scss, less, stylus or css') + ' ?',
       default: 'sass',
-      when: function (answers) { return !!answers.dialect; } }
+      when: function (answers) { return !!answers.dialect; } },
+    { type: 'boolean',
+      name: 'withBootstrap',
+      message: 'Last question, would you like to include ' + chalk.blue('Bootstrap') + ' stuffs?',
+      default: 'true',
+      when: function (answers) { return !!answers.style; } }
   ],
 
   interactiveSummary: function (answers) {
     this.appname = answers.appname;
     this.options.d = answers.dialect;
     this.options.s = answers.style;
+    this.options.skipBootstrap = !answers.withBootstrap;
     this.log("\nThank you. Then I'll sever your webapp with " +
              chalk.yellow(answers.dialect) + " and " +
-             chalk.yellow(answers.style) + " flavor." +
+             chalk.yellow(answers.style) + " flavor, " +
+             chalk.yellow(answers.withBootstrap ? "with" : "no") + " Bootstrap." +
              "\nI'm sure this " + chalk.yellow(answers.appname) + " will be an awesome project.\n");
     this.done();
   },
@@ -79,9 +86,12 @@ module.exports = generators.Base.extend({
     var stylesheet = this.config.get('stylesheet');
     var scriptSuffix = this.config.get('scriptSuffix');
     var dialectTest = (scriptSuffix === '.js') ? '.jsx?' : scriptSuffix;
+    var bootstrap = this.config.get('withBootstrap') ? 'Bootstrap' : '';
+
+    this.config.set('bootstrapLoaders',loaders.get(bootstrap));
 
     this.config.set('devDependencies',
-                    dependencies.wrap([dialect, stylesheet]));
+                    dependencies.wrap([dialect, stylesheet, bootstrap]));
 
     this.config.set('dialectTest', dialectTest);
     this.config.set('dialectLoader', loaders.get(dialect));
