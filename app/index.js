@@ -95,7 +95,7 @@ module.exports = RfHelper.extend({
       callback: function() {
         this.log("\n" + chalk.bold("Here is your webapp. Enjoy."));
         var chdirCmd = this.chdir ? "cd " + this.appname + " && " : "";
-        this.log('Run ' + chalk.bold.green(chdirCmd + "npm run dev") + ' to strat up your app.');
+        this.log('Run ' + chalk.bold.green(chdirCmd + "npm run dev") + ' to start up your app.');
       }.bind(this)
     });
   }
