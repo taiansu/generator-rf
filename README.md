@@ -67,8 +67,6 @@ cd myapp && npm run dev
 
 Then Open [http://localhost:8080](http://localhost:8080) in the browser and have fun!
 
-> If you get error message like `Cannot GET /` on MS Windows, try `http://localhost:8080/index.html` instead. [Help wanted](https://github.com/taiansu/generator-rf/issues/12)
-
 ### Run the test suit
 Don't forget to test your project by:
 
@@ -193,6 +191,7 @@ Example:
 
 ## TODO
 
+* PostCSS support
 * Actions w/Constants, Store
 * Custom template folder
 * Component and Mixin generate command
