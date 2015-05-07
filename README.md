@@ -131,7 +131,7 @@ npm run build
 By default, RF will generate codes in ES6, using [Babel](https://babeljs.io/). If you don't like it, use --d flag to change the dialect to generate.
 
 * `ls` for [LiveScript](http://livescript.net)
-* `CoffeeScript` for [](http://coffeescript.org/) (Formally JavaScript 6to5)
+* `coffee` for [coffee-script](http://coffeescript.org/) (Formally JavaScript 6to5)
 * `js` for vanilla JavaScript
 
 Example:
