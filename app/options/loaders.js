@@ -14,10 +14,11 @@ module.exports = {
   StylusLoader:         'style!css!stylus',
   SASSLoader:           'style!css!sass?indentedSyntax=true&outputStyle=expanded',
   SCSSLoader:           'style!css!sass?outputStyle=expanded',
-  BootstrapLoader:      "{"                                                                   + "\n        " +
+  // Different from other, fetch this directly.
+  BootstrapLoaders:     "{"                                                                   + "\n        " +
                            "test: /bootstrap\\/js\\//,"                                       + "\n        " +
                            "loader: 'imports?jQuery=jquery'"                                  + "\n      "   +
-                         "},"                                                                 + "\n\n      " +
+                        "},"                                                                 + "\n\n      " +
                         "{"                                                                   + "\n        " +
                            "test: /\\.(ttf|eot|svg)$/,"                                       + "\n        " +
                            "loader: 'file-loader'"                                            + "\n      "   +

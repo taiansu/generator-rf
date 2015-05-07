@@ -14,14 +14,14 @@ describe('rf:app', function () {
     '.yo-rc.json',
     'preprocessor.js',
     'webpack.config.js',
-    'src/index.html'
+    'build/index.html'
   ];
 
-  ////////////////////
-  //  CoffeeScript  //
-  ////////////////////
+  /////////////////////
+  //  Default (ES6)  //
+  /////////////////////
 
-  describe('Default: CoffeeScript & SASS', function() {
+  describe('Default: ES6 & SASS', function() {
     before(function (done) {
        helpers.run(path.join(__dirname, '../app'))
          .inDir(path.join(os.tmpdir(), './temp-test'))
@@ -38,12 +38,12 @@ describe('rf:app', function () {
       assert.file(generalFiles);
     });
 
-    it('creates CoffeeScript files', function () {
+    it('creates es6 files', function () {
       assert.file([
-        'src/scripts/main.coffee',
-        'src/scripts/components/App.coffee',
-        'src/scripts/components/__tests__/App-test.coffee',
-        'src/scripts/dispatcher/AppDispatcher.coffee'
+        'src/scripts/main.js',
+        'src/scripts/components/App.js',
+        'src/scripts/components/__tests__/App-test.js',
+        'src/scripts/dispatcher/AppDispatcher.js'
       ]);
     });
 
@@ -51,36 +51,47 @@ describe('rf:app', function () {
       assert.file('src/assets/stylesheets/style.sass');
     });
 
-    it('save configs of coffee-script and SASS', function () {
-      assert.fileContent('.yo-rc.json', /"dialect": "coffee-script"/);
-      assert.fileContent('.yo-rc.json', /"scriptSuffix": ".coffee"/);
+    it('save configs of babel', function () {
+      assert.fileContent('.yo-rc.json', /"dialect": "Babel"/);
+      assert.fileContent('.yo-rc.json', /"scriptSuffix": ".js"/);
+    });
+
+    it('save configs of sass', function () {
       assert.fileContent('.yo-rc.json', /"stylesheet": "SASS"/);
       assert.fileContent('.yo-rc.json', /"stylesheetSuffix": ".sass"/);
+    });
+
+    it('save configs of bootstrap', function () {
       assert.fileContent('.yo-rc.json', /"withBootstrap": true/);
     });
 
-    it('generate package.json with base, coffee and sass devDependencies', function () {
+    it('generate package.json with base devDependencies', function () {
       assert.fileContent('package.json', /react-tools/);
-      assert.fileContent('package.json', /coffee-react-transform/);
-      assert.fileContent('package.json', /coffee-script/);
+    });
+
+    it('generate package.json with babel devDependencies', function () {
+      assert.fileContent('package.json', /babel-loader/);
+      assert.fileContent('package.json', /babel-jest/);
+    });
+
+    it('generate package.json with sass devDependencies', function () {
       assert.fileContent('package.json', /sass-loader/);
+    });
+
+    it('generate package.json with bootstrap devDependencies', function () {
       assert.fileContent('package.json', /jquery/);
       assert.fileContent('package.json', /bootstrap/);
       assert.fileContent('package.json', /bootstrap-webpack/);
     });
 
-    it('generate package.json with "js" and "coffee" in testFileExtensions', function () {
-      assert.fileContent('package.json', /"testFileExtensions": \[[\s\S]*"js",[\s\S]*"coffee"[\s\S]\]/m);
-    });
-
-    it('generate webpack.config.js with coffee-script loader', function () {
-      assert.fileContent('webpack.config.js', /coffee!cjsx/);
+    it('generate webpack.config.js with babel loader', function () {
+      assert.fileContent('webpack.config.js', /babel/);
     });
 
     it('generate webpack.config.js with bootstrap loaders', function () {
       assert.fileContent('webpack.config.js', /loader: 'imports\?jQuery=jquery'/);
       assert.fileContent('webpack.config.js', /(ttf|eot|svg)/);
-      assert.fileContent('webpack.config.js', /loader: 'url-loader\?limit=10000&minetype=application/);
+      assert.fileContent('webpack.config.js', /url-loader\?limit=10000\&minetype=application\/font-woff/);
     });
 
   });
@@ -170,16 +181,16 @@ describe('rf:app', function () {
 
   });
 
-  ////////////
-  //  Babel //
-  ////////////
+  /////////////////////
+  //  coffee-script  //
+  /////////////////////
 
-  describe('Babel', function () {
+  describe('coffee-script', function () {
     before(function (done) {
        helpers.run(path.join(__dirname, '../app'))
          .inDir(path.join(os.tmpdir(), './temp-test'))
          .withArguments(['MyApp'])
-         .withOptions({ 'd': 'babel', 'skipInstall': true })
+         .withOptions({ 'd': 'coffee', 'skipInstall': true })
          .on('end', done);
     });
 
@@ -187,28 +198,31 @@ describe('rf:app', function () {
       assert.file(generalFiles);
     });
 
-    it('creates Babel files', function () {
+    it('creates coffee-script files', function () {
       assert.file([
-        'src/scripts/main.js',
-        'src/scripts/components/App.js',
-        'src/scripts/components/__tests__/App-test.js',
-        'src/scripts/dispatcher/AppDispatcher.js'
+        'src/scripts/main.coffee',
+        'src/scripts/components/App.coffee',
+        'src/scripts/dispatcher/AppDispatcher.coffee'
       ]);
     });
 
-    it('save configs of Babel', function () {
-      assert.fileContent('.yo-rc.json', /"dialect": "Babel"/);
-      assert.fileContent('.yo-rc.json', /"scriptSuffix": ".js"/);
+    it('generate package.json with "js" and "coffee" in testFileExtensions', function () {
+      assert.fileContent('package.json', /"testFileExtensions": \[[\s\S]*"js",[\s\S]*"coffee"[\s\S]\]/m);
     });
 
-    it('generate package.json with base and Babel devDependencies', function () {
+    it('save configs of coffee-script', function () {
+      assert.fileContent('.yo-rc.json', /"dialect": "coffee-script"/);
+      assert.fileContent('.yo-rc.json', /"scriptSuffix": ".coffee"/);
+    });
+
+    it('generate package.json with base and coffee-script devDependencies', function () {
       assert.fileContent('package.json', /react-tools/);
-      assert.fileContent('package.json', /babel-loader/);
-      assert.fileContent('package.json', /babel-jest/);
+      assert.fileContent('package.json', /coffee-react-transform/);
+      assert.fileContent('package.json', /coffee-script/);
     });
 
-    it('generate webpack.config.js with Babel loader', function () {
-      assert.fileContent('webpack.config.js', /babel/);
+    it('generate webpack.config.js with coffee-script loader', function () {
+      assert.fileContent('webpack.config.js', /coffee!cjsx/);
     });
 
   });
@@ -236,7 +250,7 @@ describe('rf:app', function () {
       assert.fileContent('package.json', /sass-loader/);
     });
 
-    it('creates sass files', function () {
+    it('creates scss files', function () {
       assert.file('src/assets/stylesheets/style.scss');
     });
 
@@ -347,12 +361,8 @@ describe('rf:app', function () {
          .on('end', done);
     });
 
-    it('creates implementation files', function () {
-      assert.file([
-        'src/scripts/main.coffee',
-        'src/scripts/components/App.coffee',
-        'src/scripts/dispatcher/AppDispatcher.coffee'
-      ]);
+    it('creates general files', function () {
+      assert.file(generalFiles);
     });
 
     it('doesn\'t create __tests__ directory and file', function () {
@@ -437,7 +447,7 @@ describe('rf:app', function () {
     it('generate webpack.config.js without bootstrap loaders', function () {
       assert.noFileContent('webpack.config.js', /loader: 'imports\?jQuery=jquery'/);
       assert.noFileContent('webpack.config.js', /(ttf|eot|svg)/);
-      assert.noFileContent('webpack.config.js', /loader: 'url-loader\?limit=10000&minetype=application/);
+      assert.noFileContent('webpack.config.js', /loader: 'url-loader\?limit=10000&minetype=application'/);
     });
 
   });

@@ -10,8 +10,8 @@ module.exports = RfHelper.extend({
     this.argument('appname', { type: String, required: false });
 
     this.option('d', { type: String,
-                       defaults: "coffee",
-                       desc: "Dialect: 'ls' for LiveScript, 'babel' for Babel or 'js' for native JavaScript" });
+                       defaults: "babel",
+                       desc: "Dialect: 'coffee' for coffee-script, 'ls' for LiveScript or 'js' for native JavaScript" });
 
     this.option('s', { type: String,
                        defaults: "sass",

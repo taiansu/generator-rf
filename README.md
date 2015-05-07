@@ -10,9 +10,9 @@
 * SourceMap from webpack's [devtool](http://webpack.github.io/docs/configuration.html#devtool)
 * Live-reload by [react-hot-loader](https://gaearon.github.io/react-hot-loader/)
 * JS dialect in your favor:
+    * ES6 powered by [Babel](https://babeljs.io/) (Formally Javascript 6to5)
     * [CoffeeScript](http://coffeescript.org/)
     * [LiveScript](http://livescript.net)
-    * [Babel](https://babeljs.io/) (Formally Javascript 6to5)
     * vanilla JavaScript
 * Have JSX in CoffeeScript/LiveScript by [coffee-react-transform](https://github.com/jsdf/coffee-react-transform)
 * Stylesheet syntax in your favor:
@@ -34,8 +34,8 @@ No, not the boring abbreviation of "React" and "Flux". It's actually the suffix 
   recommend install it by [nvm](https://github.com/creationix/nvm). Mac user can
   install it from [homebrew](http://brew.sh/).
 
-> Note: Currently Jest only support v0.10.x of Node.js, and io.js v1.6.3 or above. Other
-> node version can't run the test correctly.
+> Note: Currently Jest only support v0.10.x of Node.js. Other
+> node version (including io.js) won't run the test at all or have some glitches.
 
 ### Install [Yeoman](http://yeoman.io)
 
@@ -85,6 +85,8 @@ npm run build
 ## What RF generates:
     .
     └── myapp *
+        ├── build
+        │   └── index.html
         ├── package.json
         ├── preprocessor.js
         ├── node_modules
@@ -93,24 +95,22 @@ npm run build
         │   │   ├── images
         │   │   └── stylesheets
         │   │       └── style.sass **
-        │   ├── index.html
         │   └── scripts
-        │       ├── actions
-        │       │   └── __tests__
-        │       ├── components
-        │       │   ├── App.coffee **
-        │       │   └── __tests__
-        │       │       └── App-test.coffee **
-        │       ├── constants
-        │       │   └── __tests__
-        │       ├── dispatcher
-        │       │   ├── AppDispatcher.coffee **
-        │       │   └── __tests__
-        │       ├── main.coffee **
-        │       ├── mixins
-        │       │   └── __tests__
-        │       └── stores
-        │           └── __tests__
+        │       ├── actions
+        │       │   └── __tests__
+        │       ├── components
+        │       │   ├── App.js **
+        │       │   └── __tests__
+        │       ├── constants
+        │       │   └── __tests__
+        │       ├── dispatcher
+        │       │   ├── AppDispatcher.js **
+        │       │   └── __tests__
+        │       ├── main.js **
+        │       ├── mixins
+        │       │   └── __tests__
+        │       └── stores
+        │           └── __tests__
         └── webpack.config.js
 
 * \* Won't create root directory if your current directory is identical with your project name. Check [--skip-root](#--skip-root-dont-create-root-directory) section for detail.
@@ -122,17 +122,18 @@ npm run build
     └── myapp
         ├── build
         │   ├── bundle.js
-        │   └── index.html
+        │   ├── some bootstrap stuffs (if include)
+        │   └── ...
         └── ...
 
 ## Options
 
 ### --d: Dialect
 
-By default, RF will generate codes in [CoffeeScript](http://coffeescript.org/). If you don't like it, use --d flag to change the dialect to generate.
+By default, RF will generate codes in ES6, using [Babel](https://babeljs.io/). If you don't like it, use --d flag to change the dialect to generate.
 
 * `ls` for [LiveScript](http://livescript.net)
-* `babel` for [Babel](https://babeljs.io/) (Formally JavaScript 6to5)
+* `CoffeeScript` for [](http://coffeescript.org/) (Formally JavaScript 6to5)
 * `js` for vanilla JavaScript
 
 Example:

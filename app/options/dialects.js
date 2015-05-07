@@ -7,7 +7,7 @@ module.exports = {
     } else {
       var warning = { warning: "Warning: Don't recognize dialect: "
                                 + dialectFlag + ", generate coffee-script instead." };
-      return _.merge(this.coffee, warning);
+      return _.merge(this.babel, warning);
     }
   },
 
@@ -21,17 +21,15 @@ module.exports = {
     suffix: '.js'
   },
 
-  "babel": {
+  es6: {
     name: 'Babel',
     suffix:'.js'
   },
 
-  //Backward compatibility
-  "6to5": { // object property name constraints
+  babel: {
     name: 'Babel',
     suffix:'.js'
   },
-
 
   coffee: {
     name: 'coffee-script',

@@ -1,9 +1,8 @@
 <%= withBootstrap ? "require('bootstrap-webpack');" : "" %>
-require('../index.html');
 require('../assets/stylesheets/style<%= stylesheetSuffix %>');
 
 // TODO: Require assets here.
-// require('../assets/product.png');
+// require('../assets/images/product.png');
 
 var App = require('./components/App.js');
 var React = require('react');

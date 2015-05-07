@@ -28,8 +28,8 @@ module.exports = generators.Base.extend({
       default: 'MyWebApp' },
     { type: 'input',
       name: 'dialect',
-      message: 'So which JavaScript dialect you like in: ' + chalk.blue('coffee, ls, babel or js') + ' ?',
-      default: 'coffee',
+      message: 'So which JavaScript dialect you like in: ' + chalk.blue('babel, coffee, ls or js') + ' ?',
+      default: 'babel',
       when: function (answers) { return !!answers.appname; } },
     { type: 'input',
       name: 'style',
@@ -86,9 +86,10 @@ module.exports = generators.Base.extend({
     var stylesheet = this.config.get('stylesheet');
     var scriptSuffix = this.config.get('scriptSuffix');
     var dialectTest = (scriptSuffix === '.js') ? '.jsx?' : scriptSuffix;
-    var bootstrap = this.config.get('withBootstrap') ? 'Bootstrap' : '';
+    var bootstrap = this.config.get('withBootstrap') ? "Bootstrap" : "";
+    var bootstrapLoaders = this.config.get('withBootstrap') ? loaders['BootstrapLoaders'] : {};
 
-    this.config.set('bootstrapLoaders',loaders.get(bootstrap));
+    this.config.set('bootstrapLoaders',bootstrapLoaders);
 
     this.config.set('devDependencies',
                     dependencies.wrap([dialect, stylesheet, bootstrap]));
@@ -143,7 +144,7 @@ module.exports = generators.Base.extend({
   copyHTML: function () {
     this.fs.copy(
       this.templatePath('_index.html'),
-      this.destinationPath('src/index.html')
+      this.destinationPath('build/index.html')
     );
   },
 
