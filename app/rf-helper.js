@@ -210,17 +210,24 @@ module.exports = generators.Base.extend({
       return;
     }
 
+    var appTest = this._suffixedFile('App-test', 'script');
+    var appTestPath = this._template('App-test', 'script');
+    var appDispatcherTest = this._suffixedFile('AppDispatcher-test', 'script');
+    var appDispatcherTestPath = this._template('AppDispatcher-test', 'script');
+
     _.each(tree['src/scripts'], function (dir) {
       this.dest.mkdir('src/scripts/' + dir + '/__tests__');
     }.bind(this));
 
-    var testFile = this._suffixedFile('App-test', 'script');
-    var testFilePath = this._template('App-test', 'script');
-
     this.fs.copyTpl(
-      this.templatePath(testFilePath),
-      this.destinationPath('src/scripts/components/__tests__/' + testFile),
+      this.templatePath(appTestPath),
+      this.destinationPath('src/scripts/components/__tests__/' + appTest),
       this._stringifiedConfig()
+    );
+
+    this.fs.copy(
+      this.templatePath(appDispatcherTestPath),
+      this.destinationPath('src/scripts/components/__tests__/' + appDispatcherTest)
     );
   },
 

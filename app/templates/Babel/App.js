@@ -1,7 +1,7 @@
 import React from 'react';
 
 const App = React.createClass({
-  render (){
+  render() {
     var codeBlockStyle = { "fontFamily": "monospace",
                            "backgroundColor": "#D0D0D0" };
     return (
