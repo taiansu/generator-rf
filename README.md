@@ -153,7 +153,7 @@ Example:
 
 ### --skip-bootstrap: Don't include Bootstrap framework stuffs
 
-From 0.2.0, RF will include Bootstrap settings in the real __Webpack__ way. Turn them off by --skip-bootstrap flag.
+RF includes Bootstrap settings in the real __Webpack__ way. Turn them off by --skip-bootstrap flag.
 
 Example:
 
@@ -161,13 +161,13 @@ Example:
 
 ### --skip-root: Don't create root directory
 
-From 0.1.13, RF will create a root directory if current directory name is different from your appname, or generate files in current directory if they have same name. But if you're intentionally have them with different name, use --skip-root to generate files right in the current directory.
+RF creates a root directory if current directory name is different from your appname, or generate files in current directory if they have same name. But if you're intentionally have them with different name, use --skip-root to generate files right in the current directory.
 
 Example:
 
     yo rf trueName --skip-root
 
-### --skip-test: Don't create \_\_tests\_\_ directory
+### --skip-test: Don't create \_\_tests\_\_ directories
 
 For every sub-directories in `src/scripts`, RF will create a \_\_tests\_\_ directory
 within. Use `skip-test` to skip that.
