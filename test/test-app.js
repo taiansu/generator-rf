@@ -13,7 +13,8 @@ describe('rf:app', function () {
     '.jshintrc',
     '.yo-rc.json',
     'preprocessor.js',
-    'webpack.config.js',
+    'webpack.prod.config.js',
+    'webpack.dev.config.js',
     'build/index.html'
   ];
 
@@ -84,14 +85,19 @@ describe('rf:app', function () {
       assert.fileContent('package.json', /bootstrap-webpack/);
     });
 
-    it('generate webpack.config.js with babel loader', function () {
-      assert.fileContent('webpack.config.js', /babel/);
+    it('generate webpack.dev.config.js and webpack.prod.config.js with babel loader', function () {
+      assert.fileContent('webpack.dev.config.js', /"react-hot\!babel"/);
+      assert.fileContent('webpack.prod.config.js', /"babel"/);
     });
 
-    it('generate webpack.config.js with bootstrap loaders', function () {
-      assert.fileContent('webpack.config.js', /loader: 'imports\?jQuery=jquery'/);
-      assert.fileContent('webpack.config.js', /(ttf|eot|svg)/);
-      assert.fileContent('webpack.config.js', /url-loader\?limit=10000\&minetype=application\/font-woff/);
+    it('generate webpack.dev.config.js and webpack.prod.config.js with bootstrap loaders', function () {
+      assert.fileContent('webpack.dev.config.js', /loader: 'imports\?jQuery=jquery'/);
+      assert.fileContent('webpack.dev.config.js', /(ttf|eot|svg)/);
+      assert.fileContent('webpack.dev.config.js', /url-loader\?limit=10000\&minetype=application\/font-woff/);
+
+      assert.fileContent('webpack.prod.config.js', /loader: 'imports\?jQuery=jquery'/);
+      assert.fileContent('webpack.prod.config.js', /(ttf|eot|svg)/);
+      assert.fileContent('webpack.prod.config.js', /url-loader\?limit=10000\&minetype=application\/font-woff/);
     });
 
   });
@@ -134,7 +140,7 @@ describe('rf:app', function () {
     });
 
     it('generate webpack.config.js with LiveScript loader', function () {
-      assert.fileContent('webpack.config.js', /livescript!cjsx/);
+      assert.fileContent('webpack.dev.config.js', /livescript!cjsx/);
     });
 
   });
@@ -176,7 +182,7 @@ describe('rf:app', function () {
     });
 
     it('generate webpack.config.js with JavaScript loader', function () {
-      assert.fileContent('webpack.config.js', /jsx/);
+      assert.fileContent('webpack.dev.config.js', /jsx/);
     });
 
   });
@@ -222,7 +228,7 @@ describe('rf:app', function () {
     });
 
     it('generate webpack.config.js with coffee-script loader', function () {
-      assert.fileContent('webpack.config.js', /coffee!cjsx/);
+      assert.fileContent('webpack.dev.config.js', /coffee!cjsx/);
     });
 
   });
@@ -255,7 +261,7 @@ describe('rf:app', function () {
     });
 
     it('generate webpack.config.js with scss loader', function () {
-      assert.fileContent('webpack.config.js', /style!css!sass\?outputStyle=expanded/);
+      assert.fileContent('webpack.dev.config.js', /style!css!sass\?outputStyle=expanded/);
     });
 
   });
@@ -288,7 +294,7 @@ describe('rf:app', function () {
     });
 
     it('generate webpack.config.js with less loader', function () {
-      assert.fileContent('webpack.config.js', /style!css!less/);
+      assert.fileContent('webpack.dev.config.js', /style!css!less/);
     });
 
   });
@@ -316,7 +322,7 @@ describe('rf:app', function () {
     });
 
     it('generate webpack.config.js with css loader', function () {
-      assert.fileContent('webpack.config.js', /style!css[^!]/);
+      assert.fileContent('webpack.dev.config.js', /style!css[^!]/);
     });
 
   });
@@ -344,7 +350,7 @@ describe('rf:app', function () {
     });
 
     it('generate webpack.config.js with Stylus loader', function () {
-      assert.fileContent('webpack.config.js', /style!css!stylus/);
+      assert.fileContent('webpack.dev.config.js', /style!css!stylus/);
     });
 
   });
@@ -445,9 +451,9 @@ describe('rf:app', function () {
     });
 
     it('generate webpack.config.js without bootstrap loaders', function () {
-      assert.noFileContent('webpack.config.js', /loader: 'imports\?jQuery=jquery'/);
-      assert.noFileContent('webpack.config.js', /(ttf|eot|svg)/);
-      assert.noFileContent('webpack.config.js', /loader: 'url-loader\?limit=10000&minetype=application'/);
+      assert.noFileContent('webpack.dev.config.js', /loader: 'imports\?jQuery=jquery'/);
+      assert.noFileContent('webpack.dev.config.js', /(ttf|eot|svg)/);
+      assert.noFileContent('webpack.dev.config.js', /loader: 'url-loader\?limit=10000&minetype=application'/);
     });
 
   });

@@ -5,16 +5,16 @@ module.exports = {
     return this[key] || '';
   },
 
-  coffeescriptLoader:   'react-hot!coffee!cjsx',
-  JavaScriptLoader:     'react-hot!jsx',
-  BabelLoader:          'react-hot!babel',
-  LiveScriptLoader:     'react-hot!livescript!cjsx',
+  coffeescriptLoader:   'coffee!cjsx',
+  JavaScriptLoader:     'jsx',
+  BabelLoader:          'babel',
+  LiveScriptLoader:     'livescript!cjsx',
   CSSLoader:            'style!css',
   LessLoader:           'style!css!less',
   StylusLoader:         'style!css!stylus',
   SASSLoader:           'style!css!sass?indentedSyntax=true&outputStyle=expanded',
   SCSSLoader:           'style!css!sass?outputStyle=expanded',
-  // Different from other, fetch this directly.
+  // Different from others, fetch this directly.
   BootstrapLoaders:     "{"                                                                   + "\n        " +
                            "test: /bootstrap\\/js\\//,"                                       + "\n        " +
                            "loader: 'imports?jQuery=jquery'"                                  + "\n      "   +

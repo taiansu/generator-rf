@@ -88,6 +88,7 @@ module.exports = generators.Base.extend({
     var dialectTest = (scriptSuffix === '.js') ? '.jsx?' : scriptSuffix;
     var bootstrap = this.config.get('withBootstrap') ? "Bootstrap" : "";
     var bootstrapLoaders = this.config.get('withBootstrap') ? loaders['BootstrapLoaders'] : {};
+    var dialectLoader = loaders.get(dialect);
 
     this.config.set('bootstrapLoaders',bootstrapLoaders);
 
@@ -95,7 +96,8 @@ module.exports = generators.Base.extend({
                     dependencies.wrap([dialect, stylesheet, bootstrap]));
 
     this.config.set('dialectTest', dialectTest);
-    this.config.set('dialectLoader', loaders.get(dialect));
+    this.config.set('dialectLoader', dialectLoader);
+    this.config.set('dialectDevLoader', 'react-hot!' + dialectLoader);
     this.config.set('stylesheetLoader', loaders.get(stylesheet));
   },
 
@@ -123,7 +125,8 @@ module.exports = generators.Base.extend({
   copyConfigFiles: function () {
     var configFiles = [
       "package.json",
-      "webpack.config.js"
+      "webpack.prod.config.js",
+      "webpack.dev.config.js",
     ];
 
     _.each(configFiles, function(file){

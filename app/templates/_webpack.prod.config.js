@@ -1,11 +1,8 @@
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: "eval",
   entry: {
     app: [
-      "webpack-dev-server/client?http://0.0.0.0:8080",
-      "webpack/hot/only-dev-server",
       "./src/scripts/main<%= scriptSuffix %>"
     ]
   },
@@ -14,7 +11,6 @@ module.exports = {
     filename: "bundle.js"
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
   resolve: {

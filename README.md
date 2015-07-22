@@ -109,7 +109,8 @@ npm run build
         │       │   └── __tests__
         │       └── stores
         │           └── __tests__
-        └── webpack.config.js
+        ├── webpack.dev.config.js
+        └── webpack.prod.config.js
 
 * \* Won't create root directory if your current directory is identical with your project name. Check [--skip-root](#--skip-root-dont-create-root-directory) section for detail.
 * \*\* Varied by your choices of the dialect and stylesheet syntax
