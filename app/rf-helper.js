@@ -87,7 +87,7 @@ module.exports = generators.Base.extend({
     var scriptSuffix = this.config.get('scriptSuffix');
     var dialectTest = (scriptSuffix === '.js') ? '.jsx?' : scriptSuffix;
     var bootstrap = this.config.get('withBootstrap') ? "Bootstrap" : "";
-    var bootstrapLoaders = this.config.get('withBootstrap') ? loaders['BootstrapLoaders'] : {};
+    var bootstrapLoaders = this.config.get('withBootstrap') ? loaders['BootstrapLoaders'] : '';
     var dialectLoader = loaders.get(dialect);
 
     this.config.set('bootstrapLoaders',bootstrapLoaders);
