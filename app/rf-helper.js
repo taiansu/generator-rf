@@ -230,7 +230,7 @@ module.exports = generators.Base.extend({
 
     this.fs.copy(
       this.templatePath(appDispatcherTestPath),
-      this.destinationPath('src/scripts/components/__tests__/' + appDispatcherTest)
+      this.destinationPath('src/scripts/dispatcher/__tests__/' + appDispatcherTest)
     );
   },
 

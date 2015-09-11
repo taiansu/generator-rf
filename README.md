@@ -34,8 +34,8 @@ No, not the boring abbreviation of "React" and "Flux". It's actually the suffix 
   recommend install it by [nvm](https://github.com/creationix/nvm). Mac user can
   install it from [homebrew](http://brew.sh/).
 
-> Note: Currently Jest only support v0.10.x of Node.js. Other
-> node version (including io.js) won't run the test at all or have some glitches.
+> Note: Jest doesn't work on `io.js` & `node v0.11 ~ v0.12`,
+> if you like to have jest works, make sure you use `node.js 4.3` above or `v0.10`
 
 ### Install [Yeoman](http://yeoman.io)
 

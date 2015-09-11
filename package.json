@@ -1,6 +1,6 @@
 {
   "name": "generator-rf",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "RF: a React/Flux webapp generator with webpack, dialects and some good stuffs",
   "license": "MIT",
   "main": "app/index.js",
@@ -11,8 +11,7 @@
     "url": "https://github.com/taiansu"
   },
   "engines": {
-    "node": ">=0.10.0",
-    "iojs": ">=1.6.3"
+    "node": ">=4.3.0 ~0.10.9"
   },
   "scripts": {
     "test": "mocha"
