@@ -32,10 +32,10 @@ No, not the boring abbreviation of "React" and "Flux". It's actually the suffix 
 
 * [Node.js w/npm](http://nodejs.org/) or [iojs](https://iojs.org/) installed. I
   recommend install it by [nvm](https://github.com/creationix/nvm). Mac user can
-  install it from [homebrew](http://brew.sh/).
+  install nvm from [homebrew](http://brew.sh/).
 
 > Note: Jest doesn't work on `io.js` & `node v0.11 ~ v0.12`,
-> if you like to have jest works, make sure you use `node.js 4.3` above or `v0.10`
+> if you like to have jest works, make sure you use `node.js 4.0` above or `v0.10`
 
 ### Install [Yeoman](http://yeoman.io)
 
