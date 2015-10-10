@@ -70,6 +70,10 @@ module.exports = {
   },
 
   baseDependencies: {
+    'less-loader': '*',
+    'less': '*',
+    'exports-loader': '*',
+    'extract-text-webpack-plugin': '*',
     'css-loader': '*',
     'file-loader': '*',
     'jest-cli': '*',

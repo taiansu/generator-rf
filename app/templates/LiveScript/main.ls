@@ -5,6 +5,6 @@ require('../assets/stylesheets/style<%= stylesheetSuffix %>')
 # require('../assets/images/product.png')
 
 App = require('./components/App.ls')
-React = require('react')
+ReactDom = require('react-dom')
 
-React.render(<App />, document.getElementById('main'))
+ReactDom.render(<App />, document.getElementById('main'))
