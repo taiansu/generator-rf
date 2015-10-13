@@ -36,11 +36,10 @@ module.exports = generators.Base.extend({
       message: 'So which css syntax you like in: ' + chalk.blue('sass, scss, less, stylus or css') + ' ?',
       default: 'sass',
       when: function (answers) { return !!answers.dialect; } },
-    { type: 'boolean',
+    { type: 'confirm',
       name: 'withBootstrap',
       message: 'Last question, would you like to include ' + chalk.blue('Bootstrap') + ' stuffs?',
-      default: 'true',
-      when: function (answers) { return !!answers.style; } }
+      default: 'true' }
   ],
 
   interactiveSummary: function (answers) {
