@@ -2,12 +2,6 @@ var _ = require('lodash');
 
 module.exports = {
 
-  wrap: function (dialectAndStylesheet) {
-    return _.reduce(dialectAndStylesheet, function(result, name) {
-      return _.merge(result, this._get(name));
-    }, _.clone(this.baseDependencies), this);
-  },
-
   _get: function (name) {
     var key = name && name.replace(/-/, '') + "Dependencies";
 
@@ -17,6 +11,12 @@ module.exports = {
       // return an empty object if this[key] not exist, like CSSDependencies
       return {};
     }
+  },
+
+  wrap: function (dialectAndStylesheet) {
+    return _.reduce(dialectAndStylesheet, function(result, name) {
+      return _.merge(result, this._get(name));
+    }, _.clone(this.baseDependencies), this);
   },
 
   JavaScriptDependencies: {
