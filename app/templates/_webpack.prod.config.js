@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
   entry: {
@@ -21,7 +22,10 @@ module.exports = {
       {
         test: /\<%= dialectTest %>$/,
         loader: "<%= dialectLoader %>",
-        exclude: /node_modules/
+        query: {
+          presets: [<%= dialectPresets %>]
+        },
+        exclude: [ path.resolve(__dirname, "node_modules") ]
       },
 
       {

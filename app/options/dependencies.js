@@ -1,73 +1,59 @@
 var _ = require('lodash');
 
-module.exports = {
-
-  _get: function (name) {
-    var key = name && name.replace(/-/, '') + "Dependencies";
-
-    if (_.isPlainObject(this[key])) {
-      return this[key];
-    } else {
-      // return an empty object if this[key] not exist, like CSSDependencies
-      return {};
-    }
-  },
-
-  wrap: function (dialectAndStylesheet) {
-    return _.extend({}, this.baseDependencies, _.map(dialectAndStylesheet, this._get))
-  },
-
-  JavaScriptDependencies: {
+var dependencies = {
+  'Javascript': {
     'jsx-loader': '*'
   },
 
-  BabelDependencies: {
+  'Babel': {
     'babel-loader': '*',
+    'babel-preset-es2015': '*',
+    'babel-preset-react': '*',
     'babel-jest': '*'
   },
 
-  coffeescriptDependencies: {
+  'coffeescript': {
     'coffee-react-transform': '*',
     'cjsx-loader': '*',
     'coffee-loader': '*',
     'coffee-script': '*'
   },
 
-  LiveScriptDependencies: {
+  'LiveScript': {
     'coffee-react-transform': '*',
     'cjsx-loader': '*',
     'livescript-loader': '*',
     'LiveScript': '*'
   },
 
-  SASSDependencies: {
+  'SASS': {
     'node-sass': '*',
     'sass-loader': '*'
   },
 
-  SCSSDependencies: {
+  'SCSS': {
     'node-sass': '*',
     'sass-loader': '*'
   },
 
-  LessDependencies: {
+  'Less': {
     'less': '*',
     'less-loader': '*'
   },
 
-  StylusDependencies: {
+  'Stylus': {
     'stylus': '*',
     'stylus-loader': '*'
   },
 
-  BootstrapDependencies:{
+  'Bootstrap':{
     'bootstrap': '*',
     'bootstrap-webpack': '*',
     'imports-loader': '*',
     'jquery': '*'
   },
 
-  baseDependencies: {
+  'base': {
     'less-loader': '*',
     'less': '*',
     'exports-loader': '*',
@@ -82,5 +68,25 @@ module.exports = {
     'url-loader': '*',
     'webpack-dev-server': '*',
     'webpack': '*'
+  }
+}
+
+module.exports = {
+  _get: function (name) {
+    var key = name && name.replace(/-/, '')
+
+    // return an empty object if this[key] not exist, like CSSDependencies
+    if(!_.has(dependencies, key)){ return {} }
+
+    return dependencies[key]
+  },
+
+  wrap: function (dialectAndStylesheet) {
+    return _(dialectAndStylesheet)
+             .concat('base')
+             .map(this._get)
+             .reduce(function(result, item) {
+               return _.extend(result, item)
+             }, {})
   }
 }

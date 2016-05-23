@@ -1,38 +1,40 @@
 var _ = require('lodash');
 
+var dialects = {
+  'ls': {
+    'name': 'LiveScript',
+    'suffix': '.ls'
+  },
+
+  'js': {
+    'name': 'JavaScript',
+    'suffix': '.js'
+  },
+
+  'es6': {
+    'name': 'Babel',
+    'suffix':'.js'
+  },
+
+  'babel': {
+    'name': 'Babel',
+    'suffix':'.js'
+  },
+
+  'coffee': {
+    'name': 'coffee-script',
+    'suffix':'.coffee'
+  }
+}
+
 module.exports = {
   get: function(dialectFlag) {
-    if ( this[dialectFlag] ) {
-      return this[dialectFlag];
-    } else {
-      var warning = { warning: "Warning: Don't recognize dialect: "
-                                + dialectFlag + ", generate coffee-script instead." };
-      return _.extend(this.babel, warning)
+    if(!_.has(dialects, dialectFlag)) {
+      return _.extend(dialects.babel, {
+        'warning': "Warning: Don't recognize dialect: " + dialectFlag + ", generate coffee-script instead."
+      })
     }
-  },
 
-  ls: {
-    name: 'LiveScript',
-    suffix: '.ls'
+    return dialects[dialectFlag]
   },
-
-  js: {
-    name: 'JavaScript',
-    suffix: '.js'
-  },
-
-  es6: {
-    name: 'Babel',
-    suffix:'.js'
-  },
-
-  babel: {
-    name: 'Babel',
-    suffix:'.js'
-  },
-
-  coffee: {
-    name: 'coffee-script',
-    suffix:'.coffee'
-  }
 }

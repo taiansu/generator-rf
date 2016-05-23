@@ -62,7 +62,7 @@ module.exports = generators.Base.extend({
   setDialect: function (dialectFlag) {
     var dialect = dialects.get(dialectFlag);
 
-    if (dialect.warning) {
+    if (_.has(dialect, 'warning')) {
       this.log(dialect.warning);
     }
 
@@ -96,6 +96,11 @@ module.exports = generators.Base.extend({
 
     this.config.set('dialectTest', dialectTest);
     this.config.set('dialectLoader', dialectLoader);
+
+    // Babel need presets
+    var dialectPresets = dialect === 'Babel' ? "'es2015', 'react'" : ""
+    this.config.set('dialectPresets', dialectPresets);
+
     this.config.set('dialectDevLoader', 'react-hot!' + dialectLoader);
     this.config.set('stylesheetLoader', loaders.get(stylesheet));
   },

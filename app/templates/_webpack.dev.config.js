@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
   devtool: "eval",
@@ -25,7 +26,10 @@ module.exports = {
       {
         test: /\<%= dialectTest %>$/,
         loader: "<%= dialectDevLoader %>",
-        exclude: /node_modules/
+        query: {
+          presets: [<%= dialectPresets %>]
+        }
+        exclude: [ path.resolve(__dirname, "node_modules") ]
       },
 
       {

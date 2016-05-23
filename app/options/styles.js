@@ -1,17 +1,6 @@
 var _ = require('lodash');
 
-module.exports = {
-
-  get: function(styleFlag) {
-    if ( this[styleFlag] ) {
-      return this[styleFlag];
-    } else {
-      var warning = { warning: "Warning: Don't recognize stylesheet syntax: "
-                                + styleFlag + ", generate SASS instead." };
-      return _.merge(this.sass, warning);
-    }
-  },
-
+var styles = {
   stylus: {
     name: 'Stylus',
     suffix: '.styl'
@@ -35,4 +24,18 @@ module.exports = {
     name: 'SASS',
     suffix: '.sass'
   }
+}
+
+module.exports = {
+
+  get: function(styleFlag) {
+    if(!_.has(styles, styleFlag)){
+      var warning = { warning: "Warning: Don't recognize stylesheet syntax: "
+                                + styleFlag + ", generate SASS instead." };
+      return _.merge(styles.sass, warning);
+    }
+
+    return styles[styleFlag];
+  },
+
 }
