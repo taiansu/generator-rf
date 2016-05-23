@@ -7,7 +7,7 @@ module.exports = {
     } else {
       var warning = { warning: "Warning: Don't recognize dialect: "
                                 + dialectFlag + ", generate coffee-script instead." };
-      return _.merge(this.babel, warning);
+      return _.extend(this.babel, warning)
     }
   },
 

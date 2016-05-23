@@ -14,9 +14,7 @@ module.exports = {
   },
 
   wrap: function (dialectAndStylesheet) {
-    return _.reduce(dialectAndStylesheet, function(result, name) {
-      return _.merge(result, this._get(name));
-    }, _.clone(this.baseDependencies), this);
+    return _.extend({}, this.baseDependencies, _.map(dialectAndStylesheet, this._get))
   },
 
   JavaScriptDependencies: {
