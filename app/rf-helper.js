@@ -1,5 +1,5 @@
 var fs = require('fs');
-var sys = require('sys');
+var util = require('util');
 var exec = require('child_process').exec;
 var generators = require('yeoman-generator').generators;
 var chalk = require('chalk');
