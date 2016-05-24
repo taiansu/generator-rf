@@ -67,7 +67,8 @@ describe('rf:app', function () {
     });
 
     it('generate package.json with base devDependencies', function () {
-      assert.fileContent('package.json', /react-tools/);
+      assert.fileContent('package.json', /react/);
+      assert.fileContent('package.json', /react-dom/);
     });
 
     it('generate package.json with babel devDependencies', function () {
@@ -134,7 +135,8 @@ describe('rf:app', function () {
     });
 
     it('generate package.json with base and LiveScript devDependencies', function () {
-      assert.fileContent('package.json', /react-tools/);
+      assert.fileContent('package.json', /react/);
+      assert.fileContent('package.json', /react-dom/);
       assert.fileContent('package.json', /coffee-react-transform/);
       assert.fileContent('package.json', /LiveScript/);
     });
@@ -177,8 +179,9 @@ describe('rf:app', function () {
     });
 
     it('generate package.json with base and JavaScript devDependencies', function () {
-      assert.fileContent('package.json', /react-tools/);
-      assert.fileContent('package.json', /jsx-loader/);
+      assert.fileContent('package.json', /react/);
+      assert.fileContent('package.json', /react-dom/);
+      assert.fileContent('package.json', /babel-loader/);
     });
 
     it('generate webpack.config.js with JavaScript loader', function () {
@@ -222,7 +225,8 @@ describe('rf:app', function () {
     });
 
     it('generate package.json with base and coffee-script devDependencies', function () {
-      assert.fileContent('package.json', /react-tools/);
+      assert.fileContent('package.json', /react/);
+      assert.fileContent('package.json', /react-dom/);
       assert.fileContent('package.json', /coffee-react-transform/);
       assert.fileContent('package.json', /coffee-script/);
     });
@@ -252,7 +256,8 @@ describe('rf:app', function () {
     });
 
     it('generate package.json with base and SCSS devDependencies', function () {
-      assert.fileContent('package.json', /react-tools/);
+      assert.fileContent('package.json', /react/);
+      assert.fileContent('package.json', /react-dom/);
       assert.fileContent('package.json', /sass-loader/);
     });
 
@@ -285,7 +290,8 @@ describe('rf:app', function () {
     });
 
     it('generate package.json with base and Less devDependencies', function () {
-      assert.fileContent('package.json', /react-tools/);
+      assert.fileContent('package.json', /react/);
+      assert.fileContent('package.json', /react-dom/);
       assert.fileContent('package.json', /less-loader/);
     });
 

@@ -1,8 +1,9 @@
 var _ = require('lodash');
 
 var dependencies = {
-  'Javascript': {
-    'jsx-loader': '*'
+  'JavaScript': {
+    'babel-loader': '*',
+    'babel-preset-react': '*'
   },
 
   'Babel': {

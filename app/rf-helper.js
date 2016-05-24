@@ -97,8 +97,18 @@ module.exports = generators.Base.extend({
     this.config.set('dialectTest', dialectTest);
     this.config.set('dialectLoader', dialectLoader);
 
-    // Babel need presets
-    var dialectPresets = dialect === 'Babel' ? "'es2015', 'react'" : ""
+    // Babel presets
+    var dialectPresets;
+    switch (dialect) {
+      case 'Babel':
+        dialectPresets = "'es2015', 'react'"
+        break;
+      case 'JavaScript':
+        dialectPresets = "'react'"
+        break;
+      default:
+        dialectPresets = ""
+    }
     this.config.set('dialectPresets', dialectPresets);
 
     this.config.set('dialectDevLoader', 'react-hot!' + dialectLoader);
