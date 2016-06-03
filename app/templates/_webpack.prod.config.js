@@ -22,9 +22,6 @@ module.exports = {
       {
         test: /\<%= dialectTest %>$/,
         loader: "<%= dialectLoader %>",
-        query: {
-          presets: [<%= dialectPresets %>]
-        },
         exclude: [ path.resolve(__dirname, "node_modules") ]
       },
 

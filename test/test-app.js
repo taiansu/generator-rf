@@ -87,8 +87,8 @@ describe('rf:app', function () {
     });
 
     it('generate webpack.dev.config.js and webpack.prod.config.js with babel loader', function () {
-      assert.fileContent('webpack.dev.config.js', /"react-hot\!babel"/);
-      assert.fileContent('webpack.prod.config.js', /"babel"/);
+      assert.fileContent('webpack.dev.config.js', /"react-hot\!babel\?presets\[\]\=es2015,presets\[\]\=react"/);
+      assert.fileContent('webpack.prod.config.js', /"babel\?presets\[\]\=es2015,presets\[\]\=react"/);
     });
 
     it('generate webpack.dev.config.js and webpack.prod.config.js with bootstrap loaders', function () {

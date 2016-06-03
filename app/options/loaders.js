@@ -1,7 +1,7 @@
 var loaders = {
   coffeescript:   'coffee!cjsx',
-  JavaScript:     'jsx',
-  Babel:          'babel',
+  JavaScript:     'babel?presets[]=react',
+  Babel:          'babel?presets[]=es2015,presets[]=react',
   LiveScript:     'livescript!cjsx',
   CSS:            'style!css',
   Less:           'style!css!less',
