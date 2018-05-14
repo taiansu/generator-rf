@@ -1,5 +1,5 @@
 
-This repo is no longer maintained. Please use Facebook official generator: [create-react-app](https://github.com/facebook/create-react-app) instead.
+## This repo is no longer maintained. Please use Facebook official generator: [create-react-app](https://github.com/facebook/create-react-app) instead.
 
 ---
 
